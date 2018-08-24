@@ -1,4 +1,23 @@
-# Forum test job Repository
+# The Blog - test job.
+A simple blog with the following functions:
+
+- Authentication (SignIn/SignOut)
+- Create Post
+- Create Comment
+- Rate Comment
+
+Additional functions are welcomed, encouraged and will be discussed in detail.
+
+Technologies which we would like to see be used in the project, but are not mandatory:
+
+- NodeJs
+- GraphQL + Prisma
+- VueJs
+- ExpressJS
+- PostgreSQL 
+
+## @TODO Fix NEXT!
+## Forum test job Repository
 
 This rep reflect next job task:
 

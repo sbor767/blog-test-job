@@ -5,7 +5,7 @@ const Dotenv = require('dotenv-webpack')
 module.exports = {
   entry: [
     'react-hot-loader/patch',
-    'webpack-dev-server/client?http://localhost:8080',
+    'webpack-dev-server/client?http://localhost:8081',
     'webpack/hot/only-dev-server',
     __dirname + '/src/index.js'
   ],
@@ -50,6 +50,6 @@ module.exports = {
     historyApiFallback: true,
     inline: true,
     hot: true,
-    port: 8080
+    port: 8081
   }
 }
