@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import { Route, withRouter } from 'react-router-dom'
 
-import BlogPostListContainer from './BlogPostListContainer'
-import MessageContainer from './MessageContainer'
+import PostListPage from '../post-list-page'
+import PostPage from '../post-page'
 
-const RestApi = require(`../controllers/RestApi${process.env.DEBUG_REST === 'true' ? 'Sample' : ''}`)
+const RestApi = require(`../../controllers/RestApi${process.env.DEBUG_REST === 'true' ? 'Sample' : ''}`)
 
-import './app.css'
+import '../../components/app.css'
 
 class App extends Component {
   state = {
+    user: {},
     blogPosts: [],
     blogPostsLoaded: false,
     editItemId: undefined,
@@ -118,17 +119,17 @@ class App extends Component {
         <Route
           exact path="/"
           render={() => (
-            <BlogPostListContainer
+            <PostListPage
+              user={this.state.user}
               blogPostsLoaded={this.state.blogPostsLoaded}
-              onSubmit={this.handleSubmitMessage}
               blogPosts={this.state.blogPosts}
             />
           )}
         />
         <Route
-          path="/messages/:id"
+          path="/posts/:id"
           render={({ history, match }) => (
-            <MessageContainer
+            <PostPage
               headers={this.state.headers}
               headersLoaded={this.state.messagesLoaded}
               messageId={match.params.id}

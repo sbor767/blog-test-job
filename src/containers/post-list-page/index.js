@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import ReactDom from 'react-dom'
 
-import Header from '../presentation/Header'
-import Loading from '../presentation/Loading'
-import BlogPostList from '../presentation/BlogPostList'
-import InputBoxContainer from './InputBoxContainer'
+import Header from '../../presentation/Header'
+import Loading from '../../presentation/Loading'
+import InputBoxContainer from '../../components/InputBoxContainer'
 import {Link} from 'react-router-dom'
+import BlogPost from '../../components/blog-post'
 
-export default class BlogPostListContainer extends Component {
+export default class PostListPage extends Component {
 
   componentDidMount() {
     this.scrollToBottom()
@@ -39,10 +39,27 @@ export default class BlogPostListContainer extends Component {
           <button className="blue">SignIn</button>
         </Link>
       </Header>
+
       {blogPostsLoaded ? (
-        <BlogPostList
-          blogPosts={blogPosts}
-        />
+        <div
+          id="message-container"
+          ref={element => {
+          this.headerContainer = element}}
+        >
+          {blogPosts.map(current => (
+            <BlogPost
+              key={`post_id-${current.id}`}
+              postId={current.id}
+              title={current.title}
+              author={current.author}
+              timstamp={current.timestamp}
+              body={current.body}
+              comments={current.comments}
+              lastComment={current.lastComment}
+            />
+          ))}
+        </div>
+
       ) : (
         <Loading />
       )}

@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-import './BlogPost.css'
+import './style.css'
 
 export default function BlogPost({ postId, title, author, timestamp, body, comments, lastComment }) {
   return (

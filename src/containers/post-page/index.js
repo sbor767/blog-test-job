@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import Message from '../presentation/Message'
+import Message from '../../presentation/Message'
 
-const RestApi = require(`../controllers/RestApi${process.env.DEBUG_REST === 'true' ? 'Sample' : ''}`)
+const RestApi = require(`../../controllers/RestApi${process.env.DEBUG_REST === 'true' ? 'Sample' : ''}`)
 
-export default class MessageContainer extends Component {
+export default class PostPage extends Component {
   state = { body: undefined, bodyLoaded: false, error: undefined }
 
   componentDidMount() {
