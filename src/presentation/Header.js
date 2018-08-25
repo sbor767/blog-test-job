@@ -4,7 +4,7 @@ export default function Header({ children }) {
   return (
     <div id='HeaderContainer'>
       <img src='/assets/icon.png' alt='logo' />
-      <h1>Test Job "FORUM"</h1>
+      <h1>The BLOG</h1>
       {children}
     </div>
   )

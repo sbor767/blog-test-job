@@ -3,17 +3,18 @@ import ReactDom from 'react-dom'
 
 import Header from '../presentation/Header'
 import Loading from '../presentation/Loading'
-import MessageList from '../presentation/MessageList'
+import BlogPostList from '../presentation/BlogPostList'
 import InputBoxContainer from './InputBoxContainer'
+import {Link} from 'react-router-dom'
 
-export default class MessageListContainer extends Component {
+export default class BlogPostListContainer extends Component {
 
   componentDidMount() {
     this.scrollToBottom()
   }
 
   componentDidUpdate(previousProps) {
-    if (previousProps.headers.length !== this.props.headers.length) this.scrollToBottom()
+    if (previousProps.blogPosts.length !== this.props.blogPosts.length) this.scrollToBottom()
   }
 
   scrollToBottom = () => {
@@ -23,28 +24,24 @@ export default class MessageListContainer extends Component {
 
   render() {
     const {
-      headersLoaded,
-      headers,
+      blogPostsLoaded,
+      blogPosts,
       onSubmit,
-      onCancel,
-      editItemId,
-      onEditItem,
-      onDeleteItem
     } = this.props
 
     return (
     <div id="ForumContainer" className="inner-container">
       <Header>
-        <p>
-          @TODO Test Job specification
-        </p>
+        <Link to={'/create'}>
+          <button className="blue">Create POST</button>
+        </Link>
+        <Link to={'/login'}>
+          <button className="blue">SignIn</button>
+        </Link>
       </Header>
-      {headersLoaded ? (
-        <MessageList
-          headers={headers}
-          editItemId={editItemId}
-          onEditItem={onEditItem}
-          onDeleteItem={onDeleteItem}
+      {blogPostsLoaded ? (
+        <BlogPostList
+          blogPosts={blogPosts}
         />
       ) : (
         <Loading />
@@ -52,9 +49,7 @@ export default class MessageListContainer extends Component {
 
       <InputBoxContainer
         onSubmit={onSubmit}
-        onCancel={onCancel}
-        editItemId={editItemId}
-        headers={headers}
+        blogPosts={blogPosts}
       />
 
     </div>

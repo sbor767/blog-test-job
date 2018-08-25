@@ -73,3 +73,45 @@ module.exports.getList = () => get(REST_API_URL)
 module.exports.getOneBody = (id) => get(REST_API_URL + id)
 module.exports.delete = (id) => del(id)
 module.exports.updateOne = (message, id) => put(message, id)
+
+module.exports.getBlogPostsTest = () => Promise.resolve([
+  {
+    id: 1,
+    title: "Amazing Thirst Thing",
+    author:"John N.",
+    timestamp:"2018-05-17 18:31:12",
+    body:"Lorem ipsum ipsum ipsum now such. Lorem ipsum ipsum ipsum now such. Lorem ipsum ipsum ipsum now such. Lorem ipsum ipsum ipsum now such.",
+    comments: 5,
+    lastComment: "2018-08-15 15:10:05"
+  },
+  {
+    id: 2,
+    title: "Amazing Second Thing",
+    author:"Alexandr M.",
+    timestamp:"2018-07-27 10:11:28",
+    body:"Lorem ipsum ipsum ipsum now such. Lorem ipsum ipsum ipsum now such. Lorem ipsum ipsum ipsum now such. Lorem ipsum ipsum ipsum now such.",
+    comments: 0,
+    lastComment: ""
+
+  },
+  {
+    id: 3,
+    title: "Amazing Third Thing",
+    author:"Leonardo D.",
+    timestamp:"2018-07-28 8:14:13",
+    body:"Lorem ipsum ipsum ipsum now such. Lorem ipsum ipsum ipsum now such. Lorem ipsum ipsum ipsum now such. Lorem ipsum ipsum ipsum now such.",
+    comments: 3,
+    lastComment: "2018-07-31 19:05:33"
+
+  },
+  {
+    id: 4,
+    title: "Amazing New Thing",
+    author:"John N.",
+    timestamp:"2018-07-28 10:45:33",
+    body:"Lorem ipsum ipsum ipsum now such. Lorem ipsum ipsum ipsum now such. Lorem ipsum ipsum ipsum now such. Lorem ipsum ipsum ipsum now such.",
+    comments: 1,
+    lastComment: "2018-08-22 21:00:32"
+
+  },
+])

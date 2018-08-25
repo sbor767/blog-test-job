@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Route, withRouter } from 'react-router-dom'
 
-import MessageListContainer from './MessageListContainer'
+import BlogPostListContainer from './BlogPostListContainer'
 import MessageContainer from './MessageContainer'
 
 const RestApi = require(`../controllers/RestApi${process.env.DEBUG_REST === 'true' ? 'Sample' : ''}`)
@@ -10,26 +10,26 @@ import './app.css'
 
 class App extends Component {
   state = {
-    headers: [],
-    headersLoaded: false,
+    blogPosts: [],
+    blogPostsLoaded: false,
     editItemId: undefined,
     error: undefined
   }
 
   componentDidMount() {
-    RestApi.getList()
-      .then(headers => {
+    RestApi.getBlogPostsTest()
+      .then(blogPosts => {
         this.setState({
-          headers,
-          headersLoaded: true,
+          blogPosts,
+          blogPostsLoaded: true,
           error: undefined
         })
       })
       .catch(error => {
-        console.log('RestApi.getList error: ', error)
+        console.log('RestApi.getMessagesTest error: ', error)
         this.setState({
-          headers: [],
-          headersLoaded: false,
+          blogPosts: [],
+          blogPostsLoaded: false,
           error
         })
       })
@@ -48,7 +48,7 @@ class App extends Component {
           // console.log('headers=', headers)
           this.setState({
             headers,
-            headersLoaded: true,
+            messagesLoaded: true,
             error: undefined
           })
         })
@@ -56,7 +56,7 @@ class App extends Component {
           console.log('RestApi.create error: ', error)
           this.setState({
             headers: [],
-            headersLoaded: false,
+            messagesLoaded: false,
             error
           })
         })
@@ -70,7 +70,7 @@ class App extends Component {
           // console.log('headers=', headers)
           this.setState({
             headers,
-            headersLoaded: true,
+            messagesLoaded: true,
             editItemId: undefined,
             error: undefined
           })
@@ -93,7 +93,7 @@ class App extends Component {
         let headers = this.state.headers.filter(element => element.id !== id)
         this.setState({
           headers,
-          headersLoaded: true,
+          messagesLoaded: true,
           error: undefined
         })
       })
@@ -102,7 +102,7 @@ class App extends Component {
         console.log('RestApi.delete error: ', error)
         this.setState({
           headers: [],
-          headersLoaded: false,
+          messagesLoaded: false,
           error
         })
       })
@@ -118,14 +118,10 @@ class App extends Component {
         <Route
           exact path="/"
           render={() => (
-            <MessageListContainer
-              headersLoaded={this.state.headersLoaded}
+            <BlogPostListContainer
+              blogPostsLoaded={this.state.blogPostsLoaded}
               onSubmit={this.handleSubmitMessage}
-              onCancel={this.handleCancelEditMessage}
-              editItemId={this.state.editItemId}
-              onEditItem={this.handleEditMessage}
-              onDeleteItem={this.handleDeleteMessage}
-              headers={this.state.headers}
+              blogPosts={this.state.blogPosts}
             />
           )}
         />
@@ -134,7 +130,7 @@ class App extends Component {
           render={({ history, match }) => (
             <MessageContainer
               headers={this.state.headers}
-              headersLoaded={this.state.headersLoaded}
+              headersLoaded={this.state.messagesLoaded}
               messageId={match.params.id}
             />
           )}
