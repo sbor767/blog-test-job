@@ -11,17 +11,28 @@ import '../../components/app.css'
 class App extends Component {
   state = {
     user: {},
+    users: [],
     blogPosts: [],
     blogPostsLoaded: false,
+    comments: [],
     editItemId: undefined,
     error: undefined
   }
 
   componentDidMount() {
-    RestApi.getBlogPostsTest()
-      .then(blogPosts => {
+    Promise.all([
+      RestApi.getBlogPostsTest(),
+      RestApi.getUsersTest(),
+      RestApi.getCommentsTest()
+    ])
+      .then(values => {
+        let blogPosts = values[0]
+        let users = values[1]
+        let comments = values[2]
         this.setState({
           blogPosts,
+          users,
+          comments,
           blogPostsLoaded: true,
           error: undefined
         })
@@ -30,6 +41,8 @@ class App extends Component {
         console.log('RestApi.getMessagesTest error: ', error)
         this.setState({
           blogPosts: [],
+          users: [],
+          comments: [],
           blogPostsLoaded: false,
           error
         })
@@ -122,6 +135,8 @@ class App extends Component {
             <PostListPage
               user={this.state.user}
               blogPostsLoaded={this.state.blogPostsLoaded}
+              users={this.state.users}
+              comments={this.state.comments}
               blogPosts={this.state.blogPosts}
             />
           )}

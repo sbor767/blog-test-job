@@ -10,7 +10,7 @@ import ListPost from './list-post'
 export default class PostListPage extends Component {
 
   componentDidMount() {
-    this.scrollToBottom()
+    // this.scrollToBottom()
   }
 
   componentDidUpdate(previousProps) {
@@ -21,6 +21,10 @@ export default class PostListPage extends Component {
     const headerContainer = ReactDom.findDOMNode(this.headerContainer)
     if (headerContainer) headerContainer.scrollTop = headerContainer.scrollHeight
   }
+
+  getAuthor = (userId) => this.props.users.filter(user => user.id === userId).pop().name
+  getCommentCount = (postId) => this.props.comments.filter(comment => comment.post === postId).length
+  getCommentLastTime = (postId) => this.props.comments.filter(comment => comment.post === postId).reduce((acc, curr) => acc > curr.timestamp ? acc : curr.timestamp, '')
 
   render() {
     const {
@@ -51,11 +55,11 @@ export default class PostListPage extends Component {
               key={`post_id-${current.id}`}
               postId={current.id}
               title={current.title}
-              author={current.author}
+              author={this.getAuthor(current.author)}
               timstamp={current.timestamp}
               body={current.body}
-              comments={current.comments}
-              lastComment={current.lastComment}
+              comments={this.getCommentCount(current.id)}
+              lastComment={this.getCommentLastTime(current.id)}
             />
           ))}
         </div>
