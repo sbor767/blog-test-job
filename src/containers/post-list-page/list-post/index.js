@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 
 import './style.css'
 
-export default function BlogPost({ postId, title, author, timestamp, body, comments, lastComment }) {
+export default function ListPost({ postId, title, author, timestamp, body, comments, lastComment }) {
   return (
         <div className={`message-item`} >
           <Link to={`/posts/${postId}`}>

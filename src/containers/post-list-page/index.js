@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import ReactDom from 'react-dom'
 
-import Header from '../../presentation/Header'
-import Loading from '../../presentation/Loading'
+import Header from '../../components/header'
+import Loading from '../../components/loading'
 import InputBoxContainer from '../../components/InputBoxContainer'
 import {Link} from 'react-router-dom'
-import BlogPost from '../../components/blog-post'
+import ListPost from './list-post'
 
 export default class PostListPage extends Component {
 
@@ -47,7 +47,7 @@ export default class PostListPage extends Component {
           this.headerContainer = element}}
         >
           {blogPosts.map(current => (
-            <BlogPost
+            <ListPost
               key={`post_id-${current.id}`}
               postId={current.id}
               title={current.title}

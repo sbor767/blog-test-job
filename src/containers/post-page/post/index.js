@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import Header from './Header'
-import Loading from './Loading'
+import Header from '../../../components/header/index'
+import Loading from '../../../components/loading/index'
 
-export default function Message ({ header, isBodyLoaded, body }) {
+export default function Post({ header, isBodyLoaded, body }) {
   return (
     <div id="MessageContainer" className="inner-container">
       <Header>

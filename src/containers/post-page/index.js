@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Message from '../../presentation/Message'
+import Post from './post'
 
 const RestApi = require(`../../controllers/RestApi${process.env.DEBUG_REST === 'true' ? 'Sample' : ''}`)
 
@@ -31,7 +31,7 @@ export default class PostPage extends Component {
       messageId
     } = this.props
 
-    return <Message
+    return <Post
       // @TODO Check this !!!
       header={!!headers[messageId] ? headers[messageId] : ''}
       isBodyLoaded={this.state.bodyLoaded}
