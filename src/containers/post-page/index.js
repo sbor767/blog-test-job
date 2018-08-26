@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import Post from './post'
 import Loading from '../../components/loading'
+import Header from '../../components/header'
+import ButtonTo from '../../components/button-to'
+import SignInOut from '../../components/sign-in-out'
 
 const RestApi = require(`../../controllers/RestApi${process.env.DEBUG_REST === 'true' ? 'Sample' : ''}`)
 
@@ -18,9 +21,11 @@ export default class PostPage extends Component {
 
   render() {
     const {
+      user,
       postId,
       blogPostsLoaded,
       blogPosts,
+      onSignOut
     } = this.props
 
     let post = blogPosts.filter(item => item.id === +postId).pop()
@@ -28,6 +33,12 @@ export default class PostPage extends Component {
 
     return (
       <div>
+        <Header title={post.title}>
+          <SignInOut user={user} onSignOut={onSignOut}>
+            <ButtonTo title="Back to Home" to={"/"} classes={['blue']}/>
+          </SignInOut>
+        </Header>
+
         {blogPostsLoaded ? (
           <Post
             postId={post.id}

@@ -217,6 +217,7 @@ class App extends Component {
               blogPosts={this.state.blogPosts}
               users={this.state.users}
               comments={this.state.comments}
+              onSignOut={this.handleSignOut}
             />
           )}
         />
