@@ -3,6 +3,7 @@ import { Route, withRouter } from 'react-router-dom'
 
 import PostListPage from '../post-list-page'
 import PostPage from '../post-page'
+import SignInPage from '../sign-in-page'
 
 const RestApi = require(`../../controllers/RestApi${process.env.DEBUG_REST === 'true' ? 'Sample' : ''}`)
 
@@ -164,6 +165,19 @@ class App extends Component {
     this.setState({ user: {} })
   }
 
+  // handleSignIn = loginData => {
+  handleSignIn = loggedUser => {
+/*
+    RestApi.getUserLogged(loginData)
+      .then(user => this.setState({ user, error: undefined }))
+      .catch(msg => {
+        console.log('handleSignIn--catch-msg', msg)
+        this.setState({ error: msg })
+      })
+*/
+    this.setState({ user: loggedUser })
+  }
+
   render() {
     console.log('app--state--render0', this.state)
     return (
@@ -191,6 +205,15 @@ class App extends Component {
               blogPosts={this.state.blogPosts}
               users={this.state.users}
               comments={this.state.comments}
+            />
+          )}
+        />
+        <Route
+          path="/sign-in"
+          render={({ history, match }) => (
+            <SignInPage
+              onSubmit={this.handleSignIn}
+              history={history}
             />
           )}
         />

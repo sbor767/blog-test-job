@@ -17,7 +17,7 @@ export default function SignInOut({ user, onSignOut, children }) {
       </div>
     ) : (
       <div className="SignInOut_wrap">
-        <ButtonTo title={'SignIn'} to={'/login'} classes={['blue', 'ButtonTo_float_right', 'clearfix']}/>
+        <ButtonTo title={'SignIn'} to={'/sign-in'} classes={['blue', 'ButtonTo_float_right', 'clearfix']}/>
         <div className="SignInOut_welcome"><p>Sign in to be <span className="SignInOut_welcome_name">right guy</span></p></div>
       </div>
     )}

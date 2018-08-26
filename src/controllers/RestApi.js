@@ -189,3 +189,18 @@ const comments = [
 ]
 module.exports.testData = {blogPosts, users, user, comments}
 module.exports.getTestData = () => Promise.resolve({blogPosts, users, user, comments})
+
+module.exports.getUserLogged = data => {
+  const failMsg = 'Wrong credentials!'
+  if (!data.login || !data.password) return Promise.reject(failMsg)
+
+  const secretUserData = {
+    1: "111",
+    2: "222",
+    3: "333",
+    4: "444",
+  }
+
+  let user = users.filter(current => current.name === data.login).pop()
+  return !!user.id ? Promise.resolve(user) : Promise.reject(failMsg)
+}
