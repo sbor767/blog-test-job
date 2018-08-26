@@ -6,6 +6,7 @@ import Loading from '../../components/loading'
 import InputBoxContainer from '../../components/InputBoxContainer'
 import {Link} from 'react-router-dom'
 import ListPost from './list-post'
+import ButtonTo from '../../components/button-to'
 
 export default class PostListPage extends Component {
 
@@ -35,13 +36,9 @@ export default class PostListPage extends Component {
 
     return (
     <div id="ForumContainer" className="inner-container">
-      <Header>
-        <Link to={'/create'}>
-          <button className="blue">Create POST</button>
-        </Link>
-        <Link to={'/login'}>
-          <button className="blue">SignIn</button>
-        </Link>
+      <Header title="The BLOG">
+        <ButtonTo title={'Create POST'} to={'/create'} classes={['blue']}/>
+        <ButtonTo title={'SignIn'} to={'/login'} classes={['blue']}/>
       </Header>
 
       {blogPostsLoaded ? (

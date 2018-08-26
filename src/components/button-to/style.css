@@ -1,0 +1,41 @@
+button {
+    border: none;
+    background-color: white;
+}
+
+.ButtonTo {
+    float: right;
+}
+
+button:hover {
+    cursor: pointer;
+    opacity: .75;
+}
+
+button.red {
+    background-color: #A62824;
+    color: white;
+    padding: 7px 10px;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+
+button.red.light {
+    background-color: #A62824;
+}
+
+button.red:focus {
+    background-color: #7b1c19;
+}
+
+button.blue {
+    background-color: #77A0B8;
+    color: white;
+    padding: 7px 10px;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+
+button.blue:focus {
+    background-color: #97CCEA;
+}

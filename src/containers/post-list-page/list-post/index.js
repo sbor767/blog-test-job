@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 import './style.css'
+import ButtonTo from '../../../components/button-to'
 
 export default function ListPost({ postId, title, author, timestamp, body, comments, lastComment }) {
   return (

@@ -1,41 +1,46 @@
 import React, { Component } from 'react'
 import Post from './post'
+import Loading from '../../components/loading'
 
 const RestApi = require(`../../controllers/RestApi${process.env.DEBUG_REST === 'true' ? 'Sample' : ''}`)
 
 export default class PostPage extends Component {
-  state = { body: undefined, bodyLoaded: false, error: undefined }
+  state = {body: undefined, bodyLoaded: false, error: undefined}
 
   componentDidMount() {
-    const { messageId } = this.props
-    RestApi.getOneBody(messageId)
-      .then(body => this.setState({
-          body,
-          bodyLoaded: true,
-          error: undefined
-        })
-      )
-      .catch(error => {
-        console.log('RestApi.getOneBody error: ', error)
-        this.setState({
-          body: undefined,
-          bodyLoaded: false,
-          error
-        })
-      })
   }
+
+  getAuthor = (userId) => {
+    return this.props.users.filter(user => user.id === +userId).pop().name
+  }
+  getCommentCount = (postId) => this.props.comments.filter(comment => comment.post === +postId).length
+  getCommentLastTime = (postId) => this.props.comments.filter(comment => comment.post === +postId).reduce((acc, curr) => acc > curr.timestamp ? acc : curr.timestamp, '')
 
   render() {
     const {
-      headers,
-      messageId
+      postId,
+      blogPostsLoaded,
+      blogPosts,
     } = this.props
 
-    return <Post
-      // @TODO Check this !!!
-      header={!!headers[messageId] ? headers[messageId] : ''}
-      isBodyLoaded={this.state.bodyLoaded}
-      body={this.state.body}
-    />
+    let post = blogPosts.filter(item => item.id === +postId).pop()
+    let author = this.getAuthor(post.author)
+
+    return (
+      <div>
+        {blogPostsLoaded ? (
+          <Post
+            postId={post.id}
+            title={post.title}
+            body={post.body}
+            author={author}
+            timestamp={post.timestamp}
+          />
+          ) : (
+            <Loading/>
+          )
+        }
+      </div>
+    )
   }
 }

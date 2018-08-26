@@ -74,7 +74,7 @@ module.exports.getOneBody = (id) => get(REST_API_URL + id)
 module.exports.delete = (id) => del(id)
 module.exports.updateOne = (message, id) => put(message, id)
 
-module.exports.getBlogPostsTest = () => Promise.resolve([
+const blogPosts = [
   {
     id: 1,
     title: "Amazing Thirst Thing",
@@ -103,9 +103,8 @@ module.exports.getBlogPostsTest = () => Promise.resolve([
     timestamp:"2018-07-28 10:45:33",
     body:"Lorem ipsum ipsum ipsum now such. Lorem ipsum ipsum ipsum now such. Lorem ipsum ipsum ipsum now such. Lorem ipsum ipsum ipsum now such.",
   },
-])
-
-module.exports.getUsersTest = () => Promise.resolve([
+]
+const users = [
   {
     id: 1,
     name: 'John N.'
@@ -118,9 +117,8 @@ module.exports.getUsersTest = () => Promise.resolve([
     id: 3,
     name: 'Leonardo D.'
   }
-  ])
-
-module.exports.getCommentsTest = () => Promise.resolve([
+  ]
+const comments = [
   {
     id: 1,
     author: 1,
@@ -184,4 +182,6 @@ module.exports.getCommentsTest = () => Promise.resolve([
     post: 1,
     body:"Very amazing thing. Lorem ipsum ipsum ipsum now such. Lorem ipsum ipsum ipsum now such.",
   },
-])
+]
+module.exports.testData = {blogPosts, users, comments}
+module.exports.getTestData = () => Promise.resolve({blogPosts, users, comments})

@@ -1,14 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import Header from '../../../components/header/index'
 import './style.css'
-import ButtonTo from '../../../components/button-to'
-import Copyright from '../../../components/copyright'
 
-export default function Post({ postId, title, body, author, timestamp }) {
+export default function CommentList({ postId, title, body, author, timestamp }) {
   return (
-    <div id="MessageContainer" className="Post inner-container">
+    <div className="CommentList">
       <Header title={title}>
 {/*
         <Link to="/">

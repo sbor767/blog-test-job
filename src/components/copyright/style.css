@@ -1,0 +1,11 @@
+.Copyright {
+    font-size: 0.7em;
+    clear: both;
+}
+.Copyright__author {
+    /*float: left;*/
+    font-size: 1.6em;
+}
+.Copyright__timestamp {
+    /*float: right;*/
+}

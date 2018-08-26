@@ -19,26 +19,22 @@ class App extends Component {
     error: undefined
   }
 
-  componentDidMount() {
-    Promise.all([
-      RestApi.getBlogPostsTest(),
-      RestApi.getUsersTest(),
-      RestApi.getCommentsTest()
-    ])
-      .then(values => {
-        let blogPosts = values[0]
-        let users = values[1]
-        let comments = values[2]
-        this.setState({
-          blogPosts,
-          users,
-          comments,
+  constructor(props) {
+    super(props);
+    // this.history = createBrowserHistory();
+/*
+    RestApi.getTestData()
+      .then(testData => {
+        this.state = ({
+          blogPosts: testData.blogPosts,
+          users: testData.users,
+          comments: testData.comments,
           blogPostsLoaded: true,
           error: undefined
         })
       })
       .catch(error => {
-        console.log('RestApi.getMessagesTest error: ', error)
+        console.log('RestApi.getTestData error: ', error)
         this.setState({
           blogPosts: [],
           users: [],
@@ -47,6 +43,45 @@ class App extends Component {
           error
         })
       })
+*/
+    const testData = RestApi.testData
+    this.state = ({
+      blogPosts: testData.blogPosts,
+      users: testData.users,
+      comments: testData.comments,
+      blogPostsLoaded: true,
+      error: undefined
+    })
+
+  }
+
+  componentDidMount() {
+/*
+    RestApi.getTestData()
+      .then(testData => {
+        this.setState({
+          blogPosts: testData.blogPosts,
+          users: testData.users,
+          comments: testData.comments,
+          blogPostsLoaded: true,
+          error: undefined
+        })
+      })
+      .catch(error => {
+        console.log('RestApi.getTestData error: ', error)
+        this.setState({
+          blogPosts: [],
+          users: [],
+          comments: [],
+          blogPostsLoaded: false,
+          error
+        })
+      })
+*/
+  }
+
+  getDerivedStateFromProps(props, state) {
+
   }
 
   handleSubmitMessage = (msg, id = undefined) => {
@@ -127,6 +162,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('app--state--render0', this.state)
     return (
       <div id='container'>
         <Route
@@ -145,9 +181,11 @@ class App extends Component {
           path="/posts/:id"
           render={({ history, match }) => (
             <PostPage
-              headers={this.state.headers}
-              headersLoaded={this.state.messagesLoaded}
-              messageId={match.params.id}
+              postId={match.params.id}
+              blogPostsLoaded={this.state.blogPostsLoaded}
+              blogPosts={this.state.blogPosts}
+              users={this.state.users}
+              comments={this.state.comments}
             />
           )}
         />
