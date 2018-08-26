@@ -39,6 +39,7 @@ export default class PostListPage extends Component {
 
     return (
     <div id="ForumContainer" className="inner-container">
+
       <Header title="The BLOG">
         <SignInOut user={user} onSignOut={onSignOut}>
           <ButtonTo title={'Create POST'} to={'/post-create'} classes={['blue', 'ButtonTo_float_right']}/>
@@ -68,11 +69,6 @@ export default class PostListPage extends Component {
       ) : (
         <Loading />
       )}
-
-      <InputBoxContainer
-        onSubmit={onSubmit}
-        blogPosts={blogPosts}
-      />
 
     </div>
   )}

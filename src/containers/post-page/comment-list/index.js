@@ -1,19 +1,38 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 import './style.css'
+import Comment from '../comment'
+import CommentAdd from '../comment-add'
 
-export default function Comment({ commentId, body, author, timestamp }) {
+export default function CommentList({ postId, postComments, currentUserId, history, onCommentSubmit, getAuthor }) {
   return (
     <div className="CommentList">
-      <Header title={title}>
-        <ButtonTo title="Back to Home" to={"/"} classes={['blue']}/>
-      </Header>
-      <div id="message-container">
-        <Copyright author={author} timestamp={timestamp}/>
-        <div className="Post__body">
-          <p>{body}</p>
-        </div>
+      <div className="CommentList__title">
+        <span>Comments</span>
+      </div>
+      {postComments.length ? (
+        <ul className="CommentList__ul">
+          {postComments.map(comment => (
+            <li key={comment.id} className="CommentList__li">
+              <div className="CommentList__div">
+                <Comment
+                  comment={comment}
+                  getAuthor={getAuthor}
+                />
+              </div>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div className="CommentList__empty"><p>There are no comments yet</p></div>
+      )}
+      <div className="CommentList__add">
+        <CommentAdd
+          history={history}
+          postId={postId}
+          currentUserId={currentUserId}
+          onSubmit={onCommentSubmit}
+        />
       </div>
     </div>
   )

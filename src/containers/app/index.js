@@ -218,6 +218,7 @@ class App extends Component {
               users={this.state.users}
               comments={this.state.comments}
               onSignOut={this.handleSignOut}
+              history={history}
             />
           )}
         />

@@ -190,6 +190,26 @@ let comments = [
 module.exports.testData = {blogPosts, users, user, comments}
 module.exports.getTestData = () => Promise.resolve({blogPosts, users, user, comments})
 
+module.exports.getComments = () => Promise.resolve(comments)
+
+module.exports.addComment = (comment, postId, authorId) => {
+  let now = new Date()
+  let timestamp = now.getFullYear() + '-' + (now.getMonth() +1) + '-' + now.getDate() + ' ' + now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds()
+  let newComment = {
+    id: [...comments].length + 1,
+    author: authorId,
+    post: postId,
+    body: comment.body,
+    timestamp
+  }
+  try {
+    comments.push(newComment)
+  } catch(e) {
+    return Promise.reject(`Error saving comment: ${e.message}`)
+  }
+  return Promise.resolve(newComment)
+}
+
 module.exports.getUserLogged = data => {
   const failMsg = 'Wrong credentials!'
   if (!data.login || !data.password) return Promise.reject(failMsg)
