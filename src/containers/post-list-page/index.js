@@ -41,7 +41,7 @@ export default class PostListPage extends Component {
     <div id="ForumContainer" className="inner-container">
       <Header title="The BLOG">
         <SignInOut user={user} onSignOut={onSignOut}>
-          <ButtonTo title={'Create POST'} to={'/create'} classes={['blue', 'ButtonTo_float_right']}/>
+          <ButtonTo title={'Create POST'} to={'/post-create'} classes={['blue', 'ButtonTo_float_right']}/>
         </SignInOut>
       </Header>
 

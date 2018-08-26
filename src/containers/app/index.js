@@ -4,6 +4,7 @@ import { Route, withRouter } from 'react-router-dom'
 import PostListPage from '../post-list-page'
 import PostPage from '../post-page'
 import SignInPage from '../sign-in-page'
+import PostCreatePage from '../post-create-page'
 
 const RestApi = require(`../../controllers/RestApi${process.env.DEBUG_REST === 'true' ? 'Sample' : ''}`)
 
@@ -45,7 +46,8 @@ class App extends Component {
         })
       })
 */
-    const testData = RestApi.testData
+    let testData = {...RestApi.testData}
+    // let testData = RestApi.testData
     this.state = ({
       blogPosts: testData.blogPosts,
       users: testData.users,
@@ -178,6 +180,16 @@ class App extends Component {
     this.setState({ user: loggedUser })
   }
 
+  handlePostCreate = post => {
+    // @TODO this redundantly because state will updated with route change.
+    // So leave mutation in RestApi only.
+/*
+    let blogPosts = [...this.state.blogPosts]
+    blogPosts.push(post)
+    this.setState({ blogPosts })
+*/
+  }
+
   render() {
     console.log('app--state--render0', this.state)
     return (
@@ -213,6 +225,16 @@ class App extends Component {
           render={({ history, match }) => (
             <SignInPage
               onSubmit={this.handleSignIn}
+              history={history}
+            />
+          )}
+        />
+        <Route
+          path="/post-create"
+          render={({ history, match }) => (
+            <PostCreatePage
+              currentUserId={this.state.user.id}
+              onSubmit={this.handlePostCreate}
               history={history}
             />
           )}

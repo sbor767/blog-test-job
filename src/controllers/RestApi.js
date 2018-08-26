@@ -74,7 +74,7 @@ module.exports.getOneBody = (id) => get(REST_API_URL + id)
 module.exports.delete = (id) => del(id)
 module.exports.updateOne = (message, id) => put(message, id)
 
-const blogPosts = [
+let blogPosts = [
   {
     id: 1,
     title: "Amazing Thirst Thing",
@@ -104,7 +104,7 @@ const blogPosts = [
     body:"Lorem ipsum ipsum ipsum now such. Lorem ipsum ipsum ipsum now such. Lorem ipsum ipsum ipsum now such. Lorem ipsum ipsum ipsum now such.",
   },
 ]
-const users = [
+let users = [
   {
     id: 1,
     name: 'John N.'
@@ -118,11 +118,11 @@ const users = [
     name: 'Leonardo D.'
   }
   ]
-const user = {
+let user = {
   id: 3,
   name: 'Leonardo D.'
 }
-const comments = [
+let comments = [
   {
     id: 1,
     author: 1,
@@ -202,5 +202,23 @@ module.exports.getUserLogged = data => {
   }
 
   let user = users.filter(current => current.name === data.login).pop()
-  return !!user.id ? Promise.resolve(user) : Promise.reject(failMsg)
+  return !!user.id && !!secretUserData[user.id] && secretUserData[user.id] === data.password ? Promise.resolve(user) : Promise.reject(failMsg)
+}
+
+module.exports.addPost = (post, authorId) => {
+  let now = new Date()
+  let timestamp = now.getFullYear() + '-' + (now.getMonth() +1) + '-' + now.getDate() + ' ' + now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds()
+  let newPost = {
+    id: [...blogPosts].length + 1,
+    title: post.title,
+    body: post.body,
+    author: authorId,
+    timestamp
+  }
+  try {
+    blogPosts.push(newPost)
+  } catch(e) {
+    return Promise.reject(`Wrong Blog post: ${e.message}`)
+  }
+  return Promise.resolve(newPost)
 }
