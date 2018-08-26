@@ -118,6 +118,10 @@ const users = [
     name: 'Leonardo D.'
   }
   ]
+const user = {
+  id: 3,
+  name: 'Leonardo D.'
+}
 const comments = [
   {
     id: 1,
@@ -183,5 +187,5 @@ const comments = [
     body:"Very amazing thing. Lorem ipsum ipsum ipsum now such. Lorem ipsum ipsum ipsum now such.",
   },
 ]
-module.exports.testData = {blogPosts, users, comments}
-module.exports.getTestData = () => Promise.resolve({blogPosts, users, comments})
+module.exports.testData = {blogPosts, users, user, comments}
+module.exports.getTestData = () => Promise.resolve({blogPosts, users, user, comments})

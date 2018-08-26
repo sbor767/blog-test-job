@@ -1,0 +1,28 @@
+.SignInOut {
+    /*float: right;*/
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*flex-direction: row;*/
+}
+
+.SignInOut_wrap {
+    display: flex;
+    flex-direction: column;
+}
+
+.SignInOut_buttons {
+    float: right;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.SignInOut_welcome {
+    text-align: right;
+    /*align-items: flex-end;*/
+    font-size: 0.7em;
+}
+.SignInOut_welcome_name {
+    font-size: 1.0em;
+    font-weight: bold;
+}

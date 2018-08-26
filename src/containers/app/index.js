@@ -48,6 +48,7 @@ class App extends Component {
     this.state = ({
       blogPosts: testData.blogPosts,
       users: testData.users,
+      user: testData.user,
       comments: testData.comments,
       blogPostsLoaded: true,
       error: undefined
@@ -126,9 +127,7 @@ class App extends Component {
         })
         .catch(error => {
           console.log('RestApi.updateOne error: ', error)
-          this.setState({
-            error
-          })
+          this.setState({ error })
         })
     }
   }
@@ -161,6 +160,10 @@ class App extends Component {
     this.setState({ editItemId: id })
   }
 
+  handleSignOut = () => {
+    this.setState({ user: {} })
+  }
+
   render() {
     console.log('app--state--render0', this.state)
     return (
@@ -174,6 +177,7 @@ class App extends Component {
               users={this.state.users}
               comments={this.state.comments}
               blogPosts={this.state.blogPosts}
+              onSignOut={this.handleSignOut}
             />
           )}
         />
@@ -182,6 +186,7 @@ class App extends Component {
           render={({ history, match }) => (
             <PostPage
               postId={match.params.id}
+              user={this.state.user}
               blogPostsLoaded={this.state.blogPostsLoaded}
               blogPosts={this.state.blogPosts}
               users={this.state.users}

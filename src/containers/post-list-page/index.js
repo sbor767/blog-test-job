@@ -7,6 +7,7 @@ import InputBoxContainer from '../../components/InputBoxContainer'
 import {Link} from 'react-router-dom'
 import ListPost from './list-post'
 import ButtonTo from '../../components/button-to'
+import SignInOut from '../../components/sign-in-out'
 
 export default class PostListPage extends Component {
 
@@ -29,16 +30,19 @@ export default class PostListPage extends Component {
 
   render() {
     const {
+      user,
       blogPostsLoaded,
       blogPosts,
       onSubmit,
+      onSignOut
     } = this.props
 
     return (
     <div id="ForumContainer" className="inner-container">
       <Header title="The BLOG">
-        <ButtonTo title={'Create POST'} to={'/create'} classes={['blue']}/>
-        <ButtonTo title={'SignIn'} to={'/login'} classes={['blue']}/>
+        <SignInOut user={user} onSignOut={onSignOut}>
+          <ButtonTo title={'Create POST'} to={'/create'} classes={['blue', 'ButtonTo_float_right']}/>
+        </SignInOut>
       </Header>
 
       {blogPostsLoaded ? (
