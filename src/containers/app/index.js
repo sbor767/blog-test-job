@@ -5,13 +5,12 @@ import PostListPage from '../post-list-page'
 import PostPage from '../post-page'
 import SignInPage from '../sign-in-page'
 import PostCreatePage from '../post-create-page'
-
-const RestApi = require(`../../controllers/RestApi${process.env.DEBUG_REST === 'true' ? 'Sample' : ''}`)
-
 import '../../components/app.css'
 
-class App extends Component {
-  state = {
+const RestApi = require(`../../controllers/RestApi`)
+
+export default class App extends Component {
+	state = {
     user: {},
     users: [],
     blogPosts: [],
@@ -246,4 +245,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(App)
+//export default withRouter(App)

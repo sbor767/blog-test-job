@@ -3,8 +3,6 @@ import ReactDom from 'react-dom'
 
 import Header from '../../components/header'
 import Loading from '../../components/loading'
-import InputBoxContainer from '../../components/InputBoxContainer'
-import {Link} from 'react-router-dom'
 import ListPost from './list-post'
 import ButtonTo from '../../components/button-to'
 import SignInOut from '../../components/sign-in-out'
