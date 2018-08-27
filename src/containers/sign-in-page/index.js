@@ -73,6 +73,17 @@ export default class SignInPage extends Component {
       <Header />
       <form onSubmit={this.handleSubmit}>
         <p>Sign in or sign up by entering your login and password.</p>
+        <div className="SignInPage__note">
+          <p>
+            Use next test users credentials<br />
+            (Login : password):
+          </p>
+          <ul className="SignInPage__note__ul">
+            <li>'John N.' : 111</li>
+            <li>'Alexandr M.' : 222</li>
+            <li>'Leonardo D.' : 333</li>
+          </ul>
+        </div>
         <input
           type='text'
           onChange={this.handleLoginChange}
