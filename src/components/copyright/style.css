@@ -1,11 +1,11 @@
 .Copyright {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .Copyright__author {
-    font-size: 1.1em;
+  font-size: 1.1em;
 }
 .Copyright__timestamp {
-    font-size: 0.7em;
+  font-size: 0.7em;
 }
