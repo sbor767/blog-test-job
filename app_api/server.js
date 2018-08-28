@@ -1,53 +1,59 @@
-const morgan = require('morgan')
+// 'use strict'
+
+const express = require('express')
+const app = express()
+const jwt = require('express-jwt')
+const jwks = require('jwks-rsa')
+const cors = require('cors')
 const bodyParser = require('body-parser')
 
-// Load .env letiables
-require('dotenv').load()
+let datasource = require('./datasource')
 
-// Base
-const express = require('express'),
-    app = express(),
-    port = process.env.SERVER_PORT || 3911,
-    connection = require('express-myconnection'),
-    mysql = require('mysql'),
-    expressValidator = require('express-validator')
 
-//don't show the log when it is test
-if(process.env.NODE_ENV !== 'test') {
-  //use morgan to log at command line
-  app.use(morgan('combined')); //'combined' outputs the Apache style LOGs
-}
+const AUTH0_DOMAIN = 'blog-test-job.stripway.ru'
+// @TODO Set up it!
+const API_AUDIENCE_ATTRIBUTE = 'Some to be issued.'
 
-// Protect api with the CORS.
-const cors = require('cors')
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 
-app.use( bodyParser.json() )
-app.use(expressValidator())
-
-app.use(
-  connection(mysql,{
-    host: process.env.MYSQL_HOST || 'localhost',
-    port: process.env.MYSQL_PORT || 3306,
-    user     : process.env.MYSQL_USER || 'root',
-    password : process.env.MYSQL_PASSWORD || '',
-    database : process.env.MYSQL_DATABASE || 'test',
-    debug    : false //set true if you wanna see debug logger
-  },'request')
-)
-
-// Routes
-app.use('/api/v1.0', require('./routes/api/v1_0/messages'))
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  let err = new Error('Not Found !!!')
-  err.status = 404
-  next(err)
+const authCheck = jwt({
+  secret: jwks.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    // YOUR-AUTH0-DOMAIN name e.g https://prosper.auth0.com
+    // @TODO To be Refactored
+    jwksUri: `${AUTH0_DOMAIN}//.well-known/jwks.json`
+  }),
+  // This is the identifier we set when we created the API
+  audience: API_AUDIENCE_ATTRIBUTE,
+  issuer: AUTH0_DOMAIN,
+  algorithms: ['RS256']
 })
 
-// Start server
-app.listen(port)
-console.log(`Starting forum api server on port: ${port}`)
+app.get('/api/blog/posts', (req, res) => {
+  let { posts } = datasource
+  res.json(posts)
+})
 
-module.exports = app
+
+app.get('/api/blog/users', (req,res) => {
+  let { users } = datasource
+  res.json(users)
+})
+
+app.get('/api/blog/users-private', authCheck, (req,res) => {
+  let { users } = datasource
+  res.json(users);
+})
+
+app.get('/api/blog/comments', (req,res) => {
+  let { comments } = datasource
+  res.json(comments);
+})
+
+
+app.listen(3333);
+console.log('Listening on localhost:3333');
