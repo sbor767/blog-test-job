@@ -2,7 +2,6 @@ import React from 'react'
 
 import './style.css'
 import Comment from '../comment'
-import CommentAdd from '../comment-add'
 
 export default function CommentList({ postId, postComments, currentUserId, history, onCommentSubmit, getAuthor }) {
   return (
@@ -26,14 +25,6 @@ export default function CommentList({ postId, postComments, currentUserId, histo
       ) : (
         <div className="CommentList__empty"><p>There are no comments yet</p></div>
       )}
-      <div className="CommentList__add">
-        <CommentAdd
-          history={history}
-          postId={postId}
-          currentUserId={currentUserId}
-          onSubmit={onCommentSubmit}
-        />
-      </div>
     </div>
   )
 }

@@ -6,9 +6,10 @@ import ButtonTo from '../../components/button-to'
 import SignInOut from '../../components/sign-in-out'
 import comments from '../../api/rest-like/comments'
 import CommentList from './comment-list'
+import CommentAdd from './comment-add'
 
 export default class PostPage extends Component {
-  state = {comments: undefined, commentsLoaded: false, error: ''}
+  state = {comments: [], commentsLoaded: false, error: ''}
 
   componentDidMount() {
     // comments.get()
@@ -72,12 +73,19 @@ export default class PostPage extends Component {
                 history={history}
                 postId={postId}
                 postComments={this.state.comments}
-                currentUserId={user.id}
-                onCommentSubmit={this.onCommentSubmitHandler}
                 getAuthor={this.getAuthor}
               />
             </div>
-
+            {!!user ?
+              <div className="CommentList__add">
+                <CommentAdd
+                  history={history}
+                  postId={postId}
+                  currentUserId={user.id}
+                  onSubmit={this.onCommentSubmitHandler}
+                />
+              </div>
+            : ''}
           </div>
           ) : (
             <Loading/>

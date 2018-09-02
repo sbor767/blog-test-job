@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Header from '../../../components/header'
 
 import comments from '../../../api/rest-like/comments'
 import './style.css'
@@ -11,24 +10,13 @@ export default class CommentAdd extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    this.setState({ error: '' })
     if (this.state.body) {
       this.save({ body: this.state.body })
       this.setState({ body: '', error: '' })
     } else {
       this.setState({ error: 'Please fill comment fields.' })
     }
-
     console.log(this.state)
-  }
-
-  onSubmit() {
-    // Redirect to '/'.
-    console.log('onSubmit--this.props', this.props)
-    console.log('onSubmit--this.props.path', `/posts/${this.props.postId}`)
-    // this.props.history.push('/')
-
-    this.props.history.push(`/posts/${this.props.postId}`)
   }
 
   save(commentBody) {
@@ -40,6 +28,15 @@ export default class CommentAdd extends Component {
       .catch(err => {
         this.setState({ error: `Error when saving comment: ${err}` })
       })
+  }
+
+  onSubmit() {
+    // Redirect to '/'.
+    console.log('onSubmit--this.props', this.props)
+    console.log('onSubmit--this.props.path', `/posts/${this.props.postId}`)
+    // this.props.history.push('/')
+
+    this.props.history.push(`/posts/${this.props.postId}`)
   }
 
   render = () => (
