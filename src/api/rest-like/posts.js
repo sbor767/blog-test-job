@@ -36,8 +36,11 @@ export default {
    * Signin
    * @returns {Promise}
    */
-  // get: () => Promise.resolve(this.posts),
-  get: function() {return Promise.resolve(this.posts)},
+  get: function(id = undefined) {
+    if (!id) return Promise.resolve(this.posts)
+    if (!!this.posts[id]) return this.posts.filter(post => post.id === +id).pop()
+    return Promise.reject(`Not post exist with id=${id}`)
+  },
 
   add: function(post, authorId) {
     let newPost = {

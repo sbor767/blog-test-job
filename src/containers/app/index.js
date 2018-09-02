@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Route, withRouter } from 'react-router-dom'
 
+import LayoutRoot from '../../components/layouts/layout-root'
 import PostListPage from '../post-list-page'
 import PostPage from '../post-page'
 import SignInPage from '../sign-in-page'
@@ -71,7 +72,7 @@ export default class App extends Component {
   render() {
     console.log('app--state--render0', this.state)
     return (
-      <div id='container'>
+      <LayoutRoot>
         <Route
           exact path="/"
           render={() => (
@@ -91,10 +92,7 @@ export default class App extends Component {
             <PostPage
               postId={match.params.id}
               user={this.state.user}
-              blogPostsLoaded={this.state.blogPostsLoaded}
-              blogPosts={this.state.blogPosts}
               users={this.state.users}
-              comments={this.state.comments}
               onSignOut={this.handleSignOut}
               history={history}
             />
@@ -119,7 +117,7 @@ export default class App extends Component {
             />
           )}
         />
-      </div>
+      </LayoutRoot>
     )
   }
 }

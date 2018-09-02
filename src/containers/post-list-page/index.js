@@ -6,6 +6,8 @@ import Loading from '../../components/loading'
 import ListPost from './list-post'
 import ButtonTo from '../../components/button-to'
 import SignInOut from '../../components/sign-in-out'
+import LayoutPage from '../../components/layouts/layout-page'
+import LayoutContentItems from '../../components/layouts/layout-content-items'
 
 export default class PostListPage extends Component {
 
@@ -37,7 +39,7 @@ export default class PostListPage extends Component {
     } = this.props
 
     return (
-    <div id="ForumContainer" className="inner-container">
+    <LayoutPage>
 
       <Header title="The BLOG">
         <SignInOut user={user} onSignOut={onSignOut}>
@@ -46,10 +48,8 @@ export default class PostListPage extends Component {
       </Header>
 
       {blogPostsLoaded ? (
-        <div
-          id="message-container"
-          ref={element => {
-          this.headerContainer = element}}
+        <LayoutContentItems
+          // ref={element => {this.headerContainer = element}}
         >
           {blogPosts.map(current => (
             <ListPost
@@ -63,12 +63,12 @@ export default class PostListPage extends Component {
               lastComment={this.getCommentLastTime(current.id)}
             />
           ))}
-        </div>
+        </LayoutContentItems>
 
       ) : (
         <Loading />
       )}
 
-    </div>
+    </LayoutPage>
   )}
 }

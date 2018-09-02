@@ -9,7 +9,7 @@ export default function CommentList({ postId, postComments, currentUserId, histo
       <div className="CommentList__title">
         <span>Comments</span>
       </div>
-      {postComments.length ? (
+      {!!postComments && postComments.length ? (
         <ul className="CommentList__ul">
           {postComments.map(comment => (
             <li key={comment.id} className="CommentList__li">

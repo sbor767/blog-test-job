@@ -3,6 +3,7 @@ import Header from '../../components/header'
 
 import users from '../../api/rest-like/users'
 import './style.css'
+import LayoutCentreWrapper from '../../components/layouts/layout-centre-wrapper'
 
 export default class SignInPage extends Component {
   state = { login: '', password: '', error: '' }
@@ -40,16 +41,16 @@ export default class SignInPage extends Component {
   }
 
   render = () => (
-    <div id='LoginContainer' className='inner-container'>
+    <LayoutCentreWrapper className="SignInPage">
       <Header />
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className="SignInPage__form">
         <p>Sign in or sign up by entering your login and password.</p>
-        <div className="SignInPage__note">
+        <div className="SignInPage__form__note">
           <p>
             Use next test users credentials<br />
             (Login : password):
           </p>
-          <ul className="SignInPage__note__ul">
+          <ul className="SignInPage__form__note__ul">
             <li>'John N.' : 111</li>
             <li>'Alexandr M.' : 222</li>
             <li>'Leonardo D.' : 333</li>
@@ -60,17 +61,19 @@ export default class SignInPage extends Component {
           onChange={this.handleLoginChange}
           value={this.state.login}
           placeholder='Your login (basically name)'
+          className="SignInPage__form__input"
         />
         <input
           type='password'
           onChange={this.handlePasswordChange}
           value={this.state.password}
           placeholder='Your password'
+          className="SignInPage__form__input"
         />
         <p className="error">{this.state.error}</p>
         <button className='red light' type='submit'>Login</button>
       </form>
 
-    </div>
+    </LayoutCentreWrapper>
   )
 }
