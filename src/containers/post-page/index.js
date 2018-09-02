@@ -4,14 +4,15 @@ import Loading from '../../components/loading'
 import Header from '../../components/header'
 import ButtonTo from '../../components/button-to'
 import SignInOut from '../../components/sign-in-out'
-import RestApi from '../../controllers/RestApi'
+import comments from '../../api/rest-like/comments'
 import CommentList from './comment-list'
 
 export default class PostPage extends Component {
   state = {comments: undefined, commentsLoaded: false, error: ''}
 
   componentDidMount() {
-    RestApi.getComments()
+    // comments.get()
+    comments.get()
       .then(comments => {
         comments = comments.filter(comment => comment.post === +this.props.postId)
         this.setState({ comments, commentsLoaded: true, error: '' })

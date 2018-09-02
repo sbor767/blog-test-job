@@ -17,6 +17,7 @@ export default class PostListPage extends Component {
     if (previousProps.blogPosts.length !== this.props.blogPosts.length) this.scrollToBottom()
   }
 
+  // @TODO Fix next.
   scrollToBottom = () => {
     const headerContainer = ReactDom.findDOMNode(this.headerContainer)
     if (headerContainer) headerContainer.scrollTop = headerContainer.scrollHeight

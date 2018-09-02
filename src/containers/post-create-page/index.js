@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Header from '../../components/header'
 
-import RestApi from '../../controllers/RestApi'
+import posts from '../../api/rest-like/posts'
 import './style.css'
 
 export default class PostCreatePage extends Component {
@@ -29,7 +29,7 @@ export default class PostCreatePage extends Component {
   }
 
   save(post) {
-    RestApi.addPost(post, this.props.currentUserId)
+    posts.add(post, this.props.currentUserId)
       .then(newPost => {
         this.props.onSubmit(newPost)
         this.onSubmit()
@@ -38,22 +38,6 @@ export default class PostCreatePage extends Component {
         this.setState({ error: `Error when saving post: ${err}` })
       })
   }
-
-/*
-  signup() {
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then(res => {
-        this.onLogin()
-        console.log('Created user: ', res)
-      })
-      .catch(err => {
-        console.log('Error: ', err)
-        this.setState({ error: `Error signing up: ${err.message}` })
-      })
-  }
-*/
 
   render = () => (
     <div className='PostCreatePage'>

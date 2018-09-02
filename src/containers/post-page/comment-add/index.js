@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Header from '../../../components/header'
 
-import RestApi from '../../../controllers/RestApi'
+import comments from '../../../api/rest-like/comments'
 import './style.css'
 
 export default class CommentAdd extends Component {
@@ -32,7 +32,7 @@ export default class CommentAdd extends Component {
   }
 
   save(commentBody) {
-    RestApi.addComment(commentBody, this.props.postId, this.props.currentUserId)
+    comments.add(commentBody, this.props.postId, this.props.currentUserId)
       .then(newComment => {
         this.props.onSubmit(newComment)
         this.onSubmit()

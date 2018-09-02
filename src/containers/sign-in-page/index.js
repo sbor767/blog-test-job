@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Header from '../../components/header'
 
-import RestApi from '../../controllers/RestApi'
+import users from '../../api/rest-like/users'
 import './style.css'
 
 export default class SignInPage extends Component {
@@ -29,20 +29,7 @@ export default class SignInPage extends Component {
   }
 
   login(loginData) {
-/*
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then(res => this.onLogin())
-      .catch(err => {
-        if (err.code === 'auth/user-not-found') {
-          this.signup()
-        } else {
-          this.setState({ error: `Error loggin in: ${err.message}` })
-        }
-      })
-*/
-    RestApi.getUserLogged(loginData)
+    users.getUserLogged(loginData)
       .then(user => {
         this.props.onSubmit(user)
         this.onLogin()
@@ -51,22 +38,6 @@ export default class SignInPage extends Component {
         this.setState({ error: `Error loggin in: ${err}` })
       })
   }
-
-/*
-  signup() {
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then(res => {
-        this.onLogin()
-        console.log('Created user: ', res)
-      })
-      .catch(err => {
-        console.log('Error: ', err)
-        this.setState({ error: `Error signing up: ${err.message}` })
-      })
-  }
-*/
 
   render = () => (
     <div id='LoginContainer' className='inner-container'>
