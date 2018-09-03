@@ -16,7 +16,7 @@ export default class PostListPage extends Component {
   }
 
   componentDidUpdate(previousProps) {
-    if (previousProps.blogPosts.length !== this.props.blogPosts.length) this.scrollToBottom()
+    if (previousProps.posts.length !== this.props.posts.length) this.scrollToBottom()
   }
 
   // @TODO Fix next.
@@ -25,15 +25,15 @@ export default class PostListPage extends Component {
     if (headerContainer) headerContainer.scrollTop = headerContainer.scrollHeight
   }
 
-  getAuthor = (userId) => this.props.users.filter(user => user.id === userId).pop().name
-  getCommentCount = (postId) => this.props.comments.filter(comment => comment.post === postId).length
-  getCommentLastTime = (postId) => this.props.comments.filter(comment => comment.post === postId).reduce((acc, curr) => acc > curr.timestamp ? acc : curr.timestamp, '')
+  getAuthor = (authorId) => this.props.users.filter(user => user.id === +authorId).pop().name
+  getCommentsCount = (postId) => this.props.comments.filter(comment => comment.post === +postId).length
+  getCommentLastTime = (postId) => this.props.comments.filter(comment => comment.post === +postId).reduce((acc, curr) => acc > curr.timestamp ? acc : curr.timestamp, '')
 
   render() {
     const {
       user,
-      blogPostsLoaded,
-      blogPosts,
+      isLoaded,
+      posts,
       onSubmit,
       onSignOut
     } = this.props
@@ -47,11 +47,11 @@ export default class PostListPage extends Component {
         </SignInOut>
       </Header>
 
-      {blogPostsLoaded ? (
+      {isLoaded ? (
         <LayoutContentItems
           // ref={element => {this.headerContainer = element}}
         >
-          {blogPosts.map(current => (
+          {posts.map(current => (
             <ListPost
               key={`post_id-${current.id}`}
               postId={current.id}
@@ -59,7 +59,7 @@ export default class PostListPage extends Component {
               author={this.getAuthor(current.author)}
               timstamp={current.timestamp}
               body={current.body}
-              comments={this.getCommentCount(current.id)}
+              commentsCount={this.getCommentsCount(current.id)}
               lastComment={this.getCommentLastTime(current.id)}
             />
           ))}

@@ -38,7 +38,8 @@ export default {
    */
   get: function(id = undefined) {
     if (!id) return Promise.resolve(this.posts)
-    if (!!this.posts[id]) return this.posts.filter(post => post.id === +id).pop()
+    let post = this.posts.filter(post => post.id === +id).pop()
+    if (post) return post
     return Promise.reject(`Not post exist with id=${id}`)
   },
 

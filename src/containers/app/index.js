@@ -22,8 +22,8 @@ export default class App extends Component {
 	state = {
     user: {},
     users: [],
-    blogPosts: [],
-    blogPostsLoaded: false,
+    posts: [],
+    isLoaded: false,
     comments: [],
     error: ''
   }
@@ -33,9 +33,9 @@ export default class App extends Component {
       .then(values => this.setState({
         user: values[0],
         users:values[1],
-        blogPosts: values[2],
+        posts: values[2],
         comments: values[3],
-        blogPostsLoaded: true,
+        isLoaded: true,
         error: ''
       }))
       .catch(error => {
@@ -43,9 +43,9 @@ export default class App extends Component {
         this.setState({
           user: {},
           users: [],
-          blogPosts: [],
+          posts: [],
           comments: [],
-          blogPostsLoaded: false,
+          isLoaded: false,
           error
         })
       })
@@ -63,9 +63,9 @@ export default class App extends Component {
     // @TODO this redundantly because state will updated with route change.
     // So leave mutation in RestApi only.
 /*
-    let blogPosts = [...this.state.blogPosts]
-    blogPosts.push(post)
-    this.setState({ blogPosts })
+    let blogPosts = [...this.state.posts]
+    posts.push(post)
+    this.setState({ posts })
 */
   }
 
@@ -78,10 +78,10 @@ export default class App extends Component {
           render={() => (
             <PostListPage
               user={this.state.user}
-              blogPostsLoaded={this.state.blogPostsLoaded}
+              isLoaded={this.state.isLoaded}
               users={this.state.users}
               comments={this.state.comments}
-              blogPosts={this.state.blogPosts}
+              posts={this.state.posts}
               onSignOut={this.handleSignOut}
             />
           )}
@@ -92,7 +92,6 @@ export default class App extends Component {
             <PostPage
               postId={match.params.id}
               user={this.state.user}
-              users={this.state.users}
               onSignOut={this.handleSignOut}
               history={history}
             />

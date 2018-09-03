@@ -6,7 +6,7 @@ import ButtonTo from '../../components/button-to'
 import SignInOut from '../../components/sign-in-out'
 import CommentList from './comment-list'
 import CommentAdd from './comment-add'
-import {posts, comments} from '../../api/rest-like'
+import {posts, comments, users} from '../../api/rest-like'
 import LayoutPage from '../../components/layouts/layout-page'
 import LayoutContentItems from '../../components/layouts/layout-content-items'
 
@@ -14,21 +14,23 @@ import LayoutContentItems from '../../components/layouts/layout-content-items'
 function getData(postId) {
   return Promise.all([
     posts.get(postId),
-    comments.get()
+    comments.get(),
+    users.get()
   ])
 }
 
 export default class PostPage extends Component {
-  state = {post: {}, comments: [], isLoaded: false, error: ''}
+  state = {post: {}, comments: [], users: [], isLoaded: false, error: ''}
 
   componentDidMount() {
     getData(this.props.postId)
       .then(values => {
         console.log('PostPage-componentDidMount=postId, values=', this.props.postId, values)
-        let ownComments = values[1].filter(comment => comment.post === +this.props.postId)
+        let postComments = values[1].filter(comment => comment.post === +this.props.postId)
         this.setState({
           post: values[0],
-          comments: ownComments,
+          comments: postComments,
+          users: values[2],
           isLoaded: true,
           error: ''
         })
@@ -38,29 +40,20 @@ export default class PostPage extends Component {
         this.setState({
           post: {},
           comments: [],
+          users: [],
           isLoaded: false,
           error
         })
       })
-
-
-    // comments.get()
-    comments.get()
-      .then(comments => {
-        comments = comments.filter(comment => comment.post === +this.props.postId)
-        this.setState({ comments, isLoaded: true, error: '' })
-      })
   }
 
   getAuthor = (userId) => {
-    console.log('getAuthor ==', this.props.users, userId)
-    if (!userId || !this.props.users) return ''
-    let user = this.props.users.filter(user => user.id === +userId).pop()
+    console.log('getAuthor ==', this.state.users, userId)
+    if (!userId || !this.state.users) return ''
+    let user = this.state.users.filter(user => user.id === +userId).pop()
     if (!user) return ''
     return user.name
   }
-  getCommentCount = (postId) => this.props.comments.filter(comment => comment.post === +postId).length
-  getCommentLastTime = (postId) => this.props.comments.filter(comment => comment.post === +postId).reduce((acc, curr) => acc > curr.timestamp ? acc : curr.timestamp, '')
 
   onCommentSubmitHandler = (comment) => {
     let comments = [...this.state.comments]
@@ -93,7 +86,7 @@ export default class PostPage extends Component {
                 postId={this.state.post.id}
                 title={this.state.post.title}
                 body={this.state.post.body}
-                author={this.state.post.author}
+                author={this.getAuthor(this.state.post.author)}
                 timestamp={this.state.post.timestamp}
               />
             </div>

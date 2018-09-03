@@ -3,9 +3,9 @@ import {Link} from 'react-router-dom'
 
 import './style.css'
 import Copyright from '../../../components/copyright'
-import ListPostComments from '../list-post-comments'
+import ListPostCommentsInfo from '../list-post-comments-info'
 
-export default function ListPost({ postId, title, author, timestamp, body, comments, lastComment }) {
+export default function ListPost({ postId, title, author, timestamp, body, commentsCount, lastComment }) {
   return (
         <div className={`message-item`} >
           <Link to={`/posts/${postId}`}>
@@ -13,7 +13,7 @@ export default function ListPost({ postId, title, author, timestamp, body, comme
             <Copyright author={author} timestamp={lastComment}/>
             <p>{body}</p>
           </Link>
-          <ListPostComments commentsNum={comments} lastTimestamp={lastComment} />
+          <ListPostCommentsInfo commentsNum={commentsCount} lastTimestamp={lastComment} />
         </div>
   )
 }
