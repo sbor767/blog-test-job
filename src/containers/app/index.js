@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Route, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import LayoutRoot from '../../components/layouts/layout-root'
 import PostListPage from '../post-list-page'
@@ -76,14 +77,25 @@ export default class App extends Component {
         <Route
           exact path="/"
           render={() => (
-            <PostListPage
-              user={this.state.user}
-              isLoaded={this.state.isLoaded}
-              users={this.state.users}
-              comments={this.state.comments}
-              posts={this.state.posts}
-              onSignOut={this.handleSignOut}
-            />
+            //
+            // <PostListPage
+            //   user={this.state.user}
+            //   isLoaded={this.state.isLoaded}
+            //   users={this.state.users}
+            //   comments={this.state.comments}
+            //   posts={this.state.posts}
+            //   onSignOut={this.handleSignOut}
+            // />
+            //
+            connect(state => ({
+              user: state.user,
+              isLoaded: state.isLoaded,
+              users: state.users,
+              comments: state.comments,
+              posts: state.posts
+          })
+
+            )(PostListPage)
           )}
         />
         <Route
