@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import thunkMiddleware from 'redux-thunk'
-import createLogger from 'redux-logger'
+import { createLogger } from 'redux-logger'
 
 import './index.css'
 import App from './containers/app'
@@ -20,8 +20,6 @@ const store = createStore(
   rootReducer,
   applyMiddleware(...middleware)
 )
-
-store.dispatch()
 
 ReactDOM.render(
   <Provider store={store}>

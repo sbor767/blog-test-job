@@ -8,18 +8,10 @@ import PostPage from '../post-page'
 import SignInPage from '../sign-in-page'
 import PostCreatePage from '../post-create-page'
 import {user, users, posts, comments} from '../../api/rest-like'
+import { fetchPostsIfNeeded } from '../../store/actions/posts'
 import '../../components/app.css'
 
-function getData() {
-  return Promise.all([
-      user.get(),
-      users.get(),
-      posts.get(),
-      comments.get()
-  ])
-}
-
-export default class App extends Component {
+class App extends Component {
 	state = {
     user: {},
     users: [],
@@ -30,26 +22,8 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-	  getData()
-      .then(values => this.setState({
-        user: values[0],
-        users:values[1],
-        posts: values[2],
-        comments: values[3],
-        isLoaded: true,
-        error: ''
-      }))
-      .catch(error => {
-        console.log('Api get test data error: ', error)
-        this.setState({
-          user: {},
-          users: [],
-          posts: [],
-          comments: [],
-          isLoaded: false,
-          error
-        })
-      })
+    const { dispatch, posts } = this.props
+    fetchPostsIfNeeded(posts)
   }
 
   handleSignOut = () => {
@@ -89,7 +63,7 @@ export default class App extends Component {
             //
             connect(state => ({
               user: state.user,
-              isLoaded: state.isLoaded,
+              // isLoaded: state.isLoaded,
               users: state.users,
               comments: state.comments,
               posts: state.posts
@@ -132,3 +106,9 @@ export default class App extends Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  posts: state.posts
+})
+
+export default connect(mapStateToProps)(App)

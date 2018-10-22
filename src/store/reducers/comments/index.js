@@ -5,7 +5,7 @@ import * as utils from '../../utils'
 export default function comments(state = {}, action) {
   let newState
   switch (action.type) {
-    case actions.RATE_COMMENT:
+    case actions.comments.RATE_COMMENT:
       // @TODO May be move this to rate responsibility??
       let newRate = {}
 
