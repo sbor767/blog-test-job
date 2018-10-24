@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import ReactDom from 'react-dom'
 
 import Header from '../../components/header'
@@ -9,7 +10,8 @@ import SignInOut from '../../components/sign-in-out'
 import LayoutPage from '../../components/layouts/layout-page'
 import LayoutContentItems from '../../components/layouts/layout-content-items'
 
-export default class PostListPage extends Component {
+// export default class PostListPage extends Component {
+class PostListPage extends Component {
 
   componentDidMount() {
     // this.scrollToBottom()
@@ -32,17 +34,20 @@ export default class PostListPage extends Component {
   render() {
     const {
       user,
-      isLoaded,
+      users,
       posts,
-      onSubmit,
-      onSignOut
+      comments,
+      isLoaded,
+      // onSubmit,
+      // onSignOut
     } = this.props
-
+    console.log('DEBUG-post-list-page=props', this.props)
     return (
     <LayoutPage>
 
       <Header title="The BLOG">
-        <SignInOut user={user} onSignOut={onSignOut}>
+        {/*<SignInOut user={user} onSignOut={onSignOut}>*/}
+        <SignInOut user={user} onSignOut={() => {}}>
           <ButtonTo title={'Create POST'} to={'/post-create'} classes={['blue', 'ButtonTo_float_right']}/>
         </SignInOut>
       </Header>
@@ -51,18 +56,21 @@ export default class PostListPage extends Component {
         <LayoutContentItems
           // ref={element => {this.headerContainer = element}}
         >
-          {posts.map(current => (
+          {Object.keys(posts.items).map(key => {
+            return (
             <ListPost
-              key={`post_id-${current.id}`}
-              postId={current.id}
-              title={current.title}
-              author={this.getAuthor(current.author)}
-              timstamp={current.timestamp}
-              body={current.body}
-              commentsCount={this.getCommentsCount(current.id)}
-              lastComment={this.getCommentLastTime(current.id)}
+              key={`post_id-${key}`}
+              postId={posts.items[key].id}
+              title={posts.items[key].title}
+              author={users.items[posts.items[key].authorId].name}
+              timstamp={posts.items[key].timestamp}
+              body={posts.items[key].body}
+              // commentsCount={this.getCommentsCount(posts.items[key].id)}
+              commentsCount={1}
+              // lastComment={this.getCommentLastTime(posts.items[key].id)}
+              lastComment={'24424-33'}
             />
-          ))}
+          )})}
         </LayoutContentItems>
 
       ) : (
@@ -72,3 +80,13 @@ export default class PostListPage extends Component {
     </LayoutPage>
   )}
 }
+
+const mapStateToProps = state => ({
+  user: state.user,
+  users: state.users,
+  posts: state.posts,
+  isLoaded: !state.posts.isFetching && !state.posts.didInvalidate,
+  comments: {},
+})
+
+export default connect(mapStateToProps)(PostListPage)

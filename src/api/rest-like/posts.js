@@ -37,10 +37,15 @@ export default {
    * @returns {Promise}
    */
   get: function(id = undefined) {
-    if (!id) return Promise.resolve(this.posts)
-    let post = this.posts.filter(post => post.id === +id).pop()
-    if (post) return post
-    return Promise.reject(`Not post exist with id=${id}`)
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (!id) resolve(this.posts)
+
+        if (!!this.posts[id]) resolve(this.posts[id])
+
+        reject(`Not post exist with id=${id}`)
+      }, 300)}
+    )
   },
 
   add: function(post, authorId) {
@@ -57,6 +62,11 @@ export default {
       return Promise.reject(`Wrong Blog post: ${e.message}`)
     }
     return Promise.resolve(newPost)
+  },
+
+  // Fake method
+  delete: function(postId) {
+    return Promise.resolve(1)
   }
 
 }

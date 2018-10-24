@@ -7,23 +7,16 @@ import PostListPage from '../post-list-page'
 import PostPage from '../post-page'
 import SignInPage from '../sign-in-page'
 import PostCreatePage from '../post-create-page'
-import {user, users, posts, comments} from '../../api/rest-like'
-import { fetchPostsIfNeeded } from '../../store/actions/posts'
+import * as actions from '../../store/actions.js'
 import '../../components/app.css'
 
 class App extends Component {
-	state = {
-    user: {},
-    users: [],
-    posts: [],
-    isLoaded: false,
-    comments: [],
-    error: ''
-  }
 
   componentDidMount() {
     const { dispatch, posts } = this.props
-    fetchPostsIfNeeded(posts)
+    actions.user.init()(dispatch)
+    actions.users.init()(dispatch)
+    actions.posts.fetchIfNeeded(posts)(dispatch)
   }
 
   handleSignOut = () => {
@@ -46,31 +39,55 @@ class App extends Component {
 
   render() {
     console.log('app--state--render0', this.state)
+    console.log('props--render0', this.props)
+    // const cont = () => connect()(PostListPage)
+/*
+    const cont = () => connect(() => ({
+          posts: this.props.posts
+    }))(PostListPage)
+*/
     return (
       <LayoutRoot>
         <Route
           exact path="/"
-          render={() => (
-            //
-            // <PostListPage
-            //   user={this.state.user}
-            //   isLoaded={this.state.isLoaded}
-            //   users={this.state.users}
-            //   comments={this.state.comments}
-            //   posts={this.state.posts}
-            //   onSignOut={this.handleSignOut}
-            // />
-            //
-            connect(state => ({
-              user: state.user,
-              // isLoaded: state.isLoaded,
-              users: state.users,
-              comments: state.comments,
-              posts: state.posts
-          })
+          render={() => {
+            console.log('Route / props=', this.props)
+            return (
+              //
+//              <PostListPage
+//                user={this.state.user}
+//                isLoaded={this.state.isLoaded}
+//                users={this.state.users}
+//                comments={this.state.comments}
+//                posts={this.state.posts}
+//                onSignOut={this.handleSignOut}
+//              />
+              //
+              // console.log('AAA')
+              // connect(state => ({
+              //     user: state.user,
+              //     // isLoaded: state.isLoaded,
+              //     users: state.users,
+              //     comments: state.comments,
+              //     // posts: state.posts
+              //     posts: this.props.posts,
+              //     allState: state
+              //   })
+              //
+              // )(PostListPage)
+              // connect(
+                // () => ({
+                  // user: 1,
+                  // users: [],
+                  // comments: [],
+                  // posts: this.props.posts,
+                // })
 
-            )(PostListPage)
-          )}
+              // )(PostListPage)
+              // cont()
+              <PostListPage />
+            )
+          }}
         />
         <Route
           path="/posts/:id"
@@ -112,3 +129,4 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps)(App)
+// export default App

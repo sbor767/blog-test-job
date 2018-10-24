@@ -1,25 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
-import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-import thunkMiddleware from 'redux-thunk'
-import { createLogger } from 'redux-logger'
 
-import './index.css'
-import App from './containers/app'
 import registerServiceWorker from './registerServiceWorker'
-import rootReducer from './store/reducers'
-
-const middleware = [ thunkMiddleware ]
-if (process.env.NODE_ENV !== 'production') {
-  middleware.push(createLogger())
-}
-
-const store = createStore(
-  rootReducer,
-  applyMiddleware(...middleware)
-)
+import store from './store/store.js'
+import App from './containers/app'
+import './index.css'
 
 ReactDOM.render(
   <Provider store={store}>

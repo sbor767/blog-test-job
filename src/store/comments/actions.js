@@ -1,4 +1,4 @@
-import * as api from '../../../api'
+import * as api from '../../api/index'
 
 // Comments
 export const REQUEST_COMMENTS = 'REQUEST_COMMENTS'
