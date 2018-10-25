@@ -27,10 +27,6 @@ class PostListPage extends Component {
     if (headerContainer) headerContainer.scrollTop = headerContainer.scrollHeight
   }
 
-  getAuthor = (authorId) => this.props.users.filter(user => user.id === +authorId).pop().name
-  getCommentsCount = (postId) => this.props.comments.filter(comment => comment.post === +postId).length
-  getCommentLastTime = (postId) => this.props.comments.filter(comment => comment.post === +postId).reduce((acc, curr) => acc > curr.timestamp ? acc : curr.timestamp, '')
-
   render() {
     const {
       user,
@@ -41,7 +37,13 @@ class PostListPage extends Component {
       // onSubmit,
       // onSignOut
     } = this.props
-    console.log('DEBUG-post-list-page=props', this.props)
+
+    const lastComments = key => {
+      let postComments = posts.items[key].comments
+      if (!postComments.length) return 'None'
+      return postComments.reduce((acc, curr) => acc > comments.items[curr].timestamp ? acc : comments.items[curr].timestamp, postComments[0].timestamp)
+    }
+
     return (
     <LayoutPage>
 
@@ -63,12 +65,10 @@ class PostListPage extends Component {
               postId={posts.items[key].id}
               title={posts.items[key].title}
               author={users.items[posts.items[key].authorId].name}
-              timstamp={posts.items[key].timestamp}
+              timestamp={posts.items[key].timestamp}
               body={posts.items[key].body}
-              // commentsCount={this.getCommentsCount(posts.items[key].id)}
-              commentsCount={1}
-              // lastComment={this.getCommentLastTime(posts.items[key].id)}
-              lastComment={'24424-33'}
+              commentsCount={posts.items[key].comments.length}
+              lastComment={lastComments(key)}
             />
           )})}
         </LayoutContentItems>
@@ -85,8 +85,8 @@ const mapStateToProps = state => ({
   user: state.user,
   users: state.users,
   posts: state.posts,
-  isLoaded: !state.posts.isFetching && !state.posts.didInvalidate,
-  comments: {},
+  comments: state.comments,
+  isLoaded: !state.posts.isFetching && !state.posts.didInvalidate && !state.comments.isFetching && !state.comments.didInvalidate,
 })
 
 export default connect(mapStateToProps)(PostListPage)

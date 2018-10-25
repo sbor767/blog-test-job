@@ -10,7 +10,7 @@ export default function ListPost({ postId, title, author, timestamp, body, comme
         <div className={`message-item`} >
           <Link to={`/posts/${postId}`}>
             <h2 title={`id=${postId}`}>{title}</h2>
-            <Copyright author={author} timestamp={lastComment}/>
+            <Copyright author={author} timestamp={timestamp}/>
             <p>{body}</p>
           </Link>
           <ListPostCommentsInfo commentsNum={commentsCount} lastTimestamp={lastComment} />

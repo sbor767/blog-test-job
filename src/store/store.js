@@ -6,7 +6,7 @@ import * as reducers from './reducers'
 
 const middleware = [ thunkMiddleware ]
 if (process.env.NODE_ENV !== 'production') {
-  middleware.push(createLogger())
+  // middleware.push(createLogger())
 }
 
 

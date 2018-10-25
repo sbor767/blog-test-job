@@ -1,87 +1,100 @@
-import * as api from '../../api/index'
+import * as api from '../../api'
 
-// Comments
-export const REQUEST_COMMENTS = 'REQUEST_COMMENTS'
-export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
-export const INVALIDATE_COMMENTS = 'INVALIDATE_COMMENTS'
+export const types = {
+  INVALIDATE: Symbol('INVALIDATE COMMENTS'),
+  REQUEST: Symbol('REQUEST COMMENTS'),
+  RECEIVE: Symbol('RECEIVE COMMENTS'),
+  RECEIVE_FAILURE: Symbol('RECEIVE FAILURE COMMENTS'),
 
-export const RATE_COMMENT = 'RATE_COMMENT'
-
-/*
- * Action creators
- */
-/*
-export function invalidatePosts() {
-  return {type: INVALIDATE_POSTS}
+  ADD: Symbol('ADD COMMENT'),
+  RATE: Symbol('RATE COMMENT'),
 }
 
-function requestPosts() {
-  return {type: REQUEST_POSTS}
-}
+// Private methods
+const _fetch = Symbol('fetch private method')
+const _shouldFetch = Symbol('shouldFetch private method')
 
-function receivePosts(json) {
-  return {
-    type: RECEIVE_POSTS,
-    posts: json.data.children.map(child => child.data),
-    receivedAt: Date.now()
-  }
-}
+export default {
 
-const fetchPosts = () => dispatch => {
-  dispatch(requestPosts())
-  return api.posts.get()
-    .then(response => response.json())
-    .then(json => dispatch(receivePosts(json)))
-}
+  // Public Methods
+  invalidate: () => ({type: types.INVALIDATE}),
 
-function shouldFetchPosts(state) {
-  const posts = state.posts.items
-  if (!posts) {
-    return true
-  } else if (posts.isFetching) {
-    return false
-  } else {
-    return posts.didInvalidate
-  }
-}
+  fetchIfNeeded (state) {
+    const that = this
+    return function(dispatch) {
+      if(that[_shouldFetch](state)) {
+        dispatch(that[_fetch]())
+      }
+    }
+  },
 
-export function fetchPostsIfNeeded() {
-  return (dispatch, getState) => {
-    if(shouldFetchPosts(getState())) dispatch(fetchPosts())
-  }
-}
+  add: (postId, commentBody, userId) => async dispatch => {
+    try {
+      const newComment = await api.comments.add(commentBody, postId, userId)
+      dispatch({type: types.ADD, newComment})
+    } catch (e) {
+      throw e
+    }
+  },
 
-/!*
-export function addPost(title, body) {
-  return {type: ADD_POST, title, body}
-}
-*!/
-
-export function addPost(state, title, body) {
-  // return {type: ADD_POST, title, body}
-  return (dispatch, getState) => {
-    api.posts.add({title, body}, state.author.id)
-      // @TODO May be better dispatch action INVALIDATE_POSTS only?
-      // .then(response => {dispatch(INVALIDATE_POSTS)})
-      // Here partial approach - we meaningly lost returned value from add promise and use our store.
-      .then(newPost => {
-        console.log('newPost=', newPost)
-        dispatch(state, {type: ADD_POST, title, body})
+  add2: (state, postId, body) => dispatch => {
+    api.comments.add(body, postId, state.user.id)
+    // @TODO May be better dispatch action INVALIDATE_POSTS only?
+    // .then(response => {dispatch(INVALIDATE_POSTS)})
+    // Here partial approach - we meaningly lost returned value from add promise and use our store.
+      .then(newComment => {
+        dispatch(state, {type: types.ADD, postId, newComment})
+        // dispatch(state, {type: postsTypes.COMMENT, postId, newComment})
+        // dispatch(state, {type: postActions.types.COMMENT, postId, newComment})
       })
       .catch(reason => console.log('Failed addPost with reason: ', reason))
+  },
+
+  rate: (postId, commentBody) => async (dispatch, getState) => {
+    try {
+      const newComment = await api.comments.add(commentBody, postId, getState().user.id)
+      // @TODO Add new action for comments aka 'types.comments.NEW' and await its add.
+      if (newComment) dispatch({type: types.COMMENT, postId, commentId: newComment.id })
+    } catch (e) {
+      console.log('Posts add comment error:', e)
+      throw e
+    }
+  },
+
+  // Private methods
+
+  [_fetch] () {
+    return async function(dispatch) {
+      dispatch({type: types.REQUEST})
+      try {
+        const response = await api.comments.get()
+
+        if (response) {
+          dispatch({
+            type: types.RECEIVE,
+            comments: response,
+            receivedAt: Date.now()
+          })
+        }
+      } catch (e) {
+        // @TODO Check next
+        if (e.response && e.response.data && e.response.data.error) {
+          dispatch({type: types.RECEIVE_FAILURE, errors: e.response.data.error.data.issues})
+        } else {
+          throw e
+        }
+      }
+    }
+  },
+
+  [_shouldFetch]: state => {
+    const comments = state.items
+    if (!comments) {
+      return true
+    } else if (state.isFetching) {
+      return false
+    } else {
+      return state.didInvalidate
+    }
   }
-}
-
-
-export function deletePost(postId) {
-  return {type: DELETE_POST, postId}
-}
-
-export function commentPost(postId, commentBody) {
-  return {type: COMMENT_POST, postId, commentBody}
-}
-*/
-
-export function rateComment(commentId, rate) {
-  return {type: RATE_COMMENT, commentId, rate}
 }

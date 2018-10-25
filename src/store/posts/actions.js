@@ -1,4 +1,5 @@
 import * as api from '../../api'
+import * as comments from '../comments/actions'
 
 export const types = {
   INVALIDATE: Symbol('INVALIDATE POSTS'),
@@ -51,32 +52,33 @@ export default {
     }
   },
 
-  comment: (postId, commentBody) => async (dispatch, getState) => {
+  // Enter point for the post comment
+  comment: (postId, commentBody, userId) => dispatch => {
+/*
     try {
-      const newComment = await api.comments.add(commentBody, postId, getState().user.id)
-      // @TODO Add new action for comments aka 'types.comments.NEW' and await its add.
-      if (newComment) dispatch({type: types.COMMENT, postId, commentId: newComment.id })
+      const newComment = await api.comments.add(commentBody, postId, userId)
+      dispatch({type: comments.types.ADD, postId, newComment})
+      dispatch({type: types.COMMENT, postId, commentId: newComment.id })
     } catch (e) {
       console.log('Posts add comment error:', e)
       throw e
     }
+*/
+    comments.default.add(postId, commentBody, userId)
+      .then(newComment => {dispatch({type: types.COMMENT, postId, commentId: newComment.id})})
   },
 
   // Private methods
 
   [_fetch] () {
     return async function(dispatch) {
-      console.log('_fetch...')
       dispatch({type: types.REQUEST})
       try {
         const response = await api.posts.get()
-        console.log('DEBUG-fetch', response)
 
         if (response) {
-          // const json = response.json()
           dispatch({
             type: types.RECEIVE,
-            // posts: json.data.children.map(child => child.data),
             posts: response,
             receivedAt: Date.now()
           })
@@ -93,7 +95,6 @@ export default {
   },
 
   [_shouldFetch]: state => {
-    console.log('_shouldFetch-state', state)
     const posts = state.items
     if (!posts) {
       return true

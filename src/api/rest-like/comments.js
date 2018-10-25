@@ -7,77 +7,94 @@ export default {
       postId: 1,
       authorId: 1,
       body:"Very amazing thing. Lorem ipsum ipsum ipsum now such. Lorem ipsum ipsum ipsum now such.",
-      timestamp: "2018-05-17 18:31:12",
+      rates: {1:4, 2:5},
+      timestamp: 1526571072,
     },
     2: {
       id: 2,
       postId: 2,
       authorId: 2,
       body:"Some some some thing about it. Lorem ipsum ipsum ipsum now such.",
-      timestamp:"2018-06-28 7:15:10",
+      rates: {1:2},
+      timestamp: 1530159310,
     },
     3: {
       id: 3,
       postId: 1,
       authorId: 1,
       body:"Very amazing thing.",
-      timestamp:"2018-07-01 19:39:01",
+      rates: {3:5},
+      timestamp: 1530463141,
     },
     4: {
       id: 4,
       postId: 4,
       authorId: 3,
       body:"Wrong way. Do not do it!",
-      timestamp:"2018-07-17 15:16:56",
+      rates: {2:5, 3:3},
+      timestamp: 1531829816,
     },
     5: {
       id: 5,
       postId: 4,
       authorId: 1,
       body:"Call to service center.",
-      timestamp:"2018-07-19 10:00:05",
+      rates: {},
+      timestamp: 1531983605,
     },
     6: {
       id: 6,
       postId: 1,
       authorId: 2,
       body:"Up and down please. Make it now.",
-      timestamp:"2018-07-20 15:22:16",
+      rates: {3:4},
+      timestamp: 1532089336,
     },
     7: {
       id: 7,
       postId: 2,
       authorId: 2,
       body:"Something interesting. Something interesting. Something interesting. Something interesting. Something interesting. Something interesting. Something interesting. Something interesting.",
-      timestamp:"2018-07-20 15:26:44",
+      rates: {2:3},
+      timestamp: 1532089604,
     },
     8: {
       id: 8,
       postId: 4,
       authorId: 3,
       body:"Very amazing thing. Lorem ipsum ipsum ipsum now such. Lorem ipsum ipsum ipsum now such.",
-      timestamp:"2018-07-20 12:45:07",
+      rates: {},
+      timestamp: 1532079907,
     },
     9: {
       id: 9,
       postId: 1,
       authorId: 1,
       body:"Very amazing thing. Lorem ipsum ipsum ipsum now such. Lorem ipsum ipsum ipsum now such.",
-      timestamp:"2018-07-21 09:05:07",
+      rates: {2:5},
+      timestamp: 1532153107,
     },
   },
 
   /**
    * @returns {Promise}
    */
-  get: function() {return Promise.resolve(this.comments)},
+  // get: function() {return Promise.resolve(this.comments)},
+  get: function() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(this.comments)
+      }, 300)}
+    )
+  },
 
-  add: function(comment, postId, authorId) {
-    let newComment = {
+  add: function(body, postId, authorId) {
+    const newComment = {
       id: Object.keys(this.comments).length + 1,
-      authorId: authorId,
-      post: postId,
-      body: comment.body,
+      authorId,
+      postId,
+      body,
+      rates: {},
       timestamp: getFormattedTimestamp()
     }
     try {
@@ -86,6 +103,15 @@ export default {
       return Promise.reject(`Error saving comment: ${e.message}`)
     }
     return Promise.resolve(newComment)
-}
+  },
+
+  rate: function(commentId, userId, rate) {
+    return new Promise((resolve, reject) => {
+      if (!this.comments[commentId]) reject(`Comment ${commentId} Not Exist!`)
+      if (!!this.comments[commentId][userId]) reject(`Comment ${commentId} already rated by user with id=${userId}`)
+      this.comments[commentId].rates[userId] = rate
+      resolve({userId: rate})
+    })
+  }
 
 }

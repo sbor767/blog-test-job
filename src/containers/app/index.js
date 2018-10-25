@@ -13,10 +13,11 @@ import '../../components/app.css'
 class App extends Component {
 
   componentDidMount() {
-    const { dispatch, posts } = this.props
+    const { dispatch, posts, comments } = this.props
     actions.user.init()(dispatch)
     actions.users.init()(dispatch)
     actions.posts.fetchIfNeeded(posts)(dispatch)
+    actions.comments.fetchIfNeeded(comments)(dispatch)
   }
 
   handleSignOut = () => {
@@ -38,20 +39,11 @@ class App extends Component {
   }
 
   render() {
-    console.log('app--state--render0', this.state)
-    console.log('props--render0', this.props)
-    // const cont = () => connect()(PostListPage)
-/*
-    const cont = () => connect(() => ({
-          posts: this.props.posts
-    }))(PostListPage)
-*/
     return (
       <LayoutRoot>
         <Route
           exact path="/"
           render={() => {
-            console.log('Route / props=', this.props)
             return (
               //
 //              <PostListPage
@@ -125,7 +117,8 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  posts: state.posts
+  posts: state.posts,
+  comments: state.comments
 })
 
 export default connect(mapStateToProps)(App)
