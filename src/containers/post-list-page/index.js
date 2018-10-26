@@ -29,13 +29,10 @@ class PostListPage extends Component {
 
   render() {
     const {
-      user,
       users,
       posts,
       comments,
       isLoaded,
-      // onSubmit,
-      // onSignOut
     } = this.props
 
     const lastComments = key => {
@@ -48,8 +45,7 @@ class PostListPage extends Component {
     <LayoutPage>
 
       <Header title="The BLOG">
-        {/*<SignInOut user={user} onSignOut={onSignOut}>*/}
-        <SignInOut user={user} onSignOut={() => {}}>
+        <SignInOut>
           <ButtonTo title={'Create POST'} to={'/post-create'} classes={['blue', 'ButtonTo_float_right']}/>
         </SignInOut>
       </Header>
@@ -82,7 +78,6 @@ class PostListPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.user,
   users: state.users,
   posts: state.posts,
   comments: state.comments,

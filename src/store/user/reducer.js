@@ -17,4 +17,20 @@ export default reducer(initState, {
     }
   },
 
+  [types.SIGN_IN]: (state, action) => {
+    return {
+      ...state,
+      id: action.id,
+      name: action.name
+    }
+  },
+
+  [types.SIGN_OUT]: (state) => {
+    return {
+      ...state,
+      id: initState.id,
+      name: initState.name
+    }
+  },
+
 })

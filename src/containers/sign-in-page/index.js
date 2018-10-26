@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import Header from '../../components/header'
 
-import users from '../../api/rest-like/users'
+import { user } from '../../api'
+import * as actions from '../../store/actions.js'
 import './style.css'
 import LayoutCentreWrapper from '../../components/layouts/layout-centre-wrapper'
 
@@ -21,7 +22,7 @@ export default class SignInPage extends Component {
       this.setState({ error: 'Please fill in both fields.' })
     }
 
-    console.log(this.state)
+    // console.log(this.state)
   }
 
   onLogin() {
@@ -30,13 +31,13 @@ export default class SignInPage extends Component {
   }
 
   login(loginData) {
-    users.getUserLogged(loginData)
+    user.userLogin(loginData)
       .then(user => {
-        this.props.onSubmit(user)
+        actions.user.signIn(user)
         this.onLogin()
       })
       .catch(err => {
-        this.setState({ error: `Error loggin in: ${err}` })
+        this.setState({ error: `Error login in: ${err}` })
       })
   }
 

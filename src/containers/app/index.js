@@ -20,14 +20,6 @@ class App extends Component {
     actions.comments.fetchIfNeeded(comments)(dispatch)
   }
 
-  handleSignOut = () => {
-    this.setState({ user: {} })
-  }
-
-  handleSignIn = loggedUser => {
-    this.setState({ user: loggedUser })
-  }
-
   handlePostCreate = post => {
     // @TODO this redundantly because state will updated with route change.
     // So leave mutation in RestApi only.
@@ -45,38 +37,6 @@ class App extends Component {
           exact path="/"
           render={() => {
             return (
-              //
-//              <PostListPage
-//                user={this.state.user}
-//                isLoaded={this.state.isLoaded}
-//                users={this.state.users}
-//                comments={this.state.comments}
-//                posts={this.state.posts}
-//                onSignOut={this.handleSignOut}
-//              />
-              //
-              // console.log('AAA')
-              // connect(state => ({
-              //     user: state.user,
-              //     // isLoaded: state.isLoaded,
-              //     users: state.users,
-              //     comments: state.comments,
-              //     // posts: state.posts
-              //     posts: this.props.posts,
-              //     allState: state
-              //   })
-              //
-              // )(PostListPage)
-              // connect(
-                // () => ({
-                  // user: 1,
-                  // users: [],
-                  // comments: [],
-                  // posts: this.props.posts,
-                // })
-
-              // )(PostListPage)
-              // cont()
               <PostListPage />
             )
           }}
@@ -86,8 +46,7 @@ class App extends Component {
           render={({ history, match }) => (
             <PostPage
               postId={match.params.id}
-              user={this.state.user}
-              onSignOut={this.handleSignOut}
+              user={this.props.user}
               history={history}
             />
           )}
@@ -96,7 +55,6 @@ class App extends Component {
           path="/sign-in"
           render={({ history, match }) => (
             <SignInPage
-              onSubmit={this.handleSignIn}
               history={history}
             />
           )}
@@ -105,7 +63,7 @@ class App extends Component {
           path="/post-create"
           render={({ history, match }) => (
             <PostCreatePage
-              currentUserId={this.state.user.id}
+              currentUserId={this.props.user.id}
               onSubmit={this.handlePostCreate}
               history={history}
             />
@@ -117,9 +75,9 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
+  user: state.user,
   posts: state.posts,
   comments: state.comments
 })
 
 export default connect(mapStateToProps)(App)
-// export default App

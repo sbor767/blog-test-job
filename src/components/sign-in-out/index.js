@@ -1,17 +1,19 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 import './style.css'
+import * as actions from '../../store/actions.js'
 import Button from '../button'
 import ButtonTo from '../button-to'
 
-export default function SignInOut({ user, onSignOut, children }) {
+function SignInOut({ children, user, dispatch }) {
   return (
     <div className="SignInOut">
     {!!user.id ? (
       <div className="SignInOut_wrap">
         <div className="SignInOut_buttons">
           {children}
-          <Button title={'SignOut'} onClick={onSignOut} classes={['blue']}/>
+          <Button title={'SignOut'} onClick={actions.user.signOut()(dispatch)} classes={['blue']}/>
         </div>
         <div className="SignInOut_welcome"><p>Welcome <span className="SignInOut_welcome_name">{user.name}</span></p></div>
       </div>
@@ -24,3 +26,9 @@ export default function SignInOut({ user, onSignOut, children }) {
     </div>
   )
 }
+
+const mapStateToProps = state => ({
+  user: state.user
+})
+
+export default connect(mapStateToProps)(SignInOut)
