@@ -80,4 +80,4 @@ const mapStateToProps = state => ({
   comments: state.comments
 })
 
-export default connect(mapStateToProps)(App)
+export default withRouter(connect(mapStateToProps)(App))
