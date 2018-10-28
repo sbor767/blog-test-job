@@ -30,6 +30,12 @@ class App extends Component {
 */
   }
 
+  onLogin = user => {
+    console.log('App-onLogin=22user', user)
+    // console.log('App-onLogin=user', )
+    actions.user.signIn(user)(this.props.dispatch)
+  }
+
   render() {
     return (
       <LayoutRoot>
@@ -46,7 +52,6 @@ class App extends Component {
           render={({ history, match }) => (
             <PostPage
               postId={match.params.id}
-              user={this.props.user}
               history={history}
             />
           )}
@@ -56,6 +61,7 @@ class App extends Component {
           render={({ history, match }) => (
             <SignInPage
               history={history}
+              onLogin={this.onLogin}
             />
           )}
         />

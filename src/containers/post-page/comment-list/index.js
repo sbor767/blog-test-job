@@ -2,21 +2,21 @@ import React from 'react'
 
 import './style.css'
 import Comment from '../comment'
+import connect from 'react-redux/es/connect/connect'
 
-export default function CommentList({ postId, postComments, currentUserId, history, onCommentSubmit, getAuthor }) {
+export default function CommentList({ commentsIds }) {
   return (
     <div className="CommentList">
       <div className="CommentList__title">
         <span>Comments</span>
       </div>
-      {!!postComments && postComments.length ? (
+      {commentsIds.length ? (
         <ul className="CommentList__ul">
-          {postComments.map(comment => (
-            <li key={comment.id} className="CommentList__li">
+          {commentsIds.map(id => (
+            <li key={id} className="CommentList__li">
               <div className="CommentList__div">
                 <Comment
-                  comment={comment}
-                  getAuthor={getAuthor}
+                  commentId={id}
                 />
               </div>
             </li>

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import Header from '../../components/header'
+// import dispatch from 'react-redux'
 
 import { user } from '../../api'
 import * as actions from '../../store/actions.js'
-import './style.css'
 import LayoutCentreWrapper from '../../components/layouts/layout-centre-wrapper'
+import Header from '../../components/header'
+import './style.css'
 
 export default class SignInPage extends Component {
   state = { login: '', password: '', error: '' }
@@ -31,9 +32,12 @@ export default class SignInPage extends Component {
   }
 
   login(loginData) {
+    const onLogin  = this.props.onLogin
     user.userLogin(loginData)
       .then(user => {
-        actions.user.signIn(user)
+        console.log('SignInPage-user', user)
+        // onLogin(actions.user.signIn(user))
+        onLogin(user)
         this.onLogin()
       })
       .catch(err => {

@@ -18,7 +18,7 @@ class PostListPage extends Component {
   }
 
   componentDidUpdate(previousProps) {
-    if (previousProps.posts.length !== this.props.posts.length) this.scrollToBottom()
+    // if (previousProps.posts.length !== this.props.posts.length) this.scrollToBottom()
   }
 
   // @TODO Fix next.
@@ -35,7 +35,9 @@ class PostListPage extends Component {
       isLoaded,
     } = this.props
 
-    const lastComments = key => {
+    // console.log('PostListPage')
+
+    const lastComment = key => {
       let postComments = posts.items[key].comments
       if (!postComments.length) return 'None'
       return postComments.reduce((acc, curr) => acc > comments.items[curr].timestamp ? acc : comments.items[curr].timestamp, postComments[0].timestamp)
@@ -54,17 +56,18 @@ class PostListPage extends Component {
         <LayoutContentItems
           // ref={element => {this.headerContainer = element}}
         >
-          {Object.keys(posts.items).map(key => {
+          {Object.keys(posts.items).map(postId => {
             return (
             <ListPost
-              key={`post_id-${key}`}
-              postId={posts.items[key].id}
-              title={posts.items[key].title}
-              author={users.items[posts.items[key].authorId].name}
-              timestamp={posts.items[key].timestamp}
-              body={posts.items[key].body}
-              commentsCount={posts.items[key].comments.length}
-              lastComment={lastComments(key)}
+              key={`post_id-${postId}`}
+              postId={posts.items[postId].id}
+              title={posts.items[postId].title}
+              author={users.items[posts.items[postId].authorId].name}
+              timestamp={posts.items[postId].timestamp}
+              body={posts.items[postId].body}
+              commentsCount={posts.items[postId].comments.length}
+              // lastComment={lastComment(key)}
+              lastComment={1540717332}
             />
           )})}
         </LayoutContentItems>
