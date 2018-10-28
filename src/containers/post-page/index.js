@@ -79,7 +79,7 @@ class PostPage extends Component {
 
 
 const mapStateToProps = state => ({
-  user: state.users,
+  user: state.user,
   users: state.users,
   posts: state.posts,
   isLoaded: !state.posts.isFetching && !state.posts.didInvalidate && !state.comments.isFetching && !state.comments.didInvalidate,
