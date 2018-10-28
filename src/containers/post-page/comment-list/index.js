@@ -2,7 +2,6 @@ import React from 'react'
 
 import './style.css'
 import Comment from '../comment'
-import connect from 'react-redux/es/connect/connect'
 
 export default function CommentList({ commentsIds }) {
   return (

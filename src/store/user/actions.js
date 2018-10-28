@@ -7,7 +7,7 @@ export const types = {
 }
 
 export default {
-  // Public Methods
+
   init: () => dispatch => {
     api.user.getTestSampleUser().then(data => {
       dispatch({
