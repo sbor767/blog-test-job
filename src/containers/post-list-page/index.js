@@ -66,8 +66,7 @@ class PostListPage extends Component {
               timestamp={posts.items[postId].timestamp}
               body={posts.items[postId].body}
               commentsCount={posts.items[postId].comments.length}
-              // lastComment={lastComment(key)}
-              lastComment={1540717332}
+              lastComment={lastComment(postId)}
             />
           )})}
         </LayoutContentItems>
