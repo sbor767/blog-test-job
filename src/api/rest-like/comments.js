@@ -1,6 +1,8 @@
-import {getFormattedTimestamp} from './utils'
+// import { getNewObjectIdKey, getTimestamp } from '../../utils'
+// import posts from './posts'
 
 export default {
+
   comments: {
     1: {
       id: 1,
@@ -88,23 +90,27 @@ export default {
     )
   },
 
+/*
   add: function(body, postId, authorId) {
     const newComment = {
-      id: Object.keys(this.comments).length + 1,
+      id: getNewObjectIdKey(this.comments),
       authorId,
-      postId,
+      postId: +postId,
       body,
       rates: {},
-      timestamp: getFormattedTimestamp()
+      timestamp: getTimestamp()
     }
-    try {
-      this.comments[newComment.id] = newComment
-    } catch(e) {
-      return Promise.reject(`Error saving comment: ${e.message}`)
-    }
-    return Promise.resolve(newComment)
+    return posts.comment(postId, newComment.id)
+      .then(notNeedResult => {
+        this.comments[newComment.id] = newComment
+        return Promise.resolve(newComment)
+      })
+      .catch(msg => Promise.reject(`Error saving comment: ${msg}`))
+    // return Promise.resolve(newComment)
   },
+*/
 
+/*
   rate: function(commentId, userId, rate) {
     return new Promise((resolve, reject) => {
       if (!this.comments[commentId]) reject(`Comment ${commentId} Not Exist!`)
@@ -113,5 +119,6 @@ export default {
       resolve({userId: rate})
     })
   }
+*/
 
 }

@@ -1,4 +1,4 @@
-import {getFormattedTimestamp} from './utils'
+// import {getFormattedTimestamp} from './utils'
 
 export default {
   posts: {
@@ -52,6 +52,7 @@ export default {
     )
   },
 
+/*
   add: function(post, authorId) {
     let newPost = {
       id: Object.keys(this.posts).length + 1,
@@ -67,10 +68,21 @@ export default {
     }
     return Promise.resolve(newPost)
   },
+*/
+
+/*
+  comment: function(postId, commentId) {
+    if (!this.posts[postId]) return Promise.reject(`No post exist with id=${postId}`)
+    this.posts[postId].comments.push(commentId)
+    return Promise.resolve(this.posts[postId].comments)
+  },
+*/
 
   // Fake method
+/*
   delete: function(postId) {
     return Promise.resolve(1)
   }
+*/
 
 }

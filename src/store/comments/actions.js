@@ -1,4 +1,6 @@
 import * as api from '../../api'
+import { posts as postsActions } from '../actions.js'
+import { getNewObjectIdKey } from '../../utils'
 
 export const types = {
   INVALIDATE: Symbol('INVALIDATE COMMENTS'),
@@ -28,26 +30,24 @@ export default {
     }
   },
 
-  add: (postId, commentBody, userId) => async dispatch => {
+  add: (postId, userId, commentBody) => async dispatch => {
     try {
-      const newComment = await api.comments.add(commentBody, postId, userId)
+      // @TODO Change this (uncomment) when implemented persistent API.
+      // const newComment = await api.comments.add(commentBody, postId, userId)
+      const newComment = {
+        id: api.comments.nextId(),
+        postId,
+        userId,
+        body: commentBody
+      }
+      console.log('Actions-comment-add=newComment', newComment)
       dispatch({type: types.ADD, newComment})
+      return newComment
+      // postsActions.comment(postId, newComment.id)(dispatch)
     } catch (e) {
+      console.log('Actions-comment-add=catch(e)', e)
       throw e
     }
-  },
-
-  add2: (state, postId, body) => dispatch => {
-    api.comments.add(body, postId, state.user.id)
-    // @TODO May be better dispatch action INVALIDATE_POSTS only?
-    // .then(response => {dispatch(INVALIDATE_POSTS)})
-    // Here partial approach - we meaningly lost returned value from add promise and use our store.
-      .then(newComment => {
-        dispatch(state, {type: types.ADD, postId, newComment})
-        // dispatch(state, {type: postsTypes.COMMENT, postId, newComment})
-        // dispatch(state, {type: postActions.types.COMMENT, postId, newComment})
-      })
-      .catch(reason => console.log('Failed addPost with reason: ', reason))
   },
 
   rate: (postId, commentBody) => async (dispatch, getState) => {

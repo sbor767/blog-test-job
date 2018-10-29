@@ -10,14 +10,28 @@ import CommentList from './comment-list'
 import CommentAdd from './comment-add'
 import LayoutPage from '../../components/layouts/layout-page'
 import LayoutContentItems from '../../components/layouts/layout-content-items'
+import { getNewObjectIdKey, getTimestamp } from '../../utils'
+import { types as commentsActionTypes } from '../../store/comments/actions.js'
+import { types as postsActionTypes } from '../../store/posts/actions.js'
 
 
 class PostPage extends Component {
 
-  onCommentSubmitHandler = (comment) => {
-    let comments = [...this.state.comments]
-    comments.push(comment)
-    this.setState({ comments })
+  // onCommentSubmitHandler = async commentBody => {
+  onCommentSubmitHandler = commentBody => {
+    const {postId, user, posts, comments, dispatch} = this.props
+    // commentsActions.add(postId, commentBody, user.id)(dispatch)
+    // await postActions.comment(postId, user.id, commentBody)(dispatch)
+    const newComment = {
+      id: getNewObjectIdKey(comments.items),
+      postId,
+      authorId: user.id,
+      body: commentBody,
+      rates: {},
+      timestamp: getTimestamp()
+    }
+    dispatch({type: commentsActionTypes.ADD, newComment})
+    dispatch({type: postsActionTypes.COMMENT, postId, commentId: newComment.id})
   }
 
   render() {
@@ -29,8 +43,6 @@ class PostPage extends Component {
       posts,
       history
     } = this.props
-
-    console.log('PostPage-render', this.props)
 
     return (
       <LayoutPage>
@@ -62,7 +74,6 @@ class PostPage extends Component {
                 <CommentAdd
                   history={history}
                   postId={postId}
-                  currentUserId={user.id}
                   onSubmit={this.onCommentSubmitHandler}
                 />
               </div>
@@ -83,6 +94,9 @@ const mapStateToProps = state => ({
   users: state.users,
   posts: state.posts,
   isLoaded: !state.posts.isFetching && !state.posts.didInvalidate && !state.comments.isFetching && !state.comments.didInvalidate,
+  // Only for comments.newId()
+  // @TODO Delete this after new API
+  comments: state.comments
 })
 
 export default connect(mapStateToProps)(PostPage)

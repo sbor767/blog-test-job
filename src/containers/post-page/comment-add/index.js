@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-import comments from '../../../api/rest-like/comments'
 import './style.css'
 
 export default class CommentAdd extends Component {
@@ -11,33 +10,32 @@ export default class CommentAdd extends Component {
   handleSubmit = event => {
     event.preventDefault()
     if (this.state.body) {
-      this.save({ body: this.state.body })
+      this.submit(this.state.body)
       this.setState({ body: '', error: '' })
     } else {
       this.setState({ error: 'Please fill comment fields.' })
     }
-    console.log(this.state)
   }
 
-  save(commentBody) {
-    comments.add(commentBody, this.props.postId, this.props.currentUserId)
-      .then(newComment => {
-        this.props.onSubmit(newComment)
-        this.onSubmit()
-      })
-      .catch(err => {
-        this.setState({ error: `Error when saving comment: ${err}` })
-      })
+  submit(commentBody) {
+    const { onSubmit } = this.props
+    try {
+      onSubmit(commentBody)
+    } catch (e) {
+      this.setState({ error: `Error when saving comment: ${e}` })
+    }
+    // this.onSubmit()
   }
 
+/*
   onSubmit() {
     // Redirect to '/'.
     console.log('onSubmit--this.props', this.props)
     console.log('onSubmit--this.props.path', `/posts/${this.props.postId}`)
     // this.props.history.push('/')
-
     this.props.history.push(`/posts/${this.props.postId}`)
   }
+*/
 
   render = () => (
     <div className='CommentAdd'>

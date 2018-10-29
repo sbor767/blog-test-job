@@ -53,20 +53,20 @@ export default {
   },
 
   // Enter point for the post comment
-  comment: (postId, commentBody, userId) => dispatch => {
-/*
+  comment: (postId, authorId, body) => async dispatch => {
     try {
-      const newComment = await api.comments.add(commentBody, postId, userId)
-      dispatch({type: comments.types.ADD, postId, newComment})
-      dispatch({type: types.COMMENT, postId, commentId: newComment.id })
+      // const newComment = await api.comments.add(body, postId, authorId)
+      const newComment = await comments.default.add(postId, authorId, body)(dispatch)
+      console.log('action-post-comment=newComment', newComment)
+      // const postComments = await api.posts.comment(postId, newComment.id)
+      dispatch({type: types.COMMENT, postId, commentId: newComment.id})
     } catch (e) {
-      console.log('Posts add comment error:', e)
       throw e
     }
-*/
-    comments.default.add(postId, commentBody, userId)
-      .then(newComment => {dispatch({type: types.COMMENT, postId, commentId: newComment.id})})
-  },
+
+    // dispatch({type: comments.types.ADD})
+    // dispatch({type: types.COMMENT, postId, commentId})
+ },
 
   // Private methods
 

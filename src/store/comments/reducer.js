@@ -46,30 +46,11 @@ export default reducer(initState, {
   },
 
   [types.ADD]: (state, action) => {
-    const items = [...state.items]
+    const items = {...state.items}
     items[action.newComment.id] = action.newComment
     return {
       ...state,
       items
     }
-  },
-
-  [types.DELETE]: (state, action) => {
-    const items = [...state.items]
-    delete(items[action.postId])
-    return {
-      ...state,
-      items
-    }
-  },
-
-  [types.COMMENT]: (state, action) => {
-    const items = [...state.items]
-    items[action.postId].comments.push(action.commentId)
-    return {
-      ...state,
-      items
-    }
-  },
-
+  }
 })
