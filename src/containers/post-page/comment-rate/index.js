@@ -27,7 +27,7 @@ function CommentRate({ commentId, user, comments, dispatch }) {
       <Rate
         value={average()}
         onChange={handleOnChange}
-        style={{ fontSize: 10, marginTop: 14 }}
+        style={{ fontSize: 10, marginTop: 4 }}
         allowHalf
         character={<i className="anticon anticon-star" />}
       />
