@@ -52,5 +52,23 @@ export default reducer(initState, {
       ...state,
       items
     }
+  },
+
+  [types.RATE]: (state, action) => {
+    const items = {...state.items}
+    items[action.commentId].rates[action.userId] = action.newRate
+    return {
+      ...state,
+      items
+    }
+  },
+
+  [types.CLEAR_RATE]: (state, action) => {
+    const items = {...state.items}
+    delete(items[action.commentId].rates[action.userId])
+    return {
+      ...state,
+      items
+    }
   }
 })

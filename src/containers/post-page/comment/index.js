@@ -17,7 +17,7 @@ function Comment({ commentId, comments, users }) {
         <Copyright author={users.items[comment.authorId].name} timestamp={comment.timestamp}/>
       </div>
       <CommentRate
-        rates={comment.rates}
+        commentId={commentId}
       />
     </div>
   )

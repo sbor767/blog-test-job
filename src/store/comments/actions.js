@@ -10,6 +10,7 @@ export const types = {
 
   ADD: Symbol('ADD COMMENT'),
   RATE: Symbol('RATE COMMENT'),
+  CLEAR_RATE: Symbol('CLEAR RATE COMMENT'),
 }
 
 // Private methods
@@ -50,14 +51,15 @@ export default {
     }
   },
 
-  rate: (postId, commentBody) => async (dispatch, getState) => {
-    try {
-      const newComment = await api.comments.add(commentBody, postId, getState().user.id)
-      // @TODO Add new action for comments aka 'types.comments.NEW' and await its add.
-      if (newComment) dispatch({type: types.COMMENT, postId, commentId: newComment.id })
-    } catch (e) {
-      console.log('Posts add comment error:', e)
-      throw e
+  rate: (commentId, userId, isUserHasRate, newRate) => dispatch => {
+    if (isUserHasRate) {
+      // If exist - remove user rate.
+      console.log(commentId, userId, 'Clear, Old-rate=', isUserHasRate, 'newRate=', newRate)
+      dispatch({type: types.CLEAR_RATE, commentId, userId})
+    } else {
+      // Rate.
+      console.log(commentId, userId, 'Rate, Old-rate=', isUserHasRate, 'newRate=', newRate)
+      dispatch({type: types.RATE, commentId, userId, newRate})
     }
   },
 
