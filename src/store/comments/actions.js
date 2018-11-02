@@ -54,11 +54,9 @@ export default {
   rate: (commentId, userId, isUserHasRate, newRate) => dispatch => {
     if (isUserHasRate) {
       // If exist - remove user rate.
-      console.log(commentId, userId, 'Clear, Old-rate=', isUserHasRate, 'newRate=', newRate)
       dispatch({type: types.CLEAR_RATE, commentId, userId})
     } else {
       // Rate.
-      console.log(commentId, userId, 'Rate, Old-rate=', isUserHasRate, 'newRate=', newRate)
       dispatch({type: types.RATE, commentId, userId, newRate})
     }
   },

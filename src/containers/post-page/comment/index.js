@@ -4,9 +4,13 @@ import { connect } from 'react-redux'
 import './style.css'
 import Copyright from '../../../components/copyright'
 import CommentRate from '../comment-rate'
+import * as actions from '../../../store/actions'
 
-function Comment({ commentId, comments, users }) {
+function Comment({ commentId, comments, users, user, dispatch }) {
   const comment = comments.items[commentId]
+  const rates = comment.rates
+
+  const handleOnChange = value => actions.comments.rate(commentId, user.id, !!rates[user.id], value)(dispatch)
 
   return (
     <div className="Comment">
@@ -17,7 +21,10 @@ function Comment({ commentId, comments, users }) {
         <Copyright author={users.items[comment.authorId].name} timestamp={comment.timestamp}/>
       </div>
       <CommentRate
-        commentId={commentId}
+        rates={rates}
+        onChange={handleOnChange}
+        userId={user.id}
+        style={{ fontSize: 10, marginTop: 4 }}
       />
     </div>
   )
@@ -26,7 +33,8 @@ function Comment({ commentId, comments, users }) {
 
 const mapStateToProps = state => ({
   comments: state.comments,
-  users: state.users
+  users: state.users,
+  user: state.user,
 })
 
 export default connect(mapStateToProps)(Comment)

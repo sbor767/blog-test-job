@@ -1,13 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import Rate from 'rc-rate'
 
-import * as actions from '../../../store/actions'
 import './style.css'
 
-function CommentRate({ commentId, user, comments, dispatch }) {
-
-  const rates = comments.items[commentId].rates
+export default function CommentRate({ rates, userId, onChange, style }) {
 
   const average = () => {
     const length = Object.keys(rates).length
@@ -17,24 +13,22 @@ function CommentRate({ commentId, user, comments, dispatch }) {
 
   const qty = () => Object.keys(rates).length
 
-  const ownRate = () => !!rates[user.id] ? rates[user.id] : null
-
-  const handleOnChange = value => actions.comments.rate(commentId, user.id, !!rates[user.id], value)(dispatch)
+  const ownRate = () => !!rates[userId] ? rates[userId] : null
 
 
   return (
     <div className="Comment__CommentRate">
       <Rate
         value={average()}
-        onChange={handleOnChange}
-        style={{ fontSize: 10, marginTop: 4 }}
+        onChange={onChange}
+        style={style}
         allowHalf
         character={<i className="anticon anticon-star" />}
       />
       <div className="Comment__CommentRate__average">
         {!!average() ? `${average().toFixed(1)} star by ${qty()} user(s)` : ''}
       </div>
-      {!!user.id ? (
+      {!!userId ? (
         <div className="Comment__CommentRate__own">
           {!!ownRate() ? `Your rate is ${ownRate()}` : ''}
         </div>
@@ -42,11 +36,3 @@ function CommentRate({ commentId, user, comments, dispatch }) {
     </div>
   )
 }
-
-
-const mapStateToProps = state => ({
-  user: state.user,
-  comments: state.comments
-})
-
-export default connect(mapStateToProps)(CommentRate)
