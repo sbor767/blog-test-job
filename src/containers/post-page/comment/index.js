@@ -24,7 +24,7 @@ function Comment({ commentId, comments, users, user, dispatch }) {
         rates={rates}
         onChange={handleOnChange}
         userId={user.id}
-        style={{ fontSize: 10, marginTop: 4 }}
+        // style={{ fontSize: 10, marginTop: 4 }}
       />
     </div>
   )

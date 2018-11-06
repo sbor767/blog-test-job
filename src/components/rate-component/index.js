@@ -27,7 +27,6 @@ export default function RateComponent({ rates, userId, onChange, style }) {
         onChange={onChange}
         style={style}
         allowHalf
-        character={<i className="anticon anticon-star" />}
       />
       <div className="RateComponent__average">
         {!!average() ? `${average().toFixed(1)} star by ${qty()} user(s)` : ''}
