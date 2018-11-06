@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import './style.css'
 import Copyright from '../../../components/copyright'
-import CommentRate from '../comment-rate'
+import RateComponent from '../../../components/rate-component'
 import * as actions from '../../../store/actions'
 
 function Comment({ commentId, comments, users, user, dispatch }) {
@@ -20,7 +20,7 @@ function Comment({ commentId, comments, users, user, dispatch }) {
       <div className="Comment__copyright">
         <Copyright author={users.items[comment.authorId].name} timestamp={comment.timestamp}/>
       </div>
-      <CommentRate
+      <RateComponent
         rates={rates}
         onChange={handleOnChange}
         userId={user.id}

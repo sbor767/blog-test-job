@@ -3,7 +3,7 @@ import Rate from 'rc-rate'
 
 import './style.css'
 
-export default function CommentRate({ rates, userId, onChange, style }) {
+export default function RateComponent({ rates, userId, onChange, style }) {
 
   const average = () => {
     const length = Object.keys(rates).length
@@ -17,7 +17,7 @@ export default function CommentRate({ rates, userId, onChange, style }) {
 
 
   return (
-    <div className="Comment__CommentRate">
+    <div className="RateComponent">
       <Rate
         value={average()}
         onChange={onChange}
@@ -25,11 +25,11 @@ export default function CommentRate({ rates, userId, onChange, style }) {
         allowHalf
         character={<i className="anticon anticon-star" />}
       />
-      <div className="Comment__CommentRate__average">
+      <div className="RateComponent__average">
         {!!average() ? `${average().toFixed(1)} star by ${qty()} user(s)` : ''}
       </div>
       {!!userId ? (
-        <div className="Comment__CommentRate__own">
+        <div className="RateComponent__own">
           {!!ownRate() ? `Your rate is ${ownRate()}` : ''}
         </div>
       ) : ''}
