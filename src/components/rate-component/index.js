@@ -1,5 +1,7 @@
 import React from 'react'
 import Rate from 'rc-rate'
+import 'rc-rate/assets/index.css'
+import cn from 'classnames'
 
 import './style.css'
 
@@ -19,6 +21,8 @@ export default function RateComponent({ rates, userId, onChange, style }) {
   return (
     <div className="RateComponent">
       <Rate
+        className={cn('RateComponent__rc-rate', {['RateComponent__rc-rate-disabled']: !userId})}
+        disabled={!userId}
         value={average()}
         onChange={onChange}
         style={style}
