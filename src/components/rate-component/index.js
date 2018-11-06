@@ -21,7 +21,7 @@ export default function RateComponent({ rates, userId, onChange, style }) {
   return (
     <div className="RateComponent">
       <Rate
-        className={cn('RateComponent__rc-rate', {['RateComponent__rc-rate-disabled']: !userId})}
+        className={cn('RateComponent__rc-rate', {'RateComponent__rc-rate-disabled': !userId})}
         disabled={!userId}
         value={average()}
         onChange={onChange}
