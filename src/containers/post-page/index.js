@@ -47,8 +47,8 @@ class PostPage extends Component {
     return (
       <LayoutPage>
         <Header title={isLoaded ? posts.items[postId].title : 'Loading...'}>
+          <ButtonTo title="Back to Home" to={"/"} classes={['blue']}/>
           <SignInOut>
-            <ButtonTo title="Back to Home" to={"/"} classes={['blue']}/>
           </SignInOut>
         </Header>
 

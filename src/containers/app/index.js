@@ -1,14 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Route, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import LayoutRoot from '../../components/layouts/layout-root'
 import PostListPage from '../post-list-page'
 import PostPage from '../post-page'
 import SignInPage from '../sign-in-page'
 import PostCreatePage from '../post-create-page'
 import * as actions from '../../store/actions.js'
-import '../../components/app.css'
+import "../../theme/style.css"
 
 class App extends Component {
 
@@ -38,7 +37,7 @@ class App extends Component {
 
   render() {
     return (
-      <LayoutRoot>
+      <Fragment>
         <Route
           exact path="/"
           render={() => {
@@ -75,7 +74,7 @@ class App extends Component {
             />
           )}
         />
-      </LayoutRoot>
+      </Fragment>
     )
   }
 }

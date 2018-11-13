@@ -1,12 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import cn from 'classnames'
 
 import './style.css'
 
-export default function ButtonTo({ title, to, classes = [] }) {
+export default function ButtonTo({ title, to, className }) {
   return (
-        <Link to={to}>
-          <button className={`ButtonTo ${classes.join(' ')}`}>{title}</button>
-        </Link>
+    <div className={cn('ButtonTo', className)}>
+      <Link to={to} className={'ButtonTo__link'}>
+        <button className={'ButtonTo__button'}><span className='ButtonTo__buttonTitle'>{title}</span></button>
+      </Link>
+    </div>
   )
 }

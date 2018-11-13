@@ -1,0 +1,51 @@
+//@import 'reset.less';
+
+:root {
+  /*font: .75em/1.2 normal Arial, sans-serif;*/
+  //font: calc(.5em + 1vw)/1.2 normal Arial, sans-serif;
+  font: calc(.5em + 1vmin)/1.2 normal Arial, sans-serif;
+  --color: black;
+}
+/*
+@media (min-width: 800px) {
+  :root {
+    font-size: 0.875em;
+  }
+}
+@media (min-width: 1200px) {
+  :root {
+    font-size: 1em;
+  }
+}
+*/
+
+
+
+html, body {
+  height: 100%;
+}
+html, body, p, h1, h2, h3, h4 {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color);
+}
+
+h1 {
+  font-size: 1.2rem;
+  font-weight: bolder;
+}
+h2 {
+  font-size: .8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+
+#root {
+  display: flex;
+  height: 100%;
+}

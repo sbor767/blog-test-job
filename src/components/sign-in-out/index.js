@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 
 import './style.css'
@@ -6,26 +6,24 @@ import * as actions from '../../store/actions.js'
 import Button from '../button'
 import ButtonTo from '../button-to'
 
-function SignInOut({ children, user, dispatch }) {
+function SignInOut({ user, dispatch }) {
 
   const signOut = () => actions.user.signOut()(dispatch)
+
 
   return (
     <div className="SignInOut">
     {!!user.id ? (
-      <div className="SignInOut_wrap">
-        <div className="SignInOut_buttons">
-          {children}
-          <Button title={'SignOut'} onClick={signOut} classes={['blue']}/>
-        </div>
-        <div className="SignInOut_welcome"><p>Welcome <span className="SignInOut_welcome_name">{user.name}</span></p></div>
-      </div>
+      <Fragment>
+        <Button title={'SignOut'} onClick={signOut} className={['SignInOut__signOutButton']}/>
+        <div className="SignInOut__greeting">Welcome <span className="SignInOut__greetingName">{user.name}</span></div>
+      </Fragment>
     ) : (
-      <div className="SignInOut_wrap">
-        {/* @TODO Add history  */}
-        <ButtonTo title={'SignIn'} to={'/sign-in'} classes={['blue', 'ButtonTo_float_right', 'clearfix']}/>
-        <div className="SignInOut_welcome"><p>Sign in to be <span className="SignInOut_welcome_name">right guy</span></p></div>
-      </div>
+        /* @TODO Add history  */
+      <Fragment>
+        <ButtonTo id='sign-in-button' title={'SignIn'} to={'/sign-in'} className={['SignInOut__signInButton']}/>
+        <div className="SignInOut__greeting">Sign in to be a <span className="SignInOut__greetingMsg">right guy</span></div>
+      </Fragment>
     )}
     </div>
   )

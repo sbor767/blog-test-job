@@ -1,0 +1,30 @@
+.SignInOut {
+  display: flex;
+  flex-flow: nowrap column;
+}
+
+
+/* Set equal width with greeting. */
+.SignInOut__signInButton, .SignInOut__signOutButton {
+  width: auto;
+}
+
+.SignInOut__greeting {
+  font-size: 0.9rem;
+}
+
+.SignInOut__greetingName {
+  font-size: .8rem;
+  font-weight: bold;
+}
+
+
+/* Theme signOut button with red circle */
+.SignInOut__signOutButton .Button__buttonTitle {
+  display: list-item;
+  list-style: disc inside;
+  color: red;
+}
+.SignInOut__signOutButton .Button__buttonTitleText {
+  color: var(--color);
+}

@@ -1,17 +1,30 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import ReactDom from 'react-dom'
+import PropTypes from 'prop-types'
+import cn from 'classnames'
 
-import Header from '../../components/header'
+import LayoutPage from '../../components/layouts/layout-page'
+import LayoutHeader from '../../components/layouts/layout-header'
+import SignInOut from '../../components/sign-in-out'
 import Loading from '../../components/loading'
 import ListPost from './list-post'
-import ButtonTo from '../../components/button-to'
-import SignInOut from '../../components/sign-in-out'
-import LayoutPage from '../../components/layouts/layout-page'
 import LayoutContentItems from '../../components/layouts/layout-content-items'
+import Logo from '../../components/elements/logo'
+import './style.css'
+import ButtonTo from '../../components/button-to'
 
 // export default class PostListPage extends Component {
 class PostListPage extends Component {
+
+  static propTypes = {
+    // history: PropTypes.object.isRequired,
+    user: PropTypes.object,
+    users: PropTypes.object,
+    posts: PropTypes.object,
+    comments: PropTypes.object,
+    isLoaded: PropTypes.bool,
+    dispatch: PropTypes.func
+  };
 
   componentDidMount() {
     // this.scrollToBottom()
@@ -23,12 +36,15 @@ class PostListPage extends Component {
 
   // @TODO Fix next.
   scrollToBottom = () => {
+/*
     const headerContainer = ReactDom.findDOMNode(this.headerContainer)
     if (headerContainer) headerContainer.scrollTop = headerContainer.scrollHeight
+*/
   }
 
   render() {
     const {
+      user,
       users,
       posts,
       comments,
@@ -43,34 +59,65 @@ class PostListPage extends Component {
       return postComments.reduce((acc, curr) => acc > comments.items[curr].timestamp ? acc : comments.items[curr].timestamp, postComments[0].timestamp)
     }
 
-    return (
-    <LayoutPage>
-
+/*
+    const header = (
       <Header title="The BLOG">
         <SignInOut>
-          <ButtonTo title={'Create POST'} to={'/post-create'} classes={['blue', 'ButtonTo_float_right']}/>
+          {!!user.id ? (
+            <ButtonTo title={'Create POST'} to={'/post-create'} classes={['blue', 'ButtonTo_float_right']}/>
+          ) :
+            ''
+          }
         </SignInOut>
       </Header>
+    )
+*/
+    const header = (
+      <LayoutHeader
+        className='PostListPage__header'
+        left={<Logo/>}
+        center={(<h1>The BLOG</h1>)}
+        right={<SignInOut/>}
+      />
+    )
+
+    const contentFooter = (
+      <LayoutHeader
+        className='PostListPage__contentFooter'
+        right={<ButtonTo title={'Create POST'} to={'/post-create'} className='PostListPage__contentFooterButtonTo'/>}
+      />
+    )
+
+
+    return (
+    <LayoutPage header={header} className='PostListPage'>
 
       {isLoaded ? (
-        <LayoutContentItems
-          // ref={element => {this.headerContainer = element}}
-        >
-          {Object.keys(posts.items).map(postId => {
-            return (
-            <ListPost
-              key={`post_id-${postId}`}
-              postId={posts.items[postId].id}
-              title={posts.items[postId].title}
-              author={users.items[posts.items[postId].authorId].name}
-              timestamp={posts.items[postId].timestamp}
-              body={posts.items[postId].body}
-              commentsCount={posts.items[postId].comments.length}
-              lastComment={lastComment(postId)}
-            />
-          )})}
-        </LayoutContentItems>
-
+        <Fragment>
+          <LayoutContentItems
+            // ref={element => {this.headerContainer = element}}
+            // className="PostListPage__contentItems"
+            className={cn('PostListPage__contentItems', {"PostListPage__contentItems_whenCreateButton": !!user.id})}
+            // contentFooter={contentFooter}
+          >
+            {Object.keys(posts.items).map(postId => {
+              return (
+              <ListPost
+                key={`post_id-${postId}`}
+                postId={posts.items[postId].id}
+                title={posts.items[postId].title}
+                author={users.items[posts.items[postId].authorId].name}
+                timestamp={posts.items[postId].timestamp}
+                body={posts.items[postId].body}
+                commentsCount={posts.items[postId].comments.length}
+                lastComment={lastComment(postId)}
+              />
+            )})}
+          </LayoutContentItems>
+          {!!user.id ? (
+            contentFooter
+          ) : ''}
+        </Fragment>
       ) : (
         <Loading />
       )}
@@ -80,6 +127,7 @@ class PostListPage extends Component {
 }
 
 const mapStateToProps = state => ({
+  user: state.user,
   users: state.users,
   posts: state.posts,
   comments: state.comments,

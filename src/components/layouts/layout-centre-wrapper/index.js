@@ -1,7 +1,7 @@
 import React from 'react'
 import cn from 'classnames'
 
-import './style.css'
+import './style.less'
 
 export default function LayoutCentreWrapper({ className, children }) {
   return (
