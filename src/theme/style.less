@@ -1,25 +1,21 @@
 //@import 'reset.less';
 
 :root {
-  /*font: .75em/1.2 normal Arial, sans-serif;*/
-  //font: calc(.5em + 1vw)/1.2 normal Arial, sans-serif;
-  font: calc(.5em + 1vmin)/1.2 normal Arial, sans-serif;
   --color: black;
+  font: calc(.5em + 1vmin)/1.2 normal Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+  -webkit-text-size-adjust: none;
+  /*.viewport-unit(font-size, calc(.5em + 1vmin))*/
+  /*width: 100vw;*/
 }
-/*
-@media (min-width: 800px) {
-  :root {
-    font-size: 0.875em;
+
+h1,h2,h3,h4 {
+  font-family: 'Open Sans Condensed', 'Arial Narrow', Arial, sans-serif;
+}
+@media only screen and (min-width: 37.5em) {
+  h1,h2,h3,h4 {
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 }
-@media (min-width: 1200px) {
-  :root {
-    font-size: 1em;
-  }
-}
-*/
-
-
 
 html, body {
   height: 100%;
@@ -41,6 +37,7 @@ h1 {
 h2 {
   font-size: .8rem;
   font-weight: bold;
+  font-stretch: condensed;
   text-transform: uppercase;
 }
 
