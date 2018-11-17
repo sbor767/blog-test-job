@@ -11,7 +11,7 @@ import ListPost from './list-post'
 import LayoutContentItems from '../../components/layouts/layout-content-items'
 import Logo from '../../components/elements/logo'
 import './style.css'
-import ButtonTo from '../../components/button-to'
+import ButtonLink from '../../components/button-link'
 
 // export default class PostListPage extends Component {
 class PostListPage extends Component {
@@ -84,7 +84,7 @@ class PostListPage extends Component {
     const contentFooter = (
       <LayoutHeader
         className='PostListPage__contentFooter'
-        right={<ButtonTo title={'Create POST'} to={'/post-create'} className='PostListPage__contentFooterButtonTo'/>}
+        right={<ButtonLink to={'/post-create'} className='PostListPage__contentFooterButtonTo'>Create POST</ButtonLink>}
       />
     )
 

@@ -4,7 +4,7 @@ import connect from 'react-redux/es/connect/connect'
 import Post from './post'
 import Loading from '../../components/loading'
 import Header from '../../components/header'
-import ButtonTo from '../../components/button-to'
+import ButtonLink from '../../components/button-link'
 import SignInOut from '../../components/sign-in-out'
 import CommentList from './comment-list'
 import CommentAdd from './comment-add'
@@ -47,7 +47,7 @@ class PostPage extends Component {
     return (
       <LayoutPage>
         <Header title={isLoaded ? posts.items[postId].title : 'Loading...'}>
-          <ButtonTo title="Back to Home" to={"/"} classes={['blue']}/>
+          <ButtonLink title="Back to Home" to={"/"} classes={['blue']}/>
           <SignInOut>
           </SignInOut>
         </Header>

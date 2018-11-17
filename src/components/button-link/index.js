@@ -1,13 +1,22 @@
+/**
+ * See https://stackoverflow.com/a/49439893.
+ */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { withRouter } from 'react-router-dom'
 import cn from 'classnames'
 
 import { themes } from '../../utils'
 import './style.css'
 
-export default class Button extends Component {
+class ButtonLink extends Component {
 
   static propTypes = {
+    history: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired,
+
+    to: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired,
     onClick: PropTypes.func,
     type: PropTypes.string,
@@ -19,22 +28,24 @@ export default class Button extends Component {
   static defaultProps = {
     type: 'button',
     disabled: false,
-    theme: ''
+    theme: '',
   }
 
   onClick = (e) => {
-    if (this.props.onClick) {
+    const { history, onClick, to } = this.props
+    if (onClick) {
       e.preventDefault()
-      this.props.onClick()
+      onClick(e)
     }
+    history.push(to)
   }
 
   render() {
-    const {theme, title, type, children, disabled} = this.props
+    const { theme, title, type, children, disabled } = this.props
     return (
       <button
         type={type}
-        className={cn(`Button`, themes('Button', theme))}
+        className={cn(`ButtonLink`, themes('ButtonLink', theme))}
         title={title}
         onClick={this.onClick}
         disabled={disabled}
@@ -44,3 +55,5 @@ export default class Button extends Component {
     )
   }
 }
+
+export default withRouter(ButtonLink)
