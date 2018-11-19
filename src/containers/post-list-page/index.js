@@ -4,27 +4,25 @@ import PropTypes from 'prop-types'
 import cn from 'classnames'
 
 import LayoutPage from '../../components/layouts/layout-page'
+import LayoutContentItems from '../../components/layouts/layout-content-items'
 import LayoutHeader from '../../components/layouts/layout-header'
+import Logo from '../../components/elements/logo'
 import SignInOut from '../../components/sign-in-out'
 import Loading from '../../components/loading'
-import ListPost from './list-post'
-import LayoutContentItems from '../../components/layouts/layout-content-items'
-import Logo from '../../components/elements/logo'
-import './style.css'
 import ButtonLink from '../../components/button-link'
+import ListPost from './list-post'
+import './style.css'
 
-// export default class PostListPage extends Component {
 class PostListPage extends Component {
 
   static propTypes = {
-    // history: PropTypes.object.isRequired,
     user: PropTypes.object,
     users: PropTypes.object,
     posts: PropTypes.object,
     comments: PropTypes.object,
     isLoaded: PropTypes.bool,
     dispatch: PropTypes.func
-  };
+  }
 
   componentDidMount() {
     // this.scrollToBottom()
@@ -51,27 +49,12 @@ class PostListPage extends Component {
       isLoaded,
     } = this.props
 
-    // console.log('PostListPage')
-
     const lastComment = key => {
       let postComments = posts.items[key].comments
       if (!postComments.length) return 'None'
       return postComments.reduce((acc, curr) => acc > comments.items[curr].timestamp ? acc : comments.items[curr].timestamp, postComments[0].timestamp)
     }
 
-/*
-    const header = (
-      <Header title="The BLOG">
-        <SignInOut>
-          {!!user.id ? (
-            <ButtonTo title={'Create POST'} to={'/post-create'} classes={['blue', 'ButtonTo_float_right']}/>
-          ) :
-            ''
-          }
-        </SignInOut>
-      </Header>
-    )
-*/
     const header = (
       <LayoutHeader
         className='PostListPage__header'
@@ -95,10 +78,7 @@ class PostListPage extends Component {
       {isLoaded ? (
         <Fragment>
           <LayoutContentItems
-            // ref={element => {this.headerContainer = element}}
-            // className="PostListPage__contentItems"
             className={cn('PostListPage__contentItems', {"PostListPage__contentItems_whenCreateButton": !!user.id})}
-            // contentFooter={contentFooter}
           >
             {Object.keys(posts.items).map(postId => {
               return (
