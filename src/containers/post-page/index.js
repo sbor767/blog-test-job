@@ -1,25 +1,37 @@
 import React, { Component } from 'react'
-import connect from 'react-redux/es/connect/connect'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import cn from 'classnames'
 
-import Post from './post'
-import Loading from '../../components/loading'
-import Header from '../../components/header'
-import ButtonLink from '../../components/button-link'
-import SignInOut from '../../components/sign-in-out'
-import CommentList from './comment-list'
-import CommentAdd from './comment-add'
 import LayoutPage from '../../components/layouts/layout-page'
 import LayoutContentItems from '../../components/layouts/layout-content-items'
+import Post from './post'
+import Header from '../../components/header'
+import CommentList from './comment-list'
+import CommentAdd from './comment-add'
+import Loading from '../../components/loading'
 import { getNewObjectIdKey, getTimestamp } from '../../utils'
 import { types as commentsActionTypes } from '../../store/comments/actions.js'
 import { types as postsActionTypes } from '../../store/posts/actions.js'
-
+import './style.css'
 
 class PostPage extends Component {
 
+  static propTypes = {
+    postId: PropTypes.number.isRequired,
+    isLoaded: PropTypes.bool,
+    user: PropTypes.object,
+    users: PropTypes.object,
+    posts: PropTypes.object,
+    comments: PropTypes.object,
+    history: PropTypes.object,
+    dispatch: PropTypes.func
+  }
+
+
   // onCommentSubmitHandler = async commentBody => {
   onCommentSubmitHandler = commentBody => {
-    const {postId, user, posts, comments, dispatch} = this.props
+    const {postId, user, comments, dispatch} = this.props
     // commentsActions.add(postId, commentBody, user.id)(dispatch)
     // await postActions.comment(postId, user.id, commentBody)(dispatch)
     const newComment = {
@@ -34,50 +46,53 @@ class PostPage extends Component {
     dispatch({type: postsActionTypes.COMMENT, postId, commentId: newComment.id})
   }
 
+  commentAdd = () => {
+    const { postId, user, history } = this.props
+
+    return !!user.id ?
+      <div className="CommentList__add">
+        <CommentAdd
+          history={history}
+          postId={postId}
+          onSubmit={this.onCommentSubmitHandler}
+        />
+      </div>
+      : ''
+  }
+
   render() {
     const {
       postId,
-      user,
       isLoaded,
       users,
       posts,
-      history
     } = this.props
 
-    return (
-      <LayoutPage>
-        <Header title={isLoaded ? posts.items[postId].title : 'Loading...'}>
-          <ButtonLink title="Back to Home" to={"/"} classes={['blue']}/>
-          <SignInOut>
-          </SignInOut>
-        </Header>
+    const header = (
+      <Header
+        title={isLoaded ? posts.items[postId].title :'Loading...'}
+        className='PostPage__header'
+      />
+    )
 
+
+    return (
+      <LayoutPage header={header} className='PostPage'>
 
         {isLoaded ? (
           <LayoutContentItems>
-            <div className="PostPage__post">
-              <Post
-                body={posts.items[postId].body}
-                author={users.items[posts.items[postId].authorId].name}
-                timestamp={posts.items[postId].timestamp}
-              />
-            </div>
+            <Post
+              body={posts.items[postId].body}
+              author={users.items[posts.items[postId].authorId].name}
+              timestamp={posts.items[postId].timestamp}
+            />
             <hr className="PostPage__hr"/>
             <div className="PostPage__comments">
               <CommentList
                 commentsIds={posts.items[postId].comments}
               />
             </div>
-            {/* @TODO Change to func isLogged? */}
-            {!!user.id ?
-              <div className="CommentList__add">
-                <CommentAdd
-                  history={history}
-                  postId={postId}
-                  onSubmit={this.onCommentSubmitHandler}
-                />
-              </div>
-            : ''}
+            {this.commentAdd()}
           </LayoutContentItems>
           ) : (
             <Loading/>

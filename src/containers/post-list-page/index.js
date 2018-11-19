@@ -5,6 +5,7 @@ import cn from 'classnames'
 
 import LayoutPage from '../../components/layouts/layout-page'
 import LayoutContentItems from '../../components/layouts/layout-content-items'
+import Header from '../../components/header'
 import LayoutHeader from '../../components/layouts/layout-header'
 import Logo from '../../components/elements/logo'
 import SignInOut from '../../components/sign-in-out'
@@ -56,11 +57,9 @@ class PostListPage extends Component {
     }
 
     const header = (
-      <LayoutHeader
+      <Header
+        title='The BLOG'
         className='PostListPage__header'
-        left={<Logo/>}
-        center={(<h1>The BLOG</h1>)}
-        right={<SignInOut/>}
       />
     )
 
