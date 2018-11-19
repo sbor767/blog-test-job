@@ -20,18 +20,9 @@ class App extends Component {
   }
 
   handlePostCreate = post => {
-    // @TODO this redundantly because state will updated with route change.
-    // So leave mutation in RestApi only.
-/*
-    let blogPosts = [...this.state.posts]
-    posts.push(post)
-    this.setState({ posts })
-*/
   }
 
   onLogin = user => {
-    console.log('App-onLogin=22user', user)
-    // console.log('App-onLogin=user', )
     actions.user.signIn(user)(this.props.dispatch)
   }
 
