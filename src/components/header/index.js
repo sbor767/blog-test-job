@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import cn from 'classnames'
 
-import LayoutHeader from '../layouts/layout-header'
-import SignInOut from '../sign-in-out'
-import { Logo } from '../elements'
+import { LayoutHeader } from '../ui/layouts'
+import { Logo } from '../ui/elements'
+import { SignInOut } from '../'
 import './style.css'
 
 

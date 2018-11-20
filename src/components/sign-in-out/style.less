@@ -1,38 +1,39 @@
 .SignInOut {
   display: flex;
   flex-flow: nowrap column;
-}
+
+  /* Set equal width with greeting. */
+  &__signInButton, &__signOutButton {
+    width: auto;
+  }
+
+  &__greeting {
+    font-size: 0.9rem;
+  }
+
+  &__greetingName {
+    font-size: .8rem;
+    font-weight: bold;
+  }
+
+  &__greetingAccent {
+    color: green;
+  }
 
 
-/* Set equal width with greeting. */
-.SignInOut__signInButton, .SignInOut__signOutButton {
-  width: auto;
-}
+  /* Theme signOut button with green|red circle */
+  &__buttonDisc {
+    display: list-item;
+    list-style: disc inside;
+  }
+  &__buttonOutDisc {
+    color: red;
+  }
+  &__buttonInDisc {
+    color: green;
+  }
+  &__buttonText {
+    color: var(--color);
+  }
 
-.SignInOut__greeting {
-  font-size: 0.9rem;
-}
-
-.SignInOut__greetingName {
-  font-size: .8rem;
-  font-weight: bold;
-}
-.SignInOut__greetingAccent {
-  color: green;
-}
-
-
-/* Theme signOut button with green|red circle */
-.SignInOut__buttonDisc {
-  display: list-item;
-  list-style: disc inside;
-}
-.SignInOut__buttonOutDisc {
-  color: red;
-}
-.SignInOut__buttonInDisc {
-  color: green;
-}
-.SignInOut__buttonText {
-  color: var(--color);
 }

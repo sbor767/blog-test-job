@@ -1,0 +1,21 @@
+.LayoutContentItems {
+  //height: calc(100% - 45px);
+  //overflow-y: auto;
+  //padding: 0 10px;
+  display: flex;
+  flex-flow: nowrap column;
+
+  /*Move scrollX to box outside*/
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+
+  margin: 1em 0;
+  padding: 0 1em 0 0;
+
+  &__items {
+    /*Move scrollX to box outside*/
+    width: inherit;
+  }
+
+}

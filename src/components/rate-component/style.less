@@ -3,29 +3,30 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: baseline;
-}
 
-.RateComponent__average {
-  font-size: .7rem;
-  color: gray;
-}
+  &__average {
+    font-size: .7rem;
+    color: gray;
+  }
 
-.RateComponent__own {
-  font-size: .7rem;
-  color: gray;
-  margin-left: auto; /* This align flex box right */
-}
+  &__own {
+    font-size: .7rem;
+    color: gray;
+    margin-left: auto; /* This align flex box right */
+  }
 
-.RateComponent__rc-rate {
-}
-.RateComponent__rc-rate-disabled {
-}
+  &__rc-rate {
+  }
+  &__rc-rate-disabled {
+  }
 
+  &__rc-rate .rc-rate-star:hover {
+    transform: scale(2);
+  }
 
-.RateComponent__rc-rate .rc-rate-star:hover {
-  transform: scale(2);
-}
-.RateComponent__rc-rate-disabled .rc-rate-star:hover {
-  cursor: not-allowed;
-  transform: scale(1);
+  &__rc-rate-disabled .rc-rate-star:hover {
+    cursor: not-allowed;
+    transform: scale(1);
+  }
+
 }

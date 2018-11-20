@@ -5,6 +5,7 @@ import cn from 'classnames'
 
 import './style.css'
 
+
 export default function RateComponent({ rates, userId, onChange, style }) {
 
   const average = () => {
