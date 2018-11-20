@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import cn from 'classnames'
 
-import { themes } from '../../utils'
+import { themes } from '../../../utils/index'
 import './style.css'
 
 class ButtonLink extends Component {

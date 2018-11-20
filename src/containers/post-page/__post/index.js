@@ -3,6 +3,7 @@ import React from 'react'
 import Copyright from '../../../components/copyright'
 import './style.css'
 
+
 export default function Post({ body, author, timestamp }) {
   return (
     <div className='Post'>

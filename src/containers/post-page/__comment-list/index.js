@@ -1,7 +1,7 @@
 import React from 'react'
 
 import './style.css'
-import Comment from '../comment'
+import Comment from '../__comment'
 
 export default function CommentList({ commentsIds }) {
   return (

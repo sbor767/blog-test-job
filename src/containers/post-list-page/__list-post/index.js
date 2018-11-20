@@ -4,7 +4,7 @@ import cn from 'classnames'
 
 import './style.css'
 import Copyright from '../../../components/copyright'
-import ListPostCommentsInfo from '../list-post-comments-info'
+import ListPostCommentsInfo from '../__list-post-comments-info'
 
 export default function ListPost({ postId, title, author, timestamp, body, commentsCount, lastComment, className }) {
   return (

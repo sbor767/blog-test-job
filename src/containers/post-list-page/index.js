@@ -3,14 +3,14 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import cn from 'classnames'
 
-import LayoutPage from '../../components/layouts/layout-page'
-import LayoutContentItems from '../../components/layouts/layout-content-items'
+import { LayoutPage, LayoutContentItems, LayoutHeader } from '../../components/layouts'
 import Header from '../../components/header'
-import LayoutHeader from '../../components/layouts/layout-header'
 import Loading from '../../components/loading'
-import ButtonLink from '../../components/button-link'
-import ListPost from './list-post'
+import { ButtonLink } from '../../components/elements'
+
+import ListPost from './__list-post'
 import './style.css'
+
 
 class PostListPage extends Component {
 

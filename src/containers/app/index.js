@@ -41,7 +41,7 @@ class App extends Component {
           path="/posts/:id"
           render={({ history, match }) => (
             <PostPage
-              postId={match.params.id}
+              postId={+match.params.id}
               history={history}
             />
           )}

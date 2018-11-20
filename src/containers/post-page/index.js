@@ -3,17 +3,18 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import cn from 'classnames'
 
-import LayoutPage from '../../components/layouts/layout-page'
-import LayoutContentItems from '../../components/layouts/layout-content-items'
-import Post from './post'
+import { LayoutPage, LayoutContentItems } from '../../components/layouts'
 import Header from '../../components/header'
-import CommentList from './comment-list'
-import CommentAdd from './comment-add'
 import Loading from '../../components/loading'
 import { getNewObjectIdKey, getTimestamp } from '../../utils'
 import { types as commentsActionTypes } from '../../store/comments/actions.js'
 import { types as postsActionTypes } from '../../store/posts/actions.js'
+
+import Post from './__post'
+import CommentList from './__comment-list'
+import CommentAdd from './__comment-add'
 import './style.css'
+
 
 class PostPage extends Component {
 

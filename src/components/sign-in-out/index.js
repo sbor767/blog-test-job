@@ -2,8 +2,7 @@ import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 
 import * as actions from '../../store/actions.js'
-import Button from '../button'
-import ButtonLink from '../button-link'
+import { Button, ButtonLink } from '../elements'
 import './style.css'
 
 function SignInOut({ user, dispatch }) {
