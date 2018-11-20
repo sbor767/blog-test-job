@@ -1,13 +1,24 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-import posts from '../../../api/rest-like/posts'
-
-import { Header } from '../../index'
+import { types as postsActionTypes } from '../../../store/posts/actions'
+import { getNewObjectIdKey, getTimestamp } from '../../../utils'
 import { LayoutPage, LayoutContentItems } from '../../ui/layouts/index'
+import { Header } from '../../index'
 import './style.css'
 
 
-export default class PagesPostCreate extends Component {
+class PagesPostCreate extends Component {
+
+  static propTypes = {
+    user: PropTypes.object,
+    posts: PropTypes.object,
+    history: PropTypes.object,
+    dispatch: PropTypes.func
+  }
+
+
   state = {title: '', body: '', error: ''}
 
   handleTitleChange = event => this.setState({title: event.target.value, error: ''})
@@ -16,9 +27,9 @@ export default class PagesPostCreate extends Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    this.setState({error: ''})
     if (this.state.title && this.state.body) {
-      this.save({title: this.state.title, body: this.state.body})
+      this.onSubmitHandler({title: this.state.title, body: this.state.body})
+      this.setState({title: '', body: '', error: ''})
     } else {
       this.setState({error: 'Please fill in both fields.'})
     }
@@ -26,20 +37,21 @@ export default class PagesPostCreate extends Component {
     console.log(this.state)
   }
 
-  onSubmit() {
-    // Redirect to '/'.
-    this.props.history.push('/')
-  }
+  onSubmitHandler({ title, body }) {
+    const { user, posts, dispatch } = this.props
 
-  save(post) {
-    posts.add(post, this.props.currentUserId)
-      .then(newPost => {
-        this.props.onSubmit(newPost)
-        this.onSubmit()
-      })
-      .catch(err => {
-        this.setState({error: `Error when saving post: ${err}`})
-      })
+    const newPost = {
+      id: getNewObjectIdKey(posts.items),
+      title,
+      body,
+      authorId: user.id,
+      comments: [],
+      timestamp: getTimestamp()
+    }
+
+    dispatch({type: postsActionTypes.ADD, newPost})
+
+    this.props.history.push('/')
   }
 
 
@@ -74,3 +86,9 @@ export default class PagesPostCreate extends Component {
     )
   }
 }
+
+
+export default connect(state => ({
+  user: state.user,
+  posts: state.posts
+}))(PagesPostCreate)
