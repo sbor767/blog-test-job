@@ -67,7 +67,7 @@ class PagesPost extends Component {
 
     const header = (
       <Header
-        title={isLoaded ? posts.items[postId].title : 'Loading...'}
+        title={isLoaded && !!posts.items[postId] ? posts.items[postId].title : 'Loading...'}
         className='PagesPost__header'
       />
     )
@@ -77,7 +77,8 @@ class PagesPost extends Component {
 
       <LayoutPage header={header} className="PagesPost">
 
-        {isLoaded ? (
+        {/*@TODO Refactor this to using 404 instead*/}
+        {isLoaded && !!posts.items[postId] ? (
           <Fragment>
 
             <PagesPostContent
@@ -99,8 +100,7 @@ class PagesPost extends Component {
 
           </Fragment>
 
-        ) : (
-          <Loading/>
+        ) : (!!posts.items[postId] ? <Loading /> : <div className="PagesPost__errorNoSuchPost">No such post exist.</div>
         )}
 
       </LayoutPage>
