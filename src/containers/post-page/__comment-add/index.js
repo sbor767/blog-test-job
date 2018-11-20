@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import './style.css'
 
-export default class CommentAdd extends Component {
+export default class __CommentAdd extends Component {
   state = { body: '', error: '' }
 
   handleBodyChange = event => this.setState({ body: event.target.value, error: '' })
@@ -38,18 +38,18 @@ export default class CommentAdd extends Component {
 */
 
   render = () => (
-    <div className='CommentAdd'>
-      <form onSubmit={this.handleSubmit} className="CommentAdd__form">
+    <div className='__CommentAdd'>
+      <form onSubmit={this.handleSubmit} className="__CommentAdd__form">
         <p>Add your comment</p>
         <textarea
           type='textarea'
           onChange={this.handleBodyChange}
           value={this.state.body}
           placeholder='Your comment here'
-          className="CommentAdd__form__textarea"
+          className="__CommentAdd__form__textarea"
         />
-        <p className="error CommentAdd__form__error">{this.state.error}</p>
-        <button className='red light CommentAdd__form__button' type='submit'>Submit</button>
+        <p className="error __CommentAdd__form__error">{this.state.error}</p>
+        <button className='red light __CommentAdd__form__button' type='submit'>Submit</button>
       </form>
     </div>
   )

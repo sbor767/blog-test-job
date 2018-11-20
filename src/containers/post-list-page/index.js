@@ -8,7 +8,7 @@ import Header from '../../components/header'
 import Loading from '../../components/loading'
 import { ButtonLink } from '../../components/elements'
 
-import ListPost from './__list-post'
+import __ListPost from './__list-post'
 import './style.css'
 
 
@@ -79,7 +79,7 @@ class PostListPage extends Component {
           >
             {Object.keys(posts.items).map(postId => {
               return (
-              <ListPost
+              <__ListPost
                 key={`post_id-${postId}`}
                 postId={posts.items[postId].id}
                 title={posts.items[postId].title}

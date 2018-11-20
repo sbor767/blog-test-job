@@ -4,17 +4,17 @@ import cn from 'classnames'
 
 import './style.css'
 import Copyright from '../../../components/copyright'
-import ListPostCommentsInfo from '../__list-post-comments-info'
+import __ListPostCommentsInfo from '../__list-post-comments-info'
 
-export default function ListPost({ postId, title, author, timestamp, body, commentsCount, lastComment, className }) {
+export default function __ListPost({ postId, title, author, timestamp, body, commentsCount, lastComment, className }) {
   return (
-        <div className={cn('ListPost', className)}>
-          <Link to={`/posts/${postId}`} className='ListPost__link'>
-            <h2 title={`id=${postId}`} className='ListPost__title'>{title}</h2>
-            <Copyright author={author} timestamp={timestamp} className='ListPost__copyright'/>
-            <div className='ListPost__body'>{body}</div>
+        <div className={cn('__ListPost', className)}>
+          <Link to={`/posts/${postId}`} className='__ListPost__link'>
+            <h2 title={`id=${postId}`} className='__ListPost__title'>{title}</h2>
+            <Copyright author={author} timestamp={timestamp} className='__ListPost__copyright'/>
+            <div className='__ListPost__body'>{body}</div>
           </Link>
-          <ListPostCommentsInfo commentsNum={commentsCount} lastTimestamp={lastComment} className='ListPost__commentInfo'/>
+          <__ListPostCommentsInfo commentsNum={commentsCount} lastTimestamp={lastComment} className='__ListPost__commentInfo'/>
         </div>
   )
 }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import cn from 'classnames'
@@ -10,9 +10,9 @@ import { getNewObjectIdKey, getTimestamp } from '../../utils'
 import { types as commentsActionTypes } from '../../store/comments/actions.js'
 import { types as postsActionTypes } from '../../store/posts/actions.js'
 
-import Post from './__post'
-import CommentList from './__comment-list'
-import CommentAdd from './__comment-add'
+import __Post from './__post'
+import __CommentList from './__comment-list'
+import __CommentAdd from './__comment-add'
 import './style.css'
 
 
@@ -52,7 +52,7 @@ class PostPage extends Component {
 
     return !!user.id ?
       <div className="CommentList__add">
-        <CommentAdd
+        <__CommentAdd
           history={history}
           postId={postId}
           onSubmit={this.onCommentSubmitHandler}
@@ -81,20 +81,25 @@ class PostPage extends Component {
       <LayoutPage header={header} className='PostPage'>
 
         {isLoaded ? (
-          <LayoutContentItems>
-            <Post
+          <Fragment>
+            <__Post
               body={posts.items[postId].body}
               author={users.items[posts.items[postId].authorId].name}
               timestamp={posts.items[postId].timestamp}
             />
             <hr className="PostPage__hr"/>
-            <div className="PostPage__comments">
-              <CommentList
+
+            <div className="PostPage__CommentListTitle">
+              <span>Comments</span>
+            </div>
+
+            <LayoutContentItems>
+              <__CommentList
                 commentsIds={posts.items[postId].comments}
               />
-            </div>
-            {this.commentAdd()}
-          </LayoutContentItems>
+              {this.commentAdd()}
+            </LayoutContentItems>
+          </Fragment>
           ) : (
             <Loading/>
           )

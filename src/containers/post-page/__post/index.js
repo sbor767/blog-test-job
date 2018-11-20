@@ -4,11 +4,11 @@ import Copyright from '../../../components/copyright'
 import './style.css'
 
 
-export default function Post({ body, author, timestamp }) {
+export default function __Post({ body, author, timestamp }) {
   return (
-    <div className='Post'>
+    <div className='__Post'>
       <Copyright author={author} timestamp={timestamp}/>
-      <div className="Post__body">
+      <div className="__Post__body">
         {body}
       </div>
     </div>
