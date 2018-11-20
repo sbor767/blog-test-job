@@ -9,12 +9,12 @@ export default function RoutesPosts() {
   return (
     <Switch>
       <Route
-        path="/posts/:id"
-        render={({ history, match }) => <PagesPost postId={+match.params.id} history={history} />}
-      />
-      <Route
         path="/posts/create"
         render={({ history }) => <PagesPostCreate history={history} />}
+      />
+      <Route
+        path="/posts/:id"
+        render={({ history, match }) => <PagesPost postId={+match.params.id} history={history} />}
       />
     </Switch>
   )
