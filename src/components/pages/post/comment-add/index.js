@@ -13,7 +13,7 @@ export default class PagesPostCommentAdd extends Component {
       this.submit(this.state.body)
       this.setState({ body: '', error: '' })
     } else {
-      this.setState({ error: 'Please fill comment fields.' })
+      this.setState({ error: 'Please fill comment field.' })
     }
   }
 
@@ -48,8 +48,8 @@ export default class PagesPostCommentAdd extends Component {
           placeholder='Your comment here'
           className="PagesPostCommentAdd__formTextarea"
         />
-        <p className="error PagesPostCommentAdd__formError">{this.state.error}</p>
-        <button className='red light PagesPostCommentAdd__formButton' type='submit'>Submit</button>
+        <p className="PagesPostCommentAdd__formError">{this.state.error}</p>
+        <button className='PagesPostCommentAdd__formButton' type='submit'>Submit</button>
       </form>
     </div>
   )

@@ -1,25 +1,24 @@
 .PagesPostCreate {
 
-    &__form {
-        display: flex;
-        flex-flow: nowrap column;
-        /*width: 80%;*/
-        /*margin: 10px 10px 10px 10px;*/
-        /*marg*/
-        border-radius: .5em;
-        padding: .5em;
-    }
+  &__form {
+    display: flex;
+    flex-flow: nowrap column;
+    border-radius: .5em;
+    padding: .5em;
+  }
 
-    &__formInput, &__formTextarea, &__formButton {
-        border-radius: .5em;
-        padding: .5em;
-        margin: .5em .5em;
-    }
-
-}
-
-
-button.PagesPostCreate__formButton {
+  &__formInput, &__formTextarea, &__formButton {
+    border-radius: .5em;
+    padding: .5em;
+    margin: .5em .5em;
+  }
+  &__formButton {
     padding: 0 .5em .5em .5em;
     margin: 0 .5em .5em .5em;
+  }
+
+  &__formError {
+    color: red;
+  }
+
 }

@@ -78,8 +78,8 @@ class PagesPostCreate extends Component {
               placeholder='Your post here'
               className="PagesPostCreate__formTextarea"
             />
-            <p className="error PagesPostCreate__formError">{this.state.error}</p>
-            <button className='red light PagesPostCreate__formButton' type='submit'>Submit</button>
+            <p className="PagesPostCreate__formError">{this.state.error}</p>
+            <button className='PagesPostCreate__formButton' type='submit'>Submit</button>
           </form>
         </LayoutContentItems>
       </LayoutPage>
