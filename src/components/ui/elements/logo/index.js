@@ -24,8 +24,10 @@ export default class Logo extends Component {
   render() {
     const {to, theme, title} = this.props
     return (
+
+
       <Link className={cn(`Logo`, themes('Logo', theme))} to={to} title={title}>
-        Logo
+        <img src='/assets/react-icon.svg' alt='logo' className="Logo__img" />
       </Link>
     )
   }
