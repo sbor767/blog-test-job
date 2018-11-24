@@ -10,70 +10,79 @@
 
   &__h2 {
     text-align: center;
-    padding: 2em;
+    margin-top: .5em;
+    padding: .5em;
+    font-size: 1.5rem;
+    font-stretch: condensed;
   }
+
   &__row {
     display: flex;
     padding: .5em;
     border-radius: .5em;
   }
 
+  &__hint {
+    flex: 1;
+    margin: 0 1em 0 auto;
+    padding: 0.5em;
+    font-size: 0.8rem;
+    border: .5em solid #DDDDDD;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-flow: column nowrap;
+  }
+
+  &__hintWrapper {
+    flex: 1;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+  }
+
+  &__hintItem {
+  }
+
+  &__hintTop {
+  }
+
+  &__hintMiddle {
+    text-align: center;
+  }
+
+  &__hintBottom {
+    list-style: disc inside;
+  }
+
   &__form {
     flex: 2;
     display: flex;
-    flex-flow: column nowrap;
-    border-radius: .5rem;
-    background-color: #F5F5F5;
+    flex-flow: column;
+    border: .5em solid #DDDDDD;
+    border-radius: 0.5rem;
   }
+
   &__formInput {
     flex: 1 1;
     border-radius: .3em;
     margin: .5em;
   }
+
   &__formInput .Input__input {
     font-size: 1.5rem;
     border-radius: .3em;
   }
+
   &__formInputLogin {
   }
+
   &__formInputPassword {
   }
+
   &__formButton {
     flex: 1 1;
     margin: .5em;
     font-size: 1.1rem;
-  }
-
-  &__hint {
-    flex: 1;
-    margin: 0 1em 0 auto;
-    padding: .5em;
-    font-size: .8rem;
-    background-color: #DDDDDD;
-    border-radius: .5rem;
-    display: flex;
-  }
-  &__hintWrapper {
-    padding: .5em;
-    display: flex;
-    flex-flow: column nowrap;
-    background-color: var(--header-bg-color);
-    border-radius: .3em;
-    //height: calc(100% - 1rem);
-    width: 100%;
-
-  }
-  &__hintTop {
-    flex: 1 1;
-    width: 12em;
-  }
-  &__hintMiddle {
-    flex: 1 1;
-    text-align: center;
-  }
-  &__hintBottom {
-    flex: 1 1;
-    list-style: disc inside;
   }
 
   &__error {

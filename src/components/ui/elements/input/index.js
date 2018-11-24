@@ -20,7 +20,7 @@ class Input extends React.Component {
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     theme: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-    className: PropTypes
+    className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
   }
 
   static defaultProps = {

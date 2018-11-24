@@ -7,6 +7,7 @@ import { Header } from '../..'
 import './style.css'
 import { Input, Button } from '../../ui/elements'
 
+
 export default class PagesSignIn extends Component {
 
   state = { login: '', password: '', error: '' }
@@ -49,30 +50,35 @@ export default class PagesSignIn extends Component {
 
     const header = <Header title="Login page" inSign={true} className="PagesSignIn__header" />
 
+    const HintWrapper = ({ children }) => <div className="PagesSignIn__hintWrapper">{children}</div>
+
+
     return (
       <LayoutPage header={header} className="PagesSignIn">
 
 
         <div className="PagesSignIn__contentCenter">
 
-          <div className="PagesSignIn__h2">Sign in by entering your login and password.</div>
+          <div className="PagesSignIn__h2">Sign in by entering your login and password</div>
 
           <div className="PagesSignIn__row">
 
             <div className="PagesSignIn__hint">
-              <div className="PagesSignIn__hintWrapper">
-                <div className="PagesSignIn__hintTop">
+              <HintWrapper>
+                <div className="PagesSignIn__hintItem PagesSignIn__hintTop">
                   Use one from the next test users credentials
                 </div>
-                <div className="PagesSignIn__hintMiddle">
+              </HintWrapper>
+              <HintWrapper>
+                <div className="PagesSignIn__hintItem PagesSignIn__hintMiddle">
                   (Login : password)
                 </div>
-                <ul className="PagesSignIn__hintBottom">
-                  <li>'John N.' : 111</li>
-                  <li>'Alexandr M.' : 222</li>
-                  <li>'Leonardo D.' : 333</li>
-                </ul>
-              </div>
+              </HintWrapper>
+              <ul className="PagesSignIn__hintItem PagesSignIn__hintBottom">
+                <li>'John N.' : 111</li>
+                <li>'Alexandr M.' : 222</li>
+                <li>'Leonardo D.' : 333</li>
+              </ul>
             </div>
 
             <form onSubmit={this.handleSubmit} className="PagesSignIn__form">
@@ -101,6 +107,7 @@ export default class PagesSignIn extends Component {
           </div>
 
         </div>
+
       </LayoutPage>
     )
   }
