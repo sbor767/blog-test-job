@@ -1,5 +1,7 @@
 .ButtonLink {
   border-radius: .5em;
+  cursor: pointer;
+
   /*
   padding: 8px 10px;
   display: inline-block;
@@ -15,8 +17,6 @@
   color: #fff;
   background-color: #000;
   border: 2px solid #000;
-  border-radius: 5px;
-  cursor: pointer;
   */
 
   &_hover, &:hover {
@@ -34,7 +34,8 @@
   }
 
   &_disabled, &:disabled {
-    opacity: 0.65;
+    opacity: 0.55;
+    cursor: not-allowed;
   }
 
   &_theme {

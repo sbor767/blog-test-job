@@ -22,7 +22,8 @@ class ButtonLink extends Component {
     type: PropTypes.string,
     title: PropTypes.string,
     theme: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
   }
 
   static defaultProps = {
@@ -41,11 +42,11 @@ class ButtonLink extends Component {
   }
 
   render() {
-    const { theme, title, type, children, disabled } = this.props
+    const { theme, title, type, children, disabled, className } = this.props
     return (
       <button
         type={type}
-        className={cn(`ButtonLink`, themes('ButtonLink', theme))}
+        className={cn(`ButtonLink`, themes('ButtonLink', theme), {'ButtonLink_disabled': disabled}, className)}
         title={title}
         onClick={this.onClick}
         disabled={disabled}

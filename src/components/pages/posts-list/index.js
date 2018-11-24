@@ -56,25 +56,25 @@ class PagesPostsList extends Component {
     const header = (
       <Header
         title='The BLOG'
-        className='PostListPage__header'
+        className='PagesPostsList__header'
       />
     )
 
     const contentFooter = (
       <LayoutHeader
-        className='PostListPage__contentFooter'
-        right={<ButtonLink to={'/posts/create'} className='PostListPage__contentFooterButtonTo'>Create POST</ButtonLink>}
+        className='PagesPostsList__contentFooter'
+        right={<ButtonLink to={'/posts/create'} className='PagesPostsList__contentFooterButtonTo'>Create POST</ButtonLink>}
       />
     )
 
 
     return (
-    <LayoutPage header={header} className='PostListPage'>
+    <LayoutPage header={header} className='PagesPostsList'>
 
       {isLoaded ? (
         <Fragment>
           <LayoutContentItems
-            className={cn('PostListPage__contentItems', {"PostListPage__contentItems_whenCreateButton": !!user.id})}
+            className={cn('PagesPostsList__contentItems', {"PagesPostsList__contentItems_whenCreateButton": !!user.id})}
           >
             {Object.keys(posts.items).map(postId => {
               return (
@@ -108,6 +108,7 @@ const mapStateToProps = state => ({
   posts: state.posts,
   comments: state.comments,
   isLoaded: !state.posts.isFetching && !state.posts.didInvalidate && !state.comments.isFetching && !state.comments.didInvalidate,
+  // isLoaded: false,
 })
 
 export default connect(mapStateToProps)(PagesPostsList)

@@ -1,4 +1,4 @@
-export {default as Button} from './button/index'
-export {default as ButtonLink} from './button-link/index'
-export {default as Input} from './input/index'
-export {default as Logo} from './logo/index'
+export {default as Button} from './button'
+export {default as ButtonLink} from './button-link'
+export {default as Input} from './input'
+export {default as Logo} from './logo'

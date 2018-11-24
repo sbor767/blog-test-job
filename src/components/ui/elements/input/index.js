@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import cn from 'classnames'
 
 import { themes } from '../../../../utils/index'
-import './style.less';
+import './style.css'
 
 class Input extends React.Component {
 
@@ -20,7 +20,8 @@ class Input extends React.Component {
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     theme: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  };
+    className: PropTypes
+  }
 
   static defaultProps = {
     onBlur: () => {
@@ -31,24 +32,24 @@ class Input extends React.Component {
     },
     disabled: false,
     type: 'text'
-  };
+  }
 
   onChange = (e) => {
-    const value = e.target.value;
-    return this.props.onChange(value);
-  };
+    const value = e.target.value
+    return this.props.onChange(value)
+  }
 
   onFocus = (e) => {
-    this.props.onFocus(e);
-  };
+    this.props.onFocus(e)
+  }
 
-  onBlur = () => this.props.onBlur();
+  onBlur = () => this.props.onBlur()
 
   render() {
-    const {type, placeholder, required, focused, value, theme, disabled, tabIndex, autocomplete} = this.props;
+    const {type, placeholder, required, focused, value, theme, disabled, tabIndex, autocomplete, className} = this.props
 
     return (
-      <div className={cn("Input", themes('Input', theme))}>
+      <div className={cn("Input", themes('Input', theme), className)}>
         <input
           className="Input__input"
           value={value}
@@ -64,9 +65,9 @@ class Input extends React.Component {
           onBlur={this.onBlur}
         />
       </div>
-    );
+    )
   }
 }
 
 
-export default Input;
+export default Input

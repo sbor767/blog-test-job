@@ -1,16 +1,29 @@
-import React, { Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 
 import * as actions from '../../store/actions.js'
 import { Button, ButtonLink } from '../ui/elements'
 import './style.css'
+import PropTypes from 'prop-types'
 
 
-function SignInOut({ user, dispatch }) {
+class SignInOut extends Component {
 
-  const signOut = () => actions.user.signOut()(dispatch)
+  static propTypes = {
+    user: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    inSign: PropTypes.bool
+  }
 
-  const markup = type => (
+  static defaultProps = {
+    inSign: false
+  }
+
+
+
+  signOut = () => actions.user.signOut()(this.props.dispatch)
+
+  static markup = (type) => (
     <div className={`SignInOut__buttonDisc SignInOut__button${type}Disc`}>
       <span className='SignInOut__buttonText'>
         {`Sign${type}`}
@@ -18,26 +31,32 @@ function SignInOut({ user, dispatch }) {
     </div>
   )
 
-  return (
+
+  render() {
+
+    const { user, inSign } = this.props
+
+    return (
     <div className="SignInOut">
     {!!user.id ? (
       <Fragment>
-        <Button onClick={signOut} className='SignInOut__signOutButton'>
-          {markup('Out')}
+        <Button onClick={this.signOut} className='SignInOut__signOutButton'>
+          {SignInOut.markup('Out')}
         </Button>
         <div className="SignInOut__greeting">Welcome <span className="SignInOut__greetingName">{user.name}</span></div>
       </Fragment>
     ) : (
       <Fragment>
-        <ButtonLink to={'/sign-in'} className='SignInOut__signInButton'>
-          {markup('In')}
+        <ButtonLink to={'/sign-in'} disabled={inSign} className='SignInOut__signInButton'>
+          {SignInOut.markup('In')}
         </ButtonLink>
         <div className="SignInOut__greeting">Sign in to be a <span className="SignInOut__greetingAccent">right</span> guy</div>
       </Fragment>
     )}
     </div>
-  )
+  )}
 }
+
 
 const mapStateToProps = state => ({
   user: state.user

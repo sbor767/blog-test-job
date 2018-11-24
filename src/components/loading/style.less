@@ -1,19 +1,22 @@
 .Loading {
+
   display: flex;
   height: 90%;
+
+  &__img {
+    margin: auto;
+    width: 40vmin;
+
+    -webkit-animation-name: pulse;
+    animation-name: pulse;
+    animation-duration: 700ms;
+    transform-origin: 70% 70%;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+
 }
 
-.Loading__img {
-  margin: auto;
-  width: 40vmin;
-
-  -webkit-animation-name: pulse;
-  animation-name: pulse;
-  animation-duration: 700ms;
-  transform-origin:70% 70%;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-}
 
 @-webkit-keyframes pulse {
   0% { -webkit-transform: scale(1); }

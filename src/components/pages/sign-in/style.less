@@ -1,32 +1,82 @@
-div.SignInPage__form__note {
-    font-size: 0.9em;
-    /*background-color: #77A0B8;*/
-    /*border-color: #77A0B8;*/
-    border: 1px solid #77A0B8;
-    padding: 17px;
-}
+.PagesSignIn {
 
-ul.SignInPage__form__note__ul, li.SignInPage__form__note {
-    font-size: 0.8em;
-}
+  background-color: var(--header-bg-color);
 
-.SignInPage__form {
-    max-width: 300px;
-    margin: 0 auto;
+  &__contentCenter {
+    border: 1px solid #B6B6B6;
+    margin-top: 15%;
+    border-radius: 1em;
+  }
+
+  &__h2 {
+    text-align: center;
+    padding: 2em;
+  }
+  &__row {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 80%;
-}
+    padding: .5em;
+    border-radius: .5em;
+  }
 
-.SignInPage__form p {
-    font-size: .8em;
-    text-align:center;
-}
+  &__form {
+    flex: 2;
+    display: flex;
+    flex-flow: column nowrap;
+    border-radius: .5rem;
+    background-color: #F5F5F5;
+  }
+  &__formInput {
+    flex: 1 1;
+    border-radius: .3em;
+    margin: .5em;
+  }
+  &__formInput .Input__input {
+    font-size: 1.5rem;
+    border-radius: .3em;
+  }
+  &__formInputLogin {
+  }
+  &__formInputPassword {
+  }
+  &__formButton {
+    flex: 1 1;
+    margin: .5em;
+    font-size: 1.1rem;
+  }
 
-.SignInPage__form__input {
-    width: 200px;
-    margin: 10px 0;
-    height: 30px;
+  &__hint {
+    flex: 1;
+    margin: 0 1em 0 auto;
+    padding: .5em;
+    font-size: .8rem;
+    background-color: #DDDDDD;
+    border-radius: .5rem;
+    display: flex;
+  }
+  &__hintWrapper {
+    padding: .5em;
+    display: flex;
+    flex-flow: column nowrap;
+    background-color: var(--header-bg-color);
+    border-radius: .3em;
+    //height: calc(100% - 1rem);
+    width: 100%;
+
+  }
+  &__hintTop {
+    flex: 1 1;
+    width: 12em;
+  }
+  &__hintMiddle {
+    flex: 1 1;
+    text-align: center;
+  }
+  &__hintBottom {
+    flex: 1 1;
+    list-style: disc inside;
+  }
+
+  &__error {
+    color: red;
+  }
 }

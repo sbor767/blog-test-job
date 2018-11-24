@@ -13,7 +13,8 @@ export default class Button extends Component {
     type: PropTypes.string,
     title: PropTypes.string,
     theme: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
   }
 
   static defaultProps = {
@@ -30,11 +31,11 @@ export default class Button extends Component {
   }
 
   render() {
-    const {theme, title, type, children, disabled} = this.props
+    const { theme, title, type, children, disabled, className } = this.props
     return (
       <button
         type={type}
-        className={cn(`Button`, themes('Button', theme))}
+        className={cn(`Button`, themes('Button', theme), {'Button_disabled': disabled}, className)}
         title={title}
         onClick={this.onClick}
         disabled={disabled}

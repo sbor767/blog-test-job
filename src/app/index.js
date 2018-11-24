@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Switch, withRouter } from 'react-router-dom'
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { PagesPostsList, PagesSignIn } from '../components/pages'
@@ -26,6 +26,9 @@ class App extends Component {
   }
 
   render() {
+
+    const { user } = this.props
+
     return (
       <Switch>
         <Route exact path="/" component={PagesPostsList} />
@@ -34,7 +37,13 @@ class App extends Component {
 
         <Route
           path="/sign-in"
-          render={({ history }) => <PagesSignIn history={history} onLogin={this.onLogin} />}
+          render={({ history }) => (
+            !!user.id ? (
+              <Redirect to="/" />
+            ) : (
+              <PagesSignIn history={history} onLogin={this.onLogin} />
+            )
+          )}
         />
 
       </Switch>
