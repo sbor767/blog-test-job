@@ -31,23 +31,28 @@
     border-radius: 0.5rem;
     display: flex;
     flex-flow: column nowrap;
+    /* Horizontal centering a column blocks. */
+    align-items: center;
   }
 
-  &__hintWrapper {
+  &__hintVerticalCenter {
     flex: 1;
     display: flex;
     flex-flow: column;
+    /* Vertical align. */
     justify-content: center;
   }
 
   &__hintItem {
+    /*border: 1px solid green;*/
   }
 
   &__hintTop {
+    /* For some centering a block with an uneven right border. */
+    padding-left: 1em;
   }
 
   &__hintMiddle {
-    text-align: center;
   }
 
   &__hintBottom {

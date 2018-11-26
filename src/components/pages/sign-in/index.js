@@ -50,7 +50,7 @@ export default class PagesSignIn extends Component {
 
     const header = <Header title="Login page" inSign={true} className="PagesSignIn__header" />
 
-    const HintWrapper = ({ children }) => <div className="PagesSignIn__hintWrapper">{children}</div>
+    const VerticalCenterWrapper = ({ children }) => <div className="PagesSignIn__hintVerticalCenter">{children}</div>
 
 
     return (
@@ -64,16 +64,16 @@ export default class PagesSignIn extends Component {
           <div className="PagesSignIn__row">
 
             <div className="PagesSignIn__hint">
-              <HintWrapper>
+              <VerticalCenterWrapper>
                 <div className="PagesSignIn__hintItem PagesSignIn__hintTop">
-                  Use one from the next test users credentials
+                  Use one from the next test users credentials:
                 </div>
-              </HintWrapper>
-              <HintWrapper>
+              </VerticalCenterWrapper>
+              <VerticalCenterWrapper>
                 <div className="PagesSignIn__hintItem PagesSignIn__hintMiddle">
                   (Login : password)
                 </div>
-              </HintWrapper>
+              </VerticalCenterWrapper>
               <ul className="PagesSignIn__hintItem PagesSignIn__hintBottom">
                 <li>'John N.' : 111</li>
                 <li>'Alexandr M.' : 222</li>
