@@ -17,6 +17,7 @@ class ButtonLink extends Component {
     match: PropTypes.object.isRequired,
 
     to: PropTypes.string.isRequired,
+    prevPath: PropTypes.string,
     children: PropTypes.node.isRequired,
     onClick: PropTypes.func,
     type: PropTypes.string,
@@ -33,12 +34,14 @@ class ButtonLink extends Component {
   }
 
   onClick = (e) => {
-    const { history, onClick, to } = this.props
+    const { history, onClick, to, prevPath } = this.props
+    const toPath = !!prevPath ? {pathname: to, state: {prevPath}} : to
+    console.log('ButtonLink--onClick=props', this.props, toPath)
     if (onClick) {
       e.preventDefault()
       onClick(e)
     }
-    history.push(to)
+    history.push(toPath)
   }
 
   render() {

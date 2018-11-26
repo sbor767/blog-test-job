@@ -45,6 +45,7 @@ class PagesPostsList extends Component {
       posts,
       comments,
       isLoaded,
+      location
     } = this.props
 
     const lastComment = key => {
@@ -63,7 +64,15 @@ class PagesPostsList extends Component {
     const contentFooter = (
       <LayoutHeader
         className='PagesPostsList__contentFooter'
-        right={<ButtonLink to={'/posts/create'} className='PagesPostsList__contentFooterButtonTo'>Create POST</ButtonLink>}
+        right={
+          <ButtonLink
+            to='/posts/create'
+            prevPath={location.pathname}
+            className='PagesPostsList__contentFooterButtonTo'
+          >
+            Create POST
+          </ButtonLink>
+        }
       />
     )
 

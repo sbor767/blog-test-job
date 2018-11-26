@@ -38,7 +38,9 @@ class PagesPostCreate extends Component {
   }
 
   onSubmitHandler({ title, body }) {
-    const { user, posts, dispatch } = this.props
+    const { user, posts, history, dispatch } = this.props
+    const { location } = history
+    const prevPath = !!location.state && !!location.state.prevPath ? location.state.prevPath : undefined
 
     const newPost = {
       id: getNewObjectIdKey(posts.items),
@@ -51,7 +53,7 @@ class PagesPostCreate extends Component {
 
     dispatch({type: postsActionTypes.ADD, newPost})
 
-    this.props.history.push('/')
+    history.push(prevPath || '/')
   }
 
 
