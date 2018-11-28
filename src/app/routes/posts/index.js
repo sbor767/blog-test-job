@@ -1,16 +1,22 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import { PagesPost, PagesPostCreate } from '../../../components/pages'
 
 
-export default function RoutesPosts() {
+function RoutesPosts({ user }) {
 
   return (
     <Switch>
       <Route
         path="/posts/create"
-        render={({ history }) => <PagesPostCreate history={history} />}
+        render={({ history }) => (
+          user.id ? (
+            <PagesPostCreate history={history} />
+          ) : (
+            <Redirect to="/" />
+          ))}
       />
       <Route
         path="/posts/:id"
@@ -19,3 +25,8 @@ export default function RoutesPosts() {
     </Switch>
   )
 }
+
+
+export default connect(state => ({
+  user: state.user
+}))(RoutesPosts)

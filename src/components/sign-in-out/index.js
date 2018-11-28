@@ -12,13 +12,12 @@ class SignInOut extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
-    inSign: PropTypes.bool
+    inSignPage: PropTypes.bool
   }
 
   static defaultProps = {
-    inSign: false
+    inSignPage: false
   }
-
 
 
   signOut = () => actions.user.signOut()(this.props.dispatch)
@@ -34,7 +33,7 @@ class SignInOut extends Component {
 
   render() {
 
-    const { user, inSign } = this.props
+    const { user, inSignPage } = this.props
 
     return (
     <div className="SignInOut">
@@ -47,7 +46,7 @@ class SignInOut extends Component {
       </Fragment>
     ) : (
       <Fragment>
-        <ButtonLink to={'/sign-in'} disabled={inSign} className='SignInOut__signInButton'>
+        <ButtonLink to={'/sign-in'} disabled={inSignPage} className='SignInOut__signInButton'>
           {SignInOut.markup('In')}
         </ButtonLink>
         <div className="SignInOut__greeting">Sign in to be a <span className="SignInOut__greetingAccent">right</span> guy</div>

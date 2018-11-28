@@ -12,22 +12,22 @@ export default class Header extends Component {
 
   static propTypes = {
     title: PropTypes.string.isRequired,
-    inSign: PropTypes.bool
+    inSignPage: PropTypes.bool
   }
 
   static defaultProps = {
-    inSign: false
+    inSignPage: false
   }
 
 
   render() {
-    const {title, inSign, className} = this.props
+    const { title, inSignPage, className } = this.props
 
     return (
       <LayoutHeader
         left={<Logo/>}
         center={(<h1>{title}</h1>)}
-        right={<SignInOut inSign={inSign} />}
+        right={<SignInOut inSignPage={inSignPage} />}
         className={cn('Header', className)}
       />
     )

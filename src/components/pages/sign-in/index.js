@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { withRouter } from 'react-router-dom'
 
 import { user } from '../../../api'
 import * as actions from '../../../store/actions.js'
@@ -8,7 +10,12 @@ import './style.css'
 import { Input, Button } from '../../ui/elements'
 
 
-export default class PagesSignIn extends Component {
+class PagesSignIn extends Component {
+
+  static propTypes = {
+    history: PropTypes.object.isRequired,
+  }
+
 
   state = { login: '', password: '', error: '' }
 
@@ -26,9 +33,8 @@ export default class PagesSignIn extends Component {
     }
   }
 
-  onLogin() {
-    // Redirect to '/'.
-    this.props.history.push('/')
+  afterLogin() {
+    this.props.history.goBack()
   }
 
   login(loginData) {
@@ -38,7 +44,7 @@ export default class PagesSignIn extends Component {
         console.log('SignInPage-user', user)
         // onLogin(actions.user.signIn(user))
         onLogin(user)
-        this.onLogin()
+        this.afterLogin()
       })
       .catch(err => {
         this.setState({ error: `Error login in: ${err}` })
@@ -48,7 +54,7 @@ export default class PagesSignIn extends Component {
 
   render() {
 
-    const header = <Header title="Login page" inSign={true} className="PagesSignIn__header" />
+    const header = <Header title="Login page" inSignPage={true} className="PagesSignIn__header" />
 
     const VerticalCenterWrapper = ({ children }) => <div className="PagesSignIn__hintVerticalCenter">{children}</div>
 
@@ -112,3 +118,6 @@ export default class PagesSignIn extends Component {
     )
   }
 }
+
+
+export default withRouter(PagesSignIn)
