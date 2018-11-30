@@ -12,7 +12,8 @@ export default class Header extends Component {
 
   static propTypes = {
     title: PropTypes.string.isRequired,
-    inSignPage: PropTypes.bool
+    inSignPage: PropTypes.bool,
+    className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
   }
 
   static defaultProps = {

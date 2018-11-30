@@ -9,10 +9,10 @@ import './style.css'
 export default class LayoutHeader extends Component {
 
   static propTypes = {
-    children: PropTypes.node,
     left: PropTypes.node,
     right: PropTypes.node,
     center: PropTypes.node,
+    children: PropTypes.node,
     theme: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
     className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
   }
@@ -24,10 +24,9 @@ export default class LayoutHeader extends Component {
 
   render() {
     const {left, right, center, children, theme, className} = this.props
-    // <div className={cn('LayoutCentreWrapper', className)}>
 
     return (
-      <div  className={cn(`LayoutHeader`, className, themes('LayoutHeader', theme))}>
+      <div  className={cn('LayoutHeader', className, themes('LayoutHeader', theme))}>
         <div className="LayoutHeader__wrap">
           <div className="LayoutHeader__left">
             {left}

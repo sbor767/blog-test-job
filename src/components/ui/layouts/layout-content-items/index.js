@@ -10,7 +10,7 @@ export default function LayoutContentItems({ className, contentHeader, contentFo
   return (
     <div className={cn('LayoutContentItems', className)}>
       {contentHeader}
-      <div className='LayoutContentItems__items'>
+      <div className="LayoutContentItems__items">
         {children}
       </div>
       {contentFooter}

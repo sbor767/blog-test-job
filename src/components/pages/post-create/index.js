@@ -33,14 +33,10 @@ class PagesPostCreate extends Component {
     } else {
       this.setState({error: 'Please fill in both fields.'})
     }
-
-    console.log(this.state)
   }
 
   onSubmitHandler({ title, body }) {
     const { user, posts, history, dispatch } = this.props
-    const { location } = history
-    const prevPath = !!location.state && !!location.state.prevPath ? location.state.prevPath : undefined
 
     const newPost = {
       id: getNewObjectIdKey(posts.items),
@@ -53,7 +49,7 @@ class PagesPostCreate extends Component {
 
     dispatch({type: postsActionTypes.ADD, newPost})
 
-    history.push(prevPath || '/')
+    history.goBack()
   }
 
 

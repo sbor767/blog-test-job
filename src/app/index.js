@@ -6,9 +6,24 @@ import { PagesPostsList, PagesSignIn } from '../components/pages'
 import { RoutesPosts } from './routes'
 import * as actions from '../store/actions.js'
 import "../theme/style.css"
+import PropTypes from 'prop-types'
 
 
 class App extends Component {
+
+  static propTypes = {
+    user: PropTypes.object,
+    posts: PropTypes.object,
+    comments: PropTypes.object,
+    dispatch: PropTypes.func
+  }
+
+  static defaultProps = {
+    user: {},
+    posts: {},
+    comments: {}
+  }
+
 
   componentDidMount() {
     const { dispatch, posts, comments } = this.props

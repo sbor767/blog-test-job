@@ -44,8 +44,7 @@ class PagesPostsList extends Component {
       users,
       posts,
       comments,
-      isLoaded,
-      location
+      isLoaded
     } = this.props
 
     const lastComment = key => {
@@ -56,19 +55,18 @@ class PagesPostsList extends Component {
 
     const header = (
       <Header
-        title='The BLOG'
-        className='PagesPostsList__header'
+        title="The BLOG"
+        className="PagesPostsList__header"
       />
     )
 
     const contentFooter = (
       <LayoutHeader
-        className='PagesPostsList__contentFooter'
+        className="PagesPostsList__contentFooter"
         right={
           <ButtonLink
-            to='/posts/create'
-            prevPath={location.pathname}
-            className='PagesPostsList__contentFooterButtonTo'
+            to="/posts/create"
+            className="PagesPostsList__contentFooterButtonTo"
           >
             Create POST
           </ButtonLink>
@@ -78,12 +76,12 @@ class PagesPostsList extends Component {
 
 
     return (
-    <LayoutPage header={header} className='PagesPostsList'>
+    <LayoutPage header={header} className="PagesPostsList">
 
       {isLoaded ? (
         <Fragment>
           <LayoutContentItems
-            className={cn('PagesPostsList__contentItems', {"PagesPostsList__contentItems_whenCreateButton": !!user.id})}
+            className={cn('PagesPostsList__contentItems', {'PagesPostsList__contentItems_whenCreateButton': !!user.id})}
           >
             {Object.keys(posts.items).map(postId => {
               return (
@@ -117,7 +115,6 @@ const mapStateToProps = state => ({
   posts: state.posts,
   comments: state.comments,
   isLoaded: !state.posts.isFetching && !state.posts.didInvalidate && !state.comments.isFetching && !state.comments.didInvalidate,
-  // isLoaded: false,
 })
 
 export default connect(mapStateToProps)(PagesPostsList)

@@ -5,7 +5,7 @@ import cn from 'classnames'
 import './style.css'
 
 
-class LayoutPage extends Component {
+export default class LayoutPage extends Component {
 
   static propTypes = {
     header: PropTypes.node,
@@ -33,5 +33,3 @@ class LayoutPage extends Component {
     )
   }
 }
-
-export default LayoutPage
