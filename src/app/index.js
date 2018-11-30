@@ -33,9 +33,6 @@ class App extends Component {
     actions.comments.fetchIfNeeded(comments)(dispatch)
   }
 
-  handlePostCreate = post => {
-  }
-
   onLogin = user => {
     actions.user.signIn(user)(this.props.dispatch)
   }
@@ -46,6 +43,7 @@ class App extends Component {
 
     return (
       <Switch>
+
         <Route exact path="/" component={PagesPostsList} />
 
         <Route path="/posts" component={RoutesPosts} />
