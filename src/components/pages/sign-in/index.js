@@ -1,23 +1,22 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
 
 import { user } from '../../../api'
-import * as actions from '../../../store/actions.js'
+// import * as actions from '../../../store/actions.js'
 import { LayoutPage } from '../../ui/layouts'
+import { Input, Button } from '../../ui/elements'
 import { Header } from '../..'
 import './style.css'
-import { Input, Button } from '../../ui/elements'
 
 
-class PagesSignIn extends Component {
+export default class PagesSignIn extends Component {
 
   static propTypes = {
     history: PropTypes.object.isRequired,
   }
 
 
-  state = { login: '', password: '', error: '' }
+  state = {login: '', password: '', error: ''}
 
   handleLoginChange = login => this.setState({ login, error: '' })
 
@@ -38,11 +37,9 @@ class PagesSignIn extends Component {
   }
 
   login(loginData) {
-    const onLogin  = this.props.onLogin
+    const { onLogin } = this.props
     user.userLogin(loginData)
       .then(user => {
-        console.log('SignInPage-user', user)
-        // onLogin(actions.user.signIn(user))
         onLogin(user)
         this.afterLogin()
       })
@@ -54,7 +51,7 @@ class PagesSignIn extends Component {
 
   render() {
 
-    const header = <Header title="Login page" inSignPage={true} className="PagesSignIn__header" />
+    const header = <Header title="Login page" inSignPage className="PagesSignIn__header" />
 
     const VerticalCenterWrapper = ({ children }) => <div className="PagesSignIn__hintVerticalCenter">{children}</div>
 
@@ -90,23 +87,23 @@ class PagesSignIn extends Component {
             <form onSubmit={this.handleSubmit} className="PagesSignIn__form">
 
               <Input
-                type='text'
+                type="text"
                 onChange={this.handleLoginChange}
                 value={this.state.login}
-                placeholder='Your login (basically name)'
+                placeholder="Your login (basically name)"
                 className="PagesSignIn__formInput PagesSignIn__formInputLogin"
               />
 
               <Input
-                type='password'
+                type="password"
                 onChange={this.handlePasswordChange}
                 value={this.state.password}
-                placeholder='Your password'
+                placeholder="Your password"
                 className="PagesSignIn__formInput PagesSignIn__formInputPassword"
               />
 
               {!!this.state.error && <p className="PagesSignIn__error">{this.state.error}</p>}
-              <Button className='PagesSignIn__formButton' type='submit'>Submit</Button>
+              <Button className="PagesSignIn__formButton" type="submit">Submit</Button>
 
             </form>
 
@@ -118,6 +115,3 @@ class PagesSignIn extends Component {
     )
   }
 }
-
-
-export default withRouter(PagesSignIn)
