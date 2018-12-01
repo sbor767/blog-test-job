@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import { Copyright, RateComponent } from '../../..'
 import * as actions from '../../../../store/actions'
+import { Copyright, RateComponent } from '../../..'
 import './style.css'
 
 
@@ -19,7 +19,7 @@ function PagesPostComment({ commentId, comments, users, user, dispatch }) {
         {comment.body}
       </div>
       <div className="PagesPostComment__copyright">
-        <Copyright author={users.items[comment.authorId].name} timestamp={comment.timestamp}/>
+        <Copyright author={users.items[comment.authorId].name} timestamp={comment.timestamp} />
       </div>
       <RateComponent
         rates={rates}

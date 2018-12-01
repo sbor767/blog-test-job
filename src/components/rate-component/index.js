@@ -36,7 +36,7 @@ export default function RateComponent({ rates, userId, onChange, style }) {
         <div className="RateComponent__own">
           {!!ownRate() ? `Your rate is ${ownRate()}` : ''}
         </div>
-      ) : ''}
+      ) : null}
     </div>
   )
 }

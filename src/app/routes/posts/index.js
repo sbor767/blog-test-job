@@ -37,7 +37,7 @@ class RoutesPosts extends Component {
 
         <Route
           path="/posts/:id"
-          render={({history, match}) => <PagesPost postId={+match.params.id} history={history} />}
+          render={({ match }) => <PagesPost postId={+match.params.id} />}
         />
 
       </Switch>

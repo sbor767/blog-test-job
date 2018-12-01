@@ -1,14 +1,14 @@
 import React from 'react'
 
-import Copyright from '../../../copyright/index'
+import Copyright from '../../../copyright'
 import './style.css'
 
 
 export default function PagesPostContent({ body, author, timestamp }) {
 
   return (
-    <div className='PagesPostContent'>
-      <Copyright author={author} timestamp={timestamp}/>
+    <div className="PagesPostContent">
+      <Copyright author={author} timestamp={timestamp} />
       <div className="PagesPostContent__body">
         {body}
       </div>

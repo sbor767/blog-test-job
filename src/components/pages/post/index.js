@@ -2,15 +2,15 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { LayoutPage, LayoutContentItems } from '../../ui/layouts/index'
-import { Header, Loading } from '../../index'
-import { getNewObjectIdKey, getTimestamp } from '../../../utils/index'
 import { types as commentsActionTypes } from '../../../store/comments/actions.js'
 import { types as postsActionTypes } from '../../../store/posts/actions.js'
+import { getNewObjectIdKey, getTimestamp } from '../../../utils'
+import { LayoutPage, LayoutContentItems } from '../../ui/layouts'
+import { Header, Loading } from '../..'
 
 import PagesPostContent from './content'
 import PagesPostCommentList from './comment-list'
-import PagesPostCommentAdd from './comment-add'
+import PagesPostCommentAddForm from './comment-add-form'
 import './style.css'
 
 
@@ -23,16 +23,16 @@ class PagesPost extends Component {
     users: PropTypes.object,
     posts: PropTypes.object,
     comments: PropTypes.object,
-    history: PropTypes.object,
     dispatch: PropTypes.func
   }
 
+  static defaultProps = {
+    isLoaded: false
+  }
 
-  // onCommentSubmitHandler = async commentBody => {
+
   onCommentSubmitHandler = commentBody => {
     const {postId, user, comments, dispatch} = this.props
-    // commentsActions.add(postId, commentBody, user.id)(dispatch)
-    // await postActions.comment(postId, user.id, commentBody)(dispatch)
     const newComment = {
       id: getNewObjectIdKey(comments.items),
       postId,
@@ -45,22 +45,12 @@ class PagesPost extends Component {
     dispatch({type: postsActionTypes.COMMENT, postId, commentId: newComment.id})
   }
 
-  commentAdd = () => {
-    const { postId, user, history } = this.props
-
-    return !!user.id ? (
-      <PagesPostCommentAdd
-        history={history}
-        postId={postId}
-        onSubmit={this.onCommentSubmitHandler}
-      />)
-      : ''
-  }
 
   render() {
     const {
       postId,
       isLoaded,
+      user,
       users,
       posts,
     } = this.props
@@ -70,6 +60,15 @@ class PagesPost extends Component {
         title={isLoaded && !!posts.items[postId] ? posts.items[postId].title : 'Loading...'}
         className='PagesPost__header'
       />
+    )
+
+    const commentAddForm = () => (
+      !!user.id ? (
+        <PagesPostCommentAddForm
+          postId={postId}
+          onSubmit={this.onCommentSubmitHandler}
+        />
+      ) : null
     )
 
 
@@ -87,7 +86,7 @@ class PagesPost extends Component {
               timestamp={posts.items[postId].timestamp}
             />
 
-            <hr className="PagesPost__hr"/>
+            <hr className="PagesPost__hr" />
 
             <div className="PagesPost__CommentListTitle">
               <span>Comments</span>
@@ -95,7 +94,7 @@ class PagesPost extends Component {
 
             <LayoutContentItems>
               <PagesPostCommentList commentsIds={posts.items[postId].comments} />
-              {this.commentAdd()}
+              {commentAddForm()}
             </LayoutContentItems>
 
           </Fragment>
