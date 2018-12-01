@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 import './style.css'
-import PropTypes from 'prop-types'
 
 export default class PagesPostCommentAddForm extends Component {
 
@@ -39,14 +39,14 @@ export default class PagesPostCommentAddForm extends Component {
     <form onSubmit={this.handleSubmit} className="PagesPostCommentAddForm">
       <p>Add your comment</p>
       <textarea
-        type='textarea'
+        type="textarea"
         onChange={this.handleBodyChange}
         value={this.state.body}
-        placeholder='Your comment here'
+        placeholder="Your comment here"
         className="PagesPostCommentAddForm__formTextarea"
       />
       <p className="PagesPostCommentAddForm__formError">{this.state.error}</p>
-      <button className='PagesPostCommentAddForm__formButton' type='submit'>Submit</button>
+      <button className="PagesPostCommentAddForm__formButton" type="submit">Submit</button>
     </form>
   )
 }
