@@ -2,14 +2,28 @@
   margin: .5em 0;
   min-height: fit-content; /* Need by Mobile Safari( */
 
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: .5em;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__titleWrapper {
+    display: flex;
+    flex-flow: column;
+  }
+
   &__link:hover {
     color: darkred;
   }
 
   &__body {
-    background-color: #eaeaea;
+    background-color: var(--post-bg-color);
     border-radius: .5em;
-    padding: .5em;
+    padding-top: .5em;
   }
 
 }
