@@ -94,8 +94,8 @@ class PagesPost extends Component {
 
             <LayoutContentItems>
               <PagesPostCommentList commentsIds={posts.items[postId].comments} />
-              {commentAddForm()}
             </LayoutContentItems>
+            {commentAddForm()}
 
           </Fragment>
 
