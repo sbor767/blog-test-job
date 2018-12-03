@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { types as postsActionTypes } from '../../../store/posts/actions'
 import { getNewObjectIdKey, getTimestamp } from '../../../utils'
 import { LayoutPage } from '../../ui/layouts'
+import { Input } from '../../ui/elements'
 import { Header } from '../..'
 import './style.css'
 
@@ -21,7 +22,7 @@ class PagesPostCreate extends Component {
 
   state = {title: '', body: '', error: ''}
 
-  handleTitleChange = event => this.setState({title: event.target.value, error: ''})
+  handleTitleChange = value => this.setState({title: value, error: ''})
 
   handleBodyChange = event => this.setState({body: event.target.value, error: ''})
 
@@ -64,7 +65,7 @@ class PagesPostCreate extends Component {
       <LayoutPage header={header}>
         <form onSubmit={this.onSubmitHandler} className="PagesPostCreate__form">
           <p>Fill in the fields and click submit.</p>
-          <input
+          <Input
             type="text"
             onChange={this.handleTitleChange}
             value={this.state.title}

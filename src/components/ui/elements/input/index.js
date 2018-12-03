@@ -49,7 +49,7 @@ class Input extends React.Component {
     const {type, placeholder, required, focused, value, theme, disabled, tabIndex, autocomplete, className} = this.props
 
     return (
-      <div className={cn("Input", themes('Input', theme), className)}>
+      <div className={cn('Input', themes('Input', theme), className)}>
         <input
           className="Input__input"
           value={value}
