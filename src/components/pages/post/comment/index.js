@@ -2,7 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import * as actions from '../../../../store/actions'
-import { Copyright, RateComponent } from '../../..'
+import { Copyright } from '../../..'
+import PagesPostCommentInfo from '../comment-info'
 import './style.css'
 
 
@@ -10,7 +11,7 @@ function PagesPostComment({ commentId, comments, users, user, dispatch }) {
   const comment = comments.items[commentId]
   const rates = comment.rates
 
-  const handleOnChange = value => actions.comments.rate(commentId, user.id, !!rates[user.id], value)(dispatch)
+  const handleRateOnChange = value => actions.comments.rate(commentId, user.id, !!rates[user.id], value)(dispatch)
 
 
   return (
@@ -18,14 +19,17 @@ function PagesPostComment({ commentId, comments, users, user, dispatch }) {
       <div className="PagesPostComment__body">
         {comment.body}
       </div>
-      <div className="PagesPostComment__copyright">
-        <Copyright author={users.items[comment.authorId].name} timestamp={comment.timestamp} />
+      <div className="PagesPostComment__infoWrapper">
+        <PagesPostCommentInfo
+          rates={rates}
+          onChange={handleRateOnChange}
+          userId={user.id}
+        >
+          <div className="PagesPostComment__copyright">
+            <Copyright author={users.items[comment.authorId].name} timestamp={comment.timestamp}/>
+          </div>
+        </PagesPostCommentInfo>
       </div>
-      <RateComponent
-        rates={rates}
-        onChange={handleOnChange}
-        userId={user.id}
-      />
     </div>
   )
 }
