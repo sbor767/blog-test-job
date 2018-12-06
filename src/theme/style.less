@@ -1,6 +1,11 @@
 //@import 'reset.less';
 
 :root {
+  --page-width: 70vw;
+  --scroll-width: 16px;
+  --padding: var(--scroll-width);
+  --body-bg-from: #36798B;
+  --body-bg-to: #61DAFB;
   --color: black;
   --bg-color: #EEE;
   --post-bg-color: #EAEAEA;
@@ -16,6 +21,47 @@
   /*width: 100vw;*/
 }
 
+@media (min-width: 1600px) {
+  :root {
+    --page-width: 50vw;
+  }
+}
+@media (max-width: 1200px) {
+  :root {
+    --page-width: 75vw;
+  }
+}
+@media (max-width: 600px) {
+  :root {
+    --page-width: 85vw;
+  }
+}
+@media (max-width: 500px) {
+  :root {
+    --page-width: 100vw;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,body,p,h1,h2,h3,h4,ul,li,hr {
+  padding: 0;
+  margin: 0;
+}
+
+html,body {
+  height: 100%;
+}
+
+body {
+  background: linear-gradient(to bottom, var(--body-bg-from), var(--body-bg-to));
+  margin: 0 8px;
+  overflow: hidden;
+}
+
+
 h1,h2,h3,h4 {
   font-family: 'Open Sans Condensed', 'Arial Narrow', Arial, sans-serif;
 }
@@ -23,14 +69,6 @@ h1,h2,h3,h4 {
   h1,h2,h3,h4 {
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
-}
-
-html,body {
-  height: 100%;
-}
-html,body,p,h1,h2,h3,h4,ul,li,hr {
-  padding: 0;
-  margin: 0;
 }
 
 a {
@@ -49,8 +87,9 @@ h2 {
   text-transform: uppercase;
 }
 
-
 #root {
   display: flex;
   height: 100%;
+  justify-content: center;
+  align-items: center;
 }

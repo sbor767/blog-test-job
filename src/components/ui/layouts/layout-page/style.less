@@ -3,11 +3,9 @@
   flex-flow: nowrap column;
 
   height: calc((90vh + 90%) / 2);
-  width: 70vw;
-  margin: auto;
+  width: var(--page-width);
 
   border-radius: 1em;
-  padding: 1.5em;
 
   background-color: var(--bg-color);
   -webkit-box-shadow: 0 20px 80px rgba(0,0,0,.6);
@@ -23,26 +21,5 @@
   }
 
   &__footer{
-  }
-}
-
-@media (min-width: 1600px) {
-  .LayoutPage {
-    width: 50vw;
-  }
-}
-@media (max-width: 1200px) {
-  .LayoutPage {
-    width: 75vw;
-  }
-}
-@media (max-width: 600px) {
-  .LayoutPage {
-    width: 85vw;
-  }
-}
-@media (max-width: 500px) {
-  .LayoutPage {
-    width: 100vw;
   }
 }

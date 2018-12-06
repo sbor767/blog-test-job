@@ -3,17 +3,18 @@
   display: flex;
   flex-flow: nowrap column;
 
-  /*Move scrollX to box outside*/
+  /*Move scrollY to box outside*/
   overflow-y: auto;
+  //overflow-y: overlay;
   overflow-x: hidden;
   width: 100%;
 
-  margin: 1em 0;
-  padding: 0 1em 0 0;
+  margin: calc(var(--padding) / 2) 0;
+  padding: 0 var(--padding);
 
   &__items {
     /*Move scrollX to box outside*/
-    width: inherit;
+    width: calc(var(--page-width) - 2 * var(--padding));
   }
 
 }
