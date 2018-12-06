@@ -1,6 +1,11 @@
 {
+  "name": "Blog test job",
   "short_name": "The Blog",
-  "name": "Test Job \"Blog\"",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#6EB9FF",
+  "theme_color": "#6EB9FF",
+  "description": "Some test job.",
   "icons": [
     {
       "src": "/assets/react-icon-128.png",
@@ -17,9 +22,5 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-  "start_url": "./index.html",
-  "background_color": "#6EB9FF",
-  "theme_color": "#6EB9FF",
-  "display": "standalone"
+  ]
 }
