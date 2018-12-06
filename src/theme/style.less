@@ -12,6 +12,8 @@
   --comment-bg-color: #E8E8F0;
   /*--post-bg-color: #F4F4F4;*/
   --border-color: #DDDDDD;
+  --own-comment-color: #F5D6A5;
+
   --comment-font-family: "Marker Felt", "Comic Sans MS", fantasy;
 
   font: calc(.5em + 1vmin)/1.2 normal Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -21,9 +23,14 @@
   /*width: 100vw;*/
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1200px) {
   :root {
     --page-width: 50vw;
+  }
+}
+@media (min-width: 1600px) {
+  :root {
+    --page-width: 30vw;
   }
 }
 @media (max-width: 1200px) {
@@ -38,7 +45,7 @@
 }
 @media (max-width: 500px) {
   :root {
-    --page-width: 100vw;
+    --page-width: calc(100vw - var(--scroll-width) / 2);
   }
 }
 
@@ -57,7 +64,7 @@ html,body {
 
 body {
   background: linear-gradient(to bottom, var(--body-bg-from), var(--body-bg-to));
-  margin: 0 8px;
+  margin: 0 calc(var(--scroll-width) / 2);
   overflow: hidden;
 }
 

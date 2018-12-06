@@ -99,7 +99,7 @@ class PagesPost extends Component {
 
           </Fragment>
 
-        ) : (!!posts.items[postId] ? <Loading /> : <div className="PagesPost__errorNoSuchPost">No such post exist.</div>
+        ) : (!!posts.items[postId] ? <Loading /> : <h2 className="PagesPost__errorNoSuchPost">No such post exist.</h2>
         )}
 
       </LayoutPage>
