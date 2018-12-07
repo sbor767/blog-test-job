@@ -2,7 +2,8 @@
 
 :root {
   --page-width: 70vw;
-  --scroll-width: 16px;
+  --scroll: 16;
+  --scroll-width: calc(var(--scroll) * 1px);
   --padding: var(--scroll-width);
   --body-bg-from: #36798B;
   --body-bg-to: #61DAFB;
@@ -16,36 +17,51 @@
 
   --comment-font-family: "Marker Felt", "Comic Sans MS", fantasy;
 
-  font: calc(.5em + 1vmin)/1.2 normal Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+  font: calc(.5em + 1vw)/1.2 normal Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
 
   -webkit-text-size-adjust: none;
   /*.viewport-unit(font-size, calc(.5em + 1vmin))*/
   /*width: 100vw;*/
 }
 
+
+/* 1200px and upper. */
 @media (min-width: 1200px) {
   :root {
-    --page-width: 50vw;
+    --page-width: 720px;
+    /* 0.5*16px + 12px = 20px */
+    font-size: 20px;
   }
 }
-@media (min-width: 1600px) {
+
+/* From 1200px to 600px*/
+@media (max-width: 1199px) {
   :root {
-    --page-width: 30vw;
+    /*
+      From 60vw to 85vw.
+
+      © sbor767@yandex.ru
+      Here linear dependence from current width for smooth sizing (!).
+      .85 (!) * 600px + (1200*.6-600*.85)/600 * (100vw-600px)
+      = 510px + 35vw - 210px = 300px + 35vw = 18.75em + 35vw
+    */
+    --page-width: calc(300px + 35vw);
   }
 }
-@media (max-width: 1200px) {
+
+/* From 600px to 500px */
+@media (max-width: 599px) {
   :root {
-    --page-width: 75vw;
+    /* From 85vw to (100vw - scroll). */
+    --page-width: calc(500px - var(--scroll-width) + (10 + var(--scroll))/100 * (100vw - 500px));
+    font-size: 14px;
   }
 }
-@media (max-width: 600px) {
+
+/* 500px and lower */
+@media (max-width: 499px) {
   :root {
-    --page-width: 85vw;
-  }
-}
-@media (max-width: 500px) {
-  :root {
-    --page-width: calc(100vw - var(--scroll-width) / 2);
+    --page-width: calc(100vw - var(--scroll-width));
   }
 }
 
