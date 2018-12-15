@@ -1,10 +1,11 @@
 import usersApi from './users'
 
 const secretUserData = {
- 1: "111",
- 2: "222",
- 3: "333",
+  1: '111',
+  2: '222',
+  3: '333'
 }
+
 
 export default {
   /**
